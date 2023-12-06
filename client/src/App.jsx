@@ -1,9 +1,10 @@
+import ArtCarousel from "./components/Carousel"
 function App() {
 
 
   return (
     <>
-      <p>Hello World</p>
+      <ArtCarousel/>
     </>
   )
 }
