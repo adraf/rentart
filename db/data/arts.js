@@ -11,6 +11,18 @@ export default [
     width: 73,
     height: 95,
     price: 0,
-    
+  },
+  {
+    artName: 'Several Circles',
+    artist: 'Wassily Kandinsky',
+    artImage: 'https://www.guggenheim.org/wp-content/uploads/1926/01/41.283_ph_web-1.jpg',
+    type: 'Painting',
+    description: 'An abstract masterpiece featuring concentric circles, showcasing Kandinsky\'s synesthetic approach to art.',
+    movement: 'Abstract Art',
+    media: 'Oil on canvas',
+    year: 1926,
+    width: 140,
+    height: 140,
+    price: 0,
   }
 ]
