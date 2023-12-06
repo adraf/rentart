@@ -23,10 +23,10 @@ async function seed(){
     console.log(`👤 Seeded ${usersCreated.length} users to the database`)
 
     //* Add random user _id field as uploadedBy value on each art document
-    // const ownedArts = artData.map(art => {
-    //   const randomUserIndex = Math.floor(Math.random() * usersCreated.length)
-    //   return { ...art, uploadedBy: usersCreated[randomUserIndex]._id }
-    // })
+    const ownedArts = artData.map(art => {
+      const randomUserIndex = Math.floor(Math.random() * usersCreated.length)
+      return { ...art, uploadedBy: usersCreated[randomUserIndex]._id }
+    })
 
     const ownedArts = artData.map(async (art) => {
       const adminIndex = await User.findOne({ username: 'admin' });
