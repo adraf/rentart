@@ -7,13 +7,13 @@ import 'dotenv/config'
 
 async function seed(){
   try {
-    // 1. Establish a connection to the database
+    //* 1. Establish a connection to the database
     await mongoose.connect(process.env.CONNECTION_STRING)
     console.log('✅ Database connection established')
 
     //* 2. We will clear out existing data in preparation to add our initial/dummy data
-    // const { deletedCount: deletedArtCount } = await Art.deleteMany()
-    // console.log(`❌ Deleted ${deletedArtCount} arts from the database`)
+    const { deletedCount: deletedArtCount } = await Art.deleteMany()
+    console.log(`❌ Deleted ${deletedArtCount} arts from the database`)
 
     const { deletedCount: deletedUserCount } = await User.deleteMany()
     console.log(`❌ Deleted ${deletedUserCount} users from the database`)
@@ -28,9 +28,14 @@ async function seed(){
     //   return { ...art, uploadedBy: usersCreated[randomUserIndex]._id }
     // })
 
+    const ownedArts = artData.map(async (art) => {
+      const adminIndex = await User.findOne({ username: 'admin' });
+      return { ...art, uploadedBy: adminIndex._id };
+    })
+
     //* Use the updated artData with uploadedBy fields to create documents
-    // const artsCreated = await Art.create(ownedArts)
-    // console.log(`🌱 Seeded ${artsCreated.length} arts to the database`)
+    const artsCreated = await Art.create(ownedArts)
+    console.log(`🌱 Seeded ${artsCreated.length} arts to the database`)
 
     //* 4. Close the connection to the database
     await mongoose.connection.close()
