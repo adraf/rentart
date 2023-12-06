@@ -12,6 +12,7 @@ export const register = async (req, res) => {
   }
 }
 
+// Not very different from sam's one, but user logs in with username
 export const login = async (req,res) => {
   try {
     const user = await User.findOne({ username: req.body.username })
@@ -22,5 +23,18 @@ export const login = async (req,res) => {
   } catch (error) {
     console.log(error)
     return res.status(401).json({ message: 'Unauthorized' })
+  }
+}
+
+// Profile route
+
+export const getProfile = async (req, res) => {
+  try {
+    // We can't populate req.currentUser as its not a query. So we'll get a query by using the req.currentUser._id and populate that
+    const profile = await User.findById(req.currentUser._id).populate('rented').populate('favourites')
+    return res.json(profile)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json(error)
   }
 }
