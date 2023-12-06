@@ -1,3 +1,5 @@
+///ERROR 
+
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
@@ -6,26 +8,33 @@ import axios from "axios"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import Dropdown from 'react-bootstrap/Dropdown'
 
 export default function ArtIndex() {
   const [arts, setArts] = useState([])
   const [artistChoice, setArtistChoice] = useState('All Artists')
 
-
+  
+  
   //! Effects
   useEffect(() => {
     async function getArtData() {
       try {
-        const { data } = await axios.get('/api/art')
-        setArts(data)
-        console.log(data)
+        const res  = await axios.get('/api/art')
+        console.log(res)
+        console.log(res.data)
+        setArts(res.data)
+        console.log(res)
       } catch (error) {
         console.log(error)
       }
     }
     getArtData()
   }, [])
+  
+  const artistAll = [... new Set(arts.map(art => art.artist))]
+
+
+
 
   //! Functions
   function handleSubmit(e) {
@@ -35,20 +44,20 @@ export default function ArtIndex() {
   //! JSX
   return (
     <>
-      <section className="searchContainer">
-        <form onSubmit={handleSubmit}>
+      <section className="filter-container">
+        {/* <form onSubmit={handleSubmit}>   */}
           <select
-            className="genres-list"
+            className="artist-list"
             onChange={(e) => setArtistChoice(e.target.value)}
             value={artistChoice}
           >
-            {arts
-              .map((genreChoice, i) => {
-                return <option key={i} value={genreChoice}>{genreChoice}</option>
+            {artistAll
+              .map((artistChoice, i) => {
+                return <option key={i} value={artistChoice}>{artistChoice}</option>
               })
             }
           </select>
-        </form>
+        {/* </form> */}
       </section>
 
       <main>
@@ -71,7 +80,7 @@ export default function ArtIndex() {
                   >
                     <div className="rails">
                       <img className="thumbnail" src={artImage} to={`/art/${id}`} />
-                      <div className="arttittle">
+                      <div className="art-title">
                         <p>{artName}</p>
                       </div>
                     </div>
