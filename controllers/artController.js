@@ -1,4 +1,4 @@
-import Art from '../models/artModel'
+import Art from '../models/artModel.js'
 
 // *index
 // Method: GET
