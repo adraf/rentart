@@ -11,5 +11,6 @@ export default [
     width: 73,
     height: 95,
     price: 0,
+    
   }
 ]
