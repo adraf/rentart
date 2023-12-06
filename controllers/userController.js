@@ -1,4 +1,4 @@
-import User from '../models/user.js'
+import User from '../models/userModel.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -20,6 +20,7 @@ export const login = async (req,res) => {
       throw new Error(!user ? 'Username not found' : 'Incorrect Password')
     }
     const token = jwt.sign({ sub: user._id }, process.env.SECRET, { expiresIn: '7d' })
+    return res.json({ message: `Welcome back ${user.username}`, token: token })
   } catch (error) {
     console.log(error)
     return res.status(401).json({ message: 'Unauthorized' })
