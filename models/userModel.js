@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   paymentDetails: Number,
   profileImage: String,
   favourites: [{ type: mongoose.ObjectId, ref: 'Art' }],
-  rented: [{ type: mongoose.ObjectId, ref: 'Art' }]
+  rented: [{ type: mongoose.ObjectId, ref: 'Art' }],
 })
 
 // Whenever the user collection is queried and a user document is converted to JSON, we will remove the password from the response
@@ -19,6 +19,7 @@ userSchema.set('toJSON', {
   virtuals: true,
   transform(doc, json){
     delete json.password
+  // eslint-disable-next-line comma-dangle
   }
 })
 
