@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // import Dropdown from 'react-bootstrap/Dropdown'
 
-export default function TvIndex() {
+export default function ArtIndex() {
   const [arts, setArts] = useState([])
   const [artistChoice, setArtistChoice] = useState('All Artists')
 
@@ -56,8 +56,8 @@ export default function TvIndex() {
         <Container fluid>
           <Row className="artsAll-list">
             {arts
-              .map(show => {
-                const { id, name, image: { medium } } = show
+              .map(art => {
+                const { id, artName, artImage} = art
                 return (
                   <Col
                     as={Link}
@@ -70,9 +70,9 @@ export default function TvIndex() {
                     to={`/art/${id}`}
                   >
                     <div className="rails">
-                      <img className="thumbnail" src={medium} to={`/art/${id}`} />
-                      <div className="movietittle">
-                        <p>{name}<br></br>★Rating: {show.rating.average}</p>
+                      <img className="thumbnail" src={artImage} to={`/art/${id}`} />
+                      <div className="arttittle">
+                        <p>{artName}</p>
                       </div>
                     </div>
                   </Col>
