@@ -2,6 +2,8 @@ import express from 'express'
 import mongoose from 'mongoose'
 import 'dotenv/config'
 import router from './config/routes.js'
+// from artModel
+import Art from './models/artModel.js'
 
 //! Variables
 const app = express()
