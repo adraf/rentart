@@ -23,9 +23,9 @@ async function seed(){
     console.log(`👤 Seeded ${usersCreated.length} users to the database`)
 
     //* Add random user _id field as uploadedBy value on each art document
-    const ownedArts = artData.map(async (art) => {
-      const adminIndex = await User.findOne({ username: 'admin' });
-      return { ...art, uploadedBy: adminIndex._id };
+    const adminIndex = await User.findOne({ username: 'admin' })
+    const ownedArts = artData.map(art => {
+      return { ...art, uploadedBy: adminIndex._id }
     })
 
     //* Use the updated artData with uploadedBy fields to create documents
