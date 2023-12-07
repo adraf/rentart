@@ -9,7 +9,7 @@ export default function ArtCarousel() {
   useEffect(() => {
     async function getAllArt(){
       try {
-        const res = await axios.get(`/api/art`)
+        const res = await axios.get(`/art/count/:artCount`)
         setAllArt(res.data)
         // console.log(res)
       } catch (error) {
