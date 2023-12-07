@@ -1,4 +1,4 @@
-main {
+.index-page {
   @include flex(row, flex-start, flex-start);
 }
 
@@ -15,7 +15,8 @@ main {
   border-bottom: 1px solid $primary-color;
 }
 
-.filter-selection select, .search {
+.filter-selection select,
+.search {
   border: 1px solid $primary-color;
   width: 100%;
   padding: 10px;
@@ -43,5 +44,41 @@ main {
 }
 
 .art-grid {
-  margin-left: 2em;
+  margin: 2em;
+}
+
+.artAll-list {
+  a {
+    text-decoration: none;
+    color: black;
+    text-align: -webkit-center;
+    padding-bottom: 5em;
+    box-shadow: 10px;
+    // border: 1px solid red;
+
+    .thumbnail {
+      height: 90%;
+      width: 90%;
+      border: 10px solid;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      justify-items: center;
+      border: none;
+      margin-bottom: 0.5em;
+      box-shadow: 5px 5px 10px #d3d3d3,
+        -5px -5px 10px #ededed;
+
+      transition: size 0.2s;
+
+      &:hover {
+        width: 100%;
+      }
+    }
+
+    h5,
+    p {
+      margin: 0;
+    }
+  }
 }

@@ -32,6 +32,7 @@ export default function ArtIndex() {
   //* LIST OF ARTISTS
   const [artistChoice, setArtistChoice] = useState('Artists')
   const artistAll = [... new Set(arts.map(art => art.artist))]
+  artistAll.sort()
   artistAll.unshift('Artists')
 
   //* LIST OF MOVEMENT
@@ -41,6 +42,7 @@ export default function ArtIndex() {
   movementSets.forEach(listOfMovement => {
     listOfMovement.forEach(movement => {
       movementAll.push(movement)
+      movementAll.sort()
       movementAll.unshift('Movements')
     })
   })
@@ -53,6 +55,7 @@ export default function ArtIndex() {
   mediaSets.forEach(listOfMedia => {
     listOfMedia.forEach(medium => {
       mediaAll.push(medium)
+      mediaAll.sort()
       mediaAll.unshift('Media')
     })
   })
@@ -132,7 +135,7 @@ export default function ArtIndex() {
   //! JSX
   return (
     <>
-      <main>
+      <main className='index-page'>
         <div className='filter-container'>
           <h3>Filters</h3>
           <input
@@ -220,7 +223,7 @@ export default function ArtIndex() {
 
         {/* <h1 className="bold display-3 mb-4">Shows List</h1> */}
         <Container fluid className='art-grid'>
-          <Row className="artsAll-list">
+          <Row className="artAll-list">
             {arts
               .filter(art => {
                 const minWidth = artWidth[0]
@@ -264,25 +267,33 @@ export default function ArtIndex() {
                 //   return pattern.test(art.artName)
                 // }
               })
+              .sort((a,b)=> {
+                return a.artName.localeCompare(b.artName)
+              } 
+              )
               .map((art, i) => {
-                const { id, artName, artImage } = art
+                const { id, artName, artImage, artist } = art
                 return (
                   <Col
                     as={Link}
                     key={i}
-                    xs={4}
-                    s={3}
-                    md={3}
-                    lg={2}
-                    xl={2}
-                    style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
+                    xs={5}
+                    s={4}
+                    md={4}
+                    lg={3}
+                    xl={3}
+                    // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
                     to={`/art/${id}`}
                   >
                     {/* {artName} */}
                     <div className="rails" style={{ height: '300px' }}>
                       {/* <img className="thumbnail" src={artImage} to={`/art/${id}`} /> */}
+                      <div className="thumbnail" to={`/art/${id}`}
+                      style={{ backgroundImage: `url(${artImage})`}}
+                      ></div>
                       <div className="art-title">
-                        <p>{artName}</p>
+                        <h5>{artName}</h5>
+                        <p>{artist}</p>
                       </div>
                     </div>
                   </Col>
