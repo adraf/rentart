@@ -223,29 +223,33 @@ export default function ArtIndex() {
           <Row className="artsAll-list">
             {arts
               .filter(art => {
-                console.log(artistChoice)
+                const minWidth = artWidth[0]
+                const maxWidth = artWidth[1]
+                console.log(minWidth, maxWidth)
+                console.log(art.width)
                 const pattern = new RegExp(search, 'i')
-                if (artistChoice === 'Artists'
+                if (art.width<maxWidth 
+                  && artistChoice === 'Artists'
                   && movementChoice === 'Movements'
                   && mediaChoice === 'Media') {
                   return pattern.test(art.artName)
                 }
-                else if (art.artist.includes(artistChoice) && movementChoice === 'Movements' && mediaChoice === 'Media') {
+                else if (art.width<maxWidth && art.artist.includes(artistChoice) && movementChoice === 'Movements' && mediaChoice === 'Media') {
                   return pattern.test(art.artName)
                 }
-                else if (art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && mediaChoice === 'Media') {
+                else if (art.width<maxWidth && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && mediaChoice === 'Media') {
                   return pattern.test(art.artName)
                 }
-                else if (art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
+                else if (art.width<maxWidth && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
                   return pattern.test(art.artName)
                 }
-                else if (art.artist.includes(artistChoice) && movementChoice === 'Movements' && art.media.includes(mediaChoice)) {
+                else if (art.width<maxWidth && art.artist.includes(artistChoice) && movementChoice === 'Movements' && art.media.includes(mediaChoice)) {
                   return pattern.test(art.artName)
                 }
-                else if (artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media') {
+                else if (art.width<maxWidth && artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media') {
                   return pattern.test(art.artName)
                 }
-                else if (artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
+                else if (art.width<maxWidth && artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
                   return pattern.test(art.artName)
                 }
 
