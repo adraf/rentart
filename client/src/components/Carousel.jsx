@@ -31,6 +31,7 @@ export default function ArtCarousel() {
           const { _id: artId, artImage, artName, artist } = art
           return (
             // has link to go to individual ID page
+            // ! does this need api at the start of link?
             <Carousel.Item key={ id } as={Link} to={`/art/${artId}`}>
               <img
                 className="carouselSlideImage" 

@@ -1,10 +1,11 @@
 
 
 // Components
-import ArtIndex from './components/ArtIndex'
+// import ArtIndex from './components/ArtIndex'
 import Nav from './components/Nav'
-import ArtCarousel from "./components/Carousel"
-import RegisterUser from './components/RegisterUser'
+// import ArtCarousel from "./components/Carousel"
+// import RegisterUser from './components/RegisterUser'
+import IndArtPage from './components/IndArtPage'
 
 function App() {
 
@@ -12,9 +13,9 @@ function App() {
   return (
     <>
       <Nav></Nav>
-      <ArtIndex></ArtIndex>
-      <ArtCarousel></ArtCarousel>
-      <p>Hello World</p>
+      {/* <ArtIndex></ArtIndex>
+      <ArtCarousel></ArtCarousel> */}
+      {/* <IndArtPage></IndArtPage> */}
     </>
   )
 }
