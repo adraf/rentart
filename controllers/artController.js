@@ -77,3 +77,16 @@ export const deleteArt = async (req, res) => {
     return res.status(400).json(error)
   }
 }
+
+export const getSomeArt = async (req, res) => {
+  try {
+    const { artCount } = req.params
+    const randomArt = await Art.aggregate([
+      { $sample: { size: artCount } }
+    ])
+    return res.json(randomArt)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
+  }
+}

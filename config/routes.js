@@ -4,7 +4,8 @@ import {
   createArt, 
   getSingleArt,
   updateArt,
-  deleteArt
+  deleteArt,
+  getSomeArt
 } from '../controllers/artController.js'
 import { register, login, getProfile } from '../controllers/userController.js'
 import secureRoute from './secureRoute.js'
@@ -20,6 +21,9 @@ router.route('/art/:artId')
   .get(getSingleArt)
   .put(secureRoute, updateArt)
   .delete(secureRoute, deleteArt)
+
+router.route('/art/count/:artCount')
+  .get(getSomeArt)
 
 // Auth
 router.route('/register')
