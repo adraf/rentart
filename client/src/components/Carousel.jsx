@@ -1,6 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 // use state stores the data from the useEffect
 export default function ArtCarousel() {
@@ -20,10 +21,6 @@ export default function ArtCarousel() {
     getAllArt()
   }, [])
 
-// ! To do  
-// ! Need to make sure all images are equal size - css
-// ! Need to fit them to page to see the text at the bottom - css
-
 // Data stored in state is mapped through and added to carousel
   return (
     <main>
@@ -31,9 +28,10 @@ export default function ArtCarousel() {
       <Carousel touch={true} wrap={true} data-bs-theme="dark" slide={true}>
         {/* map through art for carousel to cycle through */}
         {allArt.map((art, id) => {
-          const { artImage, artName, artist } = art
+          const { _id: artId, artImage, artName, artist } = art
           return (
-            <Carousel.Item key={ id }>
+            // has link to go to individual ID page
+            <Carousel.Item key={ id } as={Link} to={`/art/${artId}`}>
               <img
                 className="carouselSlideImage" 
                 src={artImage}
