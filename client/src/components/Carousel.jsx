@@ -7,11 +7,12 @@ export default function ArtCarousel() {
   const [ allArt, setAllArt ] = useState([])
 // useEffect gets data on load and sets to state
   useEffect(() => {
-    async function getAllArt(){
+    async function getAllArt() {
       try {
-        const res = await axios.get(`/art/count/:artCount`)
+        // const res = await axios.get(`/api/art`)
+        const res = await axios.get(`api/art/count/:artCount`)
         setAllArt(res.data)
-        // console.log(res)
+        console.log(res)
       } catch (error) {
         console.log(error)
       }
@@ -27,17 +28,14 @@ export default function ArtCarousel() {
   return (
     <main>
       {/* touch means you can use with touchscreen, wrap continues with no hard stop */}
-      <Carousel touch={true} wrap={true}>
+      <Carousel touch={true} wrap={true} data-bs-theme="dark" slide={true}>
         {/* map through art for carousel to cycle through */}
-        {allArt.map(art => {
-          const artId = art._id
-          const artImage = art.artImage
-          const artName = art.artName
-          const artist = art.artist
+        {allArt.map((art, id) => {
+          const { artImage, artName, artist } = art
           return (
-            <Carousel.Item key={ artId }>
+            <Carousel.Item key={ id }>
               <img
-                className="carouselSlideImage"
+                className="carouselSlideImage" 
                 src={artImage}
                 alt={artName}
               />

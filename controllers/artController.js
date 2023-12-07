@@ -82,7 +82,7 @@ export const getSomeArt = async (req, res) => {
   try {
     const { artCount } = req.params
     const randomArt = await Art.aggregate([
-      { $sample: { size: artCount } }
+      { $sample: { size: 6 } }
     ])
     return res.json(randomArt)
   } catch (error) {

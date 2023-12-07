@@ -13,7 +13,7 @@ function App() {
       <Nav></Nav>
       <ArtIndex></ArtIndex>
       <ArtCarousel></ArtCarousel>
-      <p>Hello World</p>
+      {/* <p>Hello World</p> */}
     </>
   )
 }
