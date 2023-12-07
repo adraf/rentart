@@ -1,0 +1,33 @@
+main {
+  @include flex(row, flex-start, center);
+}
+
+.filter-container {
+  // border: 1px solid $primary-color;
+  padding: 2em;
+}
+.filter-container h3{
+  border-bottom: 1px solid $primary-color;
+}
+
+.filter-selection select {
+  border: 1px solid $primary-color;
+  width: calc(100vw/6);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+}
+
+.filter-sliders-container {
+  width: calc(100vw/6);
+  // border: 1px solid $primary-color;
+  // padding: 10px;
+  margin: 5px;
+  // border-radius: 10px;
+}
+
+.art-grid {
+  margin-left: 2em;
+}
