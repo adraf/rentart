@@ -3,16 +3,21 @@ main {
 }
 
 .filter-container {
-  // border: 1px solid $primary-color;
+  border-right: 1px solid $primary-color;
   padding: 2em;
+  width: calc(100vw/5);
+  min-width: 250px;
 }
-.filter-container h3{
+
+.filter-container h3 {
+  text-align: end;
+  width: 100%;
   border-bottom: 1px solid $primary-color;
 }
 
 .filter-selection select {
   border: 1px solid $primary-color;
-  width: calc(100vw/6);
+  width: 100%;
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
@@ -21,11 +26,16 @@ main {
 }
 
 .filter-sliders-container {
-  width: calc(100vw/6);
+  width: 100%;
   // border: 1px solid $primary-color;
-  // padding: 10px;
-  margin: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  // margin: 5px;
   // border-radius: 10px;
+}
+
+.filter-sliders-container label {
+  padding-bottom: 10px;
 }
 
 .art-grid {
