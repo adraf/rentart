@@ -1,22 +1,31 @@
+//import { useState } from 'react'
+import { Outlet, useNavigation } from 'react-router-dom'
+import { useState } from 'react'
 
-
-// Components
-import ArtIndex from './components/ArtIndex'
+// components
 import Nav from './components/Nav'
-import ArtCarousel from "./components/Carousel"
-import RegisterUser from './components/RegisterUser'
 
-function App() {
+import { Spinner } from 'react-bootstrap'
 
+export default function App() {
+
+  const [ userData, setUserData ] = useState([])
+  console.log(setUserData)
+  const navigation = useNavigation()
 
   return (
     <>
-      <Nav></Nav>
-      <ArtIndex></ArtIndex>
-      <ArtCarousel></ArtCarousel>
-      <p>Hello World</p>
+      <Nav userData={userData} />
+      <main>
+      {
+      navigation.state === 'idle' ?
+      <Outlet context={[userData, setUserData]} />
+      :
+      <div className='centered'>
+        <Spinner animation='border' />
+      </div>
+      }
+      </main>
     </>
   )
 }
-
-export default App
