@@ -4,12 +4,17 @@ import { useEffect, useState } from 'react'
 
 // use state stores the data from the useEffect
 export default function ArtCarousel() {
-  const [ allArt, setAllArt ] = useState()
-// useEffect gets data on load and sets state
+  const [ allArt, setAllArt ] = useState([])
+// useEffect gets data on load and sets to state
   useEffect(() => {
     async function getAllArt(){
-      const data = await axios.get(`/api/art`)
-      setAllArt(data.data)
+      try {
+        const res = await axios.get(`/api/art`)
+        setAllArt(res.data)
+        // console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
     }
     getAllArt()
   }, [])
@@ -21,7 +26,9 @@ export default function ArtCarousel() {
 // Data stored in state is mapped through and added to carousel
   return (
     <main>
+      {/* touch means you can use with touchscreen, wrap continues with no hard stop */}
       <Carousel touch={true} wrap={true}>
+        {/* map through art for carousel to cycle through */}
         {allArt.map(art => {
           const artId = art._id
           const artImage = art.artImage
