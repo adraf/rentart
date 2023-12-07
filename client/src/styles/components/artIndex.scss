@@ -15,7 +15,7 @@ main {
   border-bottom: 1px solid $primary-color;
 }
 
-.filter-selection select {
+.filter-selection select, .search  {
   border: 1px solid $primary-color;
   width: 100%;
   padding: 10px;
@@ -24,6 +24,7 @@ main {
   background-color: white;
   color: black;
 }
+
 
 .filter-sliders-container {
   width: 100%;
