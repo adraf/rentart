@@ -13,7 +13,6 @@ export default function ArtCarousel() {
         // const res = await axios.get(`/api/art`)
         const res = await axios.get(`api/art/count/:artCount`)
         setAllArt(res.data)
-        console.log(res)
       } catch (error) {
         console.log(error)
       }

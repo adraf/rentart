@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import ArtCarousel from './components/Carousel.jsx'
 import RegisterUser from './components/RegisterUser.jsx'
+import Login from './components/Login.jsx'
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
         element: <ArtCarousel />
       },
       {
-        path: '/login'
+        path: '/login',
+        element: <Login />
       },
       {
         path: '/register',
