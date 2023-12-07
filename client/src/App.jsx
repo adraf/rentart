@@ -1,9 +1,9 @@
 
 
 // Components
-//import ArtIndex from './components/ArtIndex'
+import ArtIndex from './components/ArtIndex'
 import Nav from './components/Nav'
-//import ArtCarousel from "./components/Carousel"
+import ArtCarousel from "./components/Carousel"
 import RegisterUser from './components/RegisterUser'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     <>
       <Nav></Nav>
       <ArtIndex></ArtIndex>
-      {/* <ArtCarousel></ArtCarousel> */}
+      <ArtCarousel></ArtCarousel>
       <p>Hello World</p>
     </>
   )
