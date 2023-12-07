@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react'
 import axios from "axios"
 
 //! components
+
 import Slider from '@mui/material/Slider'
 import Box from '@mui/material/Box'
 
-export default function ArtIndex() {
+export default function Filterbox() {
   const [arts, setArts] = useState([])
 
   //! Effects
@@ -127,6 +128,7 @@ export default function ArtIndex() {
   //! JSX
   return (
     <>
+      <main>
         <div className='filter-container'>
           <h3>Filters</h3>
           <section className='filter-selection'>
@@ -204,6 +206,7 @@ export default function ArtIndex() {
             />
           </Box>
         </div>
+      </main >
     </>
   )
 }

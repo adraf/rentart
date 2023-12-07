@@ -5,7 +5,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import ArtCarousel from './components/Carousel.jsx'
 import RegisterUser from './components/RegisterUser.jsx'
+<<<<<<< HEAD
 import Login from './components/Login.jsx'
+=======
+import ArtIndex from './components/ArtIndex.jsx'
+>>>>>>> 61e44bd45474b8a49a390ce3da7bf599c5b13597
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <RegisterUser />,
+      },
+      {
+        path: '/gallery',
+        element: <ArtIndex />,
       }
     ]
   }
