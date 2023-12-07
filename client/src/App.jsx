@@ -10,12 +10,11 @@ import { Spinner } from 'react-bootstrap'
 export default function App() {
 
   const [ userData, setUserData ] = useState([])
-  console.log(setUserData)
   const navigation = useNavigation()
 
   return (
     <>
-      <Nav userData={userData} />
+      <Nav userData={userData} setUserData={setUserData} />
       <main>
       {
       navigation.state === 'idle' ?
