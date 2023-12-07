@@ -12,9 +12,8 @@ function App() {
   return (
     <>
       <Nav></Nav>
-      {/* <ArtIndex></ArtIndex>
-      <ArtCarousel></ArtCarousel> */}
-      <RegisterUser />
+      <ArtIndex></ArtIndex>
+      {/* <ArtCarousel></ArtCarousel> */}
       <p>Hello World</p>
     </>
   )
