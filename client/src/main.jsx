@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // Components
 import App from './App.jsx'
+import ArtCarousel from './components/Carousel.jsx'
+import RegisterUser from './components/RegisterUser.jsx'
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,7 +16,15 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        index: true,
+        element: <ArtCarousel />
+      },
+      {
         path: '/login'
+      },
+      {
+        path: '/register',
+        element: <RegisterUser />,
       }
     ]
   }

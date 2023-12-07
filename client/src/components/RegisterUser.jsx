@@ -1,11 +1,32 @@
 import { useState } from "react"
+import { useNavigate, useOutletContext } from "react-router-dom"
+import axios from "axios"
 
 export default function RegisterUser(){
   // State
   const [ noBueno, setNoBueno ] = useState('')
+  // navigation
+  const navigate = useNavigate()
+  const data = useOutletContext()
+  const setUserData = data[1]
+  console.log(typeof(setUserData))
+  console.log('2',data[1])
 
-  function submitUserData(e){
-    console.log('in')
+  async function submitData(parsedData){
+    try {
+      const res = await axios.post('/api/register', parsedData)
+      
+      localStorage.setItem('token', res.token)
+      localStorage.setItem('username', res.username)
+      setUserData([res.token, res.username])
+      console.log('done')
+      navigate("/")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function authenticate(e){
     e.preventDefault()
     // Defining variables for validation
     const formData = new FormData(e.target)
@@ -21,11 +42,16 @@ export default function RegisterUser(){
       // If empty values were found we make a string with them to add to an error message
       formKeys.map(val => str = `${str}${val} ,`)
       str = str.substring(0, str.length - 2)
-      setNoBueno('Seems you have missed some fields: \n' + str)
+      return setNoBueno('Seems you have missed some fields: \n' + str)
     } else {
       setNoBueno('')
     }
-    
+    // Client side authentication
+    if (parsedData.password !== parsedData.passwordConfirmation) {
+      return setNoBueno('Password confirmation must match password')
+    }
+    parsedData.usertype = parsedData.usertype === 'artist' ? 1 : 2
+    submitData(parsedData)
 
     //JSON.stringify(parsedData)
   }
@@ -35,7 +61,7 @@ export default function RegisterUser(){
       {/* If user doesen't fill one or more of the fields a warning appears */}
       {noBueno && <section className="nobueno"><p>{noBueno}</p></section>}
       <legend>Join the Art Rental Community!</legend>
-      <form action="#" onSubmit={submitUserData}>
+      <form action="#" onSubmit={authenticate}>
         <input type="text" name="name" placeholder="First and Last Name"/>
         <input type="text" name="address" placeholder="Address"/>
         <input type="text" name="username" placeholder="Username"/>
