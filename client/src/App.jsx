@@ -12,8 +12,8 @@ function App() {
     <>
       <Nav></Nav>
       <ArtIndex></ArtIndex>
-      <ArtCarousel></ArtCarousel>
-      {/* <p>Hello World</p> */}
+      {/* <ArtCarousel></ArtCarousel> */}
+      <p>Hello World</p>
     </>
   )
 }
