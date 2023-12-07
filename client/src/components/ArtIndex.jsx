@@ -1,3 +1,5 @@
+///ERROR 
+
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
@@ -6,26 +8,33 @@ import axios from "axios"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import Dropdown from 'react-bootstrap/Dropdown'
 
 export default function ArtIndex() {
   const [arts, setArts] = useState([])
   const [artistChoice, setArtistChoice] = useState('All Artists')
 
 
+
   //! Effects
   useEffect(() => {
     async function getArtData() {
       try {
-        const { data } = await axios.get('/api/art')
-        setArts(data)
-        console.log(data)
+        const res = await axios.get('/api/art')
+        console.log(res)
+        console.log(res.data)
+        setArts(res.data)
+        console.log(res)
       } catch (error) {
         console.log(error)
       }
     }
     getArtData()
   }, [])
+
+  const artistAll = [... new Set(arts.map(art => art.artist))]
+
+
+
 
   //! Functions
   function handleSubmit(e) {
@@ -35,20 +44,20 @@ export default function ArtIndex() {
   //! JSX
   return (
     <>
-      <section className="searchContainer">
-        <form onSubmit={handleSubmit}>
-          <select
-            className="genres-list"
-            onChange={(e) => setArtistChoice(e.target.value)}
-            value={artistChoice}
-          >
-            {arts
-              .map((genreChoice, i) => {
-                return <option key={i} value={genreChoice}>{genreChoice}</option>
-              })
-            }
-          </select>
-        </form>
+      <section className="filter-container">
+        {/* <form onSubmit={handleSubmit}>   */}
+        <select
+          className="artist-list"
+          onChange={(e) => setArtistChoice(e.target.value)}
+          value={artistChoice}
+        >
+          {artistAll
+            .map((artistChoice, i) => {
+              return <option key={i} value={artistChoice}>{artistChoice}</option>
+            })
+          }
+        </select>
+        {/* </form> */}
       </section>
 
       <main>
@@ -56,31 +65,33 @@ export default function ArtIndex() {
         <Container fluid>
           <Row className="artsAll-list">
             {arts
-              .map(art => {
-                const { id, artName, artImage} = art
+              .map((art, i) => {
+                const { id, artName, artImage } = art
                 return (
                   <Col
                     as={Link}
-                    key={id}
+                    key={i}
                     xs={4}
                     s={3}
                     md={3}
                     lg={2}
                     xl={2}
+                    style={{ backgroundImage: `url(${artImage})`, backgroundRepeat:'no-repeat' , backgroundPosition:'center', backgroundSize:'contain'}}
                     to={`/art/${id}`}
                   >
-                    <div className="rails">
-                      <img className="thumbnail" src={artImage} to={`/art/${id}`} />
-                      <div className="arttittle">
-                        <p>{artName}</p>
-                      </div>
+                    {/* {artName} */}
+                    <div className="rails" style={{height: '300px'}}>
+                    {/* <img className="thumbnail" src={artImage} to={`/art/${id}`} /> */}
+                    <div className="art-title">
+                      <p>{artName}</p>
                     </div>
+                  </div>
                   </Col>
-                )
+          )
               })}
-          </Row>
-        </Container>
-      </main >
+        </Row>
+      </Container>
+    </main >
     </>
   )
 }
