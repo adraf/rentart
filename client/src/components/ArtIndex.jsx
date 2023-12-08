@@ -80,7 +80,7 @@ export default function ArtIndex() {
   //* HEIGHT SLIDER
   const [artHeight, setArtHeight] = React.useState([0, 1000])
 
-  const handleChange2 = (event, newValue, activeThumb) => {
+  const handleChange2 = (newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -101,7 +101,7 @@ export default function ArtIndex() {
   //* PRICE SLIDER
   const [artPrice, setArtPrice] = React.useState([0, 100000])
 
-  const handleChange3 = (event, newValue, activeThumb) => {
+  const handleChange3 = (newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -119,8 +119,10 @@ export default function ArtIndex() {
     }
   }
 
-
-
+  //* FAVOURITES
+  // let isToggled = false
+  // let favoriteStatus = '🤍'
+  // const [favorite, setFavorite] = useState(isToggled)
 
   //! Functions
   // function handleSubmit(e) {
@@ -131,6 +133,12 @@ export default function ArtIndex() {
     return `${value} cm`
   }
 
+
+  // function favoriteSelection() {
+  //   const favoriteN = '🤍'
+  //   const favoriteY = '♥️♡'
+  // if () return 
+  // }
 
   //! JSX
   return (
@@ -230,8 +238,6 @@ export default function ArtIndex() {
                 const maxWidth = artWidth[1]
                 const minHeight = artHeight[0]
                 const maxHeight = artHeight[1]
-                console.log(minWidth, maxWidth)
-                console.log(art.width)
                 const pattern = new RegExp(search, 'i')
                 if (minWidth < art.width
                   && art.width < maxWidth
@@ -267,14 +273,15 @@ export default function ArtIndex() {
                 //   return pattern.test(art.artName)
                 // }
               })
-              .sort((a,b)=> {
+              .sort((a, b) => {
                 return a.artName.localeCompare(b.artName)
-              } 
+              }
               )
               .map((art, i) => {
                 const { id, artName, artImage, artist } = art
                 return (
                   <Col
+                    className='single-art-container'
                     as={Link}
                     key={i}
                     xs={5}
@@ -282,15 +289,30 @@ export default function ArtIndex() {
                     md={4}
                     lg={3}
                     xl={3}
-                    // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
-                    to={`/art/${id}`}
+                  // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
+                  to={`/art/${id}`}
                   >
                     {/* {artName} */}
                     <div className="rails" style={{ height: '300px' }}>
                       {/* <img className="thumbnail" src={artImage} to={`/art/${id}`} /> */}
                       <div className="thumbnail" to={`/art/${id}`}
-                      style={{ backgroundImage: `url(${artImage})`}}
-                      ></div>
+                        style={{ backgroundImage: `url(${artImage})` }}>
+
+                        <p className='favorite'
+                          onClick={(e) => {
+                            e.preventDefault()
+                            console.log(e.target.innerText)
+                            if (e.target.innerText === '🤍') {
+                              e.target.innerText = '♥️'
+                            } else {
+                              e.target.innerText = '🤍'
+                            }
+                          }}
+                        >
+                          {'🤍'}
+                        </p>
+
+                      </div>
                       <div className="art-title">
                         <h5>{artName}</h5>
                         <p>{artist}</p>
