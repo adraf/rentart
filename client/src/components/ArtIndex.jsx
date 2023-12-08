@@ -85,7 +85,7 @@ export default function ArtIndex() {
   //* HEIGHT SLIDER
   const [artHeight, setArtHeight] = React.useState([0, 1000])
 
-  const handleChange2 = (newValue, activeThumb) => {
+  const handleChange2 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -106,7 +106,7 @@ export default function ArtIndex() {
   //* PRICE SLIDER
   const [artPrice, setArtPrice] = React.useState([0, 100000])
 
-  const handleChange3 = (newValue, activeThumb) => {
+  const handleChange3 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
