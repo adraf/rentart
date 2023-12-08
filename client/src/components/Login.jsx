@@ -10,13 +10,11 @@ export default function Login(){
   // State from App
   const data = useOutletContext()
   const setUserData = data[1]
-  const userData = data[0]
   //! console log turns udefined! Why?
 
 
   async function submitData(parsedData){
     try {
-      console.log(userData)
       // Get logged in
       const res = await axios.post('/api/login', parsedData)
       // Save data
@@ -26,7 +24,7 @@ export default function Login(){
 
       setUserData([res.data.token, res.data.username])
       // Go to homepage
-      navigate("/")
+      navigate("/profile")
     } catch (error) {
       console.log(error)
     }

@@ -7,6 +7,7 @@ import ArtCarousel from './components/Carousel.jsx'
 import RegisterUser from './components/RegisterUser.jsx'
 import Login from './components/Login.jsx'
 import ArtIndex from './components/ArtIndex.jsx'
+import Profile from './components/Profile.jsx'
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/gallery',
         element: <ArtIndex />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       }
     ]
   }
