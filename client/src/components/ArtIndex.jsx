@@ -80,7 +80,7 @@ export default function ArtIndex() {
   //* HEIGHT SLIDER
   const [artHeight, setArtHeight] = React.useState([0, 1000])
 
-  const handleChange2 = (event, newValue, activeThumb) => {
+  const handleChange2 = (newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -101,7 +101,7 @@ export default function ArtIndex() {
   //* PRICE SLIDER
   const [artPrice, setArtPrice] = React.useState([0, 100000])
 
-  const handleChange3 = (event, newValue, activeThumb) => {
+  const handleChange3 = (newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -119,8 +119,10 @@ export default function ArtIndex() {
     }
   }
 
-
-
+  //* FAVOURITES
+  // let isToggled = false
+  // let favoriteStatus = '🤍'
+  // const [favorite, setFavorite] = useState(isToggled)
 
   //! Functions
   // function handleSubmit(e) {
@@ -131,6 +133,12 @@ export default function ArtIndex() {
     return `${value} cm`
   }
 
+
+  // function favoriteSelection() {
+  //   const favoriteN = '🤍'
+  //   const favoriteY = '♥️♡'
+  // if () return 
+  // }
 
   //! JSX
   return (
@@ -267,15 +275,16 @@ export default function ArtIndex() {
                 //   return pattern.test(art.artName)
                 // }
               })
-              .sort((a,b)=> {
+              .sort((a, b) => {
                 return a.artName.localeCompare(b.artName)
-              } 
+              }
               )
               .map((art, i) => {
                 // 'indArtId' is to link to Individual Art Page
                 const { _id: indArtId, artName, artImage, artist } = art
                 return (
                   <Col
+                    className='single-art-container'
                     // Link helps the individual art page function
                     as={Link}
                     key={i}
@@ -290,10 +299,24 @@ export default function ArtIndex() {
                     {/* {artName} */}
                     <div className="rails" style={{ height: '300px' }}>
                       {/* <img className="thumbnail" src={artImage} to={`/art/${id}`} /> */}
-                      {/* Need the id below for the individual art page */}
-                      <div className="thumbnail" id={indArtId}
-                      style={{ backgroundImage: `url(${artImage})`}}
-                      ></div>
+                      <div className="thumbnail" to={`/art/${indArtId}`}
+                        style={{ backgroundImage: `url(${artImage})` }}>
+
+                        <p className='favorite'
+                          onClick={(e) => {
+                            e.preventDefault()
+                            console.log(e.target.innerText)
+                            if (e.target.innerText === '🤍') {
+                              e.target.innerText = '♥️'
+                            } else {
+                              e.target.innerText = '🤍'
+                            }
+                          }}
+                        >
+                          {'🤍'}
+                        </p>
+
+                      </div>
                       <div className="art-title">
                         <h5>{artName}</h5>
                         <p>{artist}</p>

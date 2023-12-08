@@ -28,3 +28,16 @@ nav button{
 h3 {
   font-size: 1.75em;
 }
+
+footer{
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: #494848;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}

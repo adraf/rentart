@@ -1,4 +1,5 @@
 @import './artistProfile.scss';
+@import './appreciatorProfile.scss';
 
 
 .profile-header{
@@ -21,3 +22,12 @@
   box-shadow: 0 0 5px 0 #9E9E9E;
 }
 
+.profile-body{
+  min-height: 40vh;
+}
+
+.body-instance{
+  background-color: antiquewhite;
+  margin: 15px;
+  padding: 15px;
+}

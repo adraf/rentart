@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
 export default function Nav({ userData, setUserData }){
-  //const userData = [localStorage.getItem('username'), localStorage.getItem('token')]
   console.log(userData)
   const navigate = useNavigate()
 
