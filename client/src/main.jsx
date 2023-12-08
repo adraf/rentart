@@ -8,6 +8,7 @@ import RegisterUser from './components/RegisterUser.jsx'
 import Login from './components/Login.jsx'
 import ArtIndex from './components/ArtIndex.jsx'
 import IndArtPage from './components/IndArtPage.jsx'
+import Profile from './components/Profile.jsx'
 
 // Loader
 import { getIndArt } from './loaders/artLoader.js'
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         path: '/art/:artId',
         element: <IndArtPage />,
         loader: async ({ params }) => getIndArt(params.artId)
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       }
     ]
   }

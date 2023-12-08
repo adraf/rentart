@@ -8,6 +8,7 @@ export default function Nav({ userData, setUserData }){
 
   function logOut(){
     localStorage.clear()
+    setUserData('')
     navigate('/')
   }
 
@@ -25,13 +26,13 @@ export default function Nav({ userData, setUserData }){
           </>
         ) : (
           <>
-            <Link to={`/profile/${userData[1]}`}><button>Profile</button></Link>
+            <Link to={`/profile/${userData[0]}`}><button>Profile</button></Link>
             <button onClick={logOut}>Log Out</button>
           </>
         )}
       </nav>
       <section className="welcome">
-        <p>Welcome {!userData[0] ? 'visitor' : userData[0]}</p>
+        <p>Welcome {!userData[1] ? 'visitor' : userData[1]}</p>
       </section>
     </header>
   )

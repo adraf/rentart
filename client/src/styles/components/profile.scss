@@ -1,0 +1,23 @@
+@import './artistProfile.scss';
+
+
+.profile-header{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.profile-body, .artistcollection, .profilepic{
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 0 5px 0 #9E9E9E;
+}
+
+.artistcollection, .profilepic{
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 0 5px 0 #9E9E9E;
+}
+
