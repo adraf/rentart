@@ -11,7 +11,8 @@ import IndArtPage from './components/IndArtPage.jsx'
 import Profile from './components/Profile.jsx'
 
 // Loader
-import { getIndArt } from './loaders/artLoader.js'
+import { getIndArt } from './utils/loaders/artLoader.js'
+
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       {
         path: '/gallery',
         element: <ArtIndex />,
+        // loader: getUser
       },
       {
         path: '/art/:artId',
