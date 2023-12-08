@@ -1,6 +1,5 @@
-//import { useState } from 'react'
-import { Outlet, useNavigation } from 'react-router-dom'
 import { useState } from 'react'
+import { Outlet, useNavigation } from 'react-router-dom'
 
 // components
 import Nav from './components/Nav'
