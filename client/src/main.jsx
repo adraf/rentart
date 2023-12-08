@@ -7,6 +7,7 @@ import ArtCarousel from './components/Carousel.jsx'
 import RegisterUser from './components/RegisterUser.jsx'
 import Login from './components/Login.jsx'
 import ArtIndex from './components/ArtIndex.jsx'
+import ArtCollection from './components/ArtCollection.jsx'
 import IndArtPage from './components/IndArtPage.jsx'
 import Profile from './components/Profile.jsx'
 
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
       {
         path: '/gallery',
         element: <ArtIndex />,
+        // loader: getUser
+      },
+      {
+        path: '/collection',
+        element: <ArtCollection />,
         // loader: getUser
       },
       {

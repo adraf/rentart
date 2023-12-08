@@ -1,6 +1,6 @@
 ///ERROR 
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 
@@ -12,13 +12,17 @@ import Slider from '@mui/material/Slider'
 import Box from '@mui/material/Box'
 import { Modal } from '@mui/material'
 
-export default function ArtIndex() {
+export default function ArtCollection( ) {
   //! States
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
   const [open, setOpen] = React.useState(false);
+  const data = useOutletContext()
+  const [ userData, setUserData ] = data
+  const { favourites } = userData
+  console.log(favourites)
 
-
+  // console.log(userData.username)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -305,11 +309,17 @@ export default function ArtIndex() {
                         <p className='favorite'
                           onClick={(e) => {
                             e.preventDefault()
+                            
                             if (e.target.innerText === '🤍') {
                               e.target.innerText = '♥️'
-                              console.log(indArtId)
+                              favourites.push(indArtId)
+                              // setUserData(favourites)
+                              console.log(favourites)
                             } else {
                               e.target.innerText = '🤍'
+                              console.log(indArtId)
+                              favourites.filter((value) => value.includes(indArtId))
+                              console.log(favourites)
                             }
                           }}
                         >

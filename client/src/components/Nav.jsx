@@ -16,7 +16,6 @@ export default function Nav({ userData, setUserData }){
         <Link to='/'><button>Home</button></Link>
         <Link to='/gallery'><button>Gallery</button></Link>
         <Link to='/about'><button>About us</button></Link>
-        <Link to='/collection/'><button>Collection</button></Link>
         {!userData.username ? (
           <>
             <Link to='/login/'><button>Login</button></Link>
@@ -24,6 +23,7 @@ export default function Nav({ userData, setUserData }){
           </>
         ) : (
           <>
+            <Link to={'/collection/'}><button>Collection</button></Link>
             <Link to={`/profile/`}><button>Profile</button></Link>
             <button onClick={logOut}>Log Out</button>
           </>
