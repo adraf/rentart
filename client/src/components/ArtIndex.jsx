@@ -238,6 +238,8 @@ export default function ArtIndex() {
                 const maxWidth = artWidth[1]
                 const minHeight = artHeight[0]
                 const maxHeight = artHeight[1]
+                // console.log(minWidth, maxWidth)
+                // console.log(art.width)
                 const pattern = new RegExp(search, 'i')
                 if (minWidth < art.width
                   && art.width < maxWidth
@@ -278,10 +280,12 @@ export default function ArtIndex() {
               }
               )
               .map((art, i) => {
-                const { id, artName, artImage, artist } = art
+                // 'indArtId' is to link to Individual Art Page
+                const { _id: indArtId, artName, artImage, artist } = art
                 return (
                   <Col
                     className='single-art-container'
+                    // Link helps the individual art page function
                     as={Link}
                     key={i}
                     xs={5}
@@ -289,13 +293,13 @@ export default function ArtIndex() {
                     md={4}
                     lg={3}
                     xl={3}
-                  // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
-                  to={`/art/${id}`}
+                    // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
+                    to={`/art/${indArtId}`}
                   >
                     {/* {artName} */}
                     <div className="rails" style={{ height: '300px' }}>
                       {/* <img className="thumbnail" src={artImage} to={`/art/${id}`} /> */}
-                      <div className="thumbnail" to={`/art/${id}`}
+                      <div className="thumbnail" to={`/art/${indArtId}`}
                         style={{ backgroundImage: `url(${artImage})` }}>
 
                         <p className='favorite'
@@ -318,7 +322,7 @@ export default function ArtIndex() {
                         <p>{artist}</p>
                       </div>
                     </div>
-                  </Col>
+                  </Col> 
                 )
               })}
           </Row>
