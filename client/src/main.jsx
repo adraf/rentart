@@ -7,10 +7,15 @@ import ArtCarousel from './components/Carousel.jsx'
 import RegisterUser from './components/RegisterUser.jsx'
 import Login from './components/Login.jsx'
 import ArtIndex from './components/ArtIndex.jsx'
+import IndArtPage from './components/IndArtPage.jsx'
+
+// Loader
+import { getIndArt } from './loaders/artLoader.js'
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/main.scss'
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +37,11 @@ const router = createBrowserRouter([
       {
         path: '/gallery',
         element: <ArtIndex />,
+      },
+      {
+        path: '/art/:artId',
+        element: <IndArtPage />,
+        loader: async ({ params }) => getIndArt(params.artId)
       }
     ]
   }

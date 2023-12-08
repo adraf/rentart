@@ -119,7 +119,7 @@ export default [
   {
     artName: 'Guernica',
     artist: 'Pablo Picasso',
-    artImage: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/400px-PicassoGuernica.jpg',
+    artImage: 'https://cdn.shopify.com/s/files/1/0849/4704/files/guernica_sartle.jpg?v=1582528493',
     type: 'Painting',
     description: 'A large 1937 oil painting by Spanish artist Pablo Picasso. It is one of his best-known works, regarded by many art critics as the most moving and powerful anti-war painting in history.',
     movement: 'Cubism',
@@ -145,7 +145,7 @@ export default [
   {
     artName: 'The Great Day of His Wrath',
     artist: 'John Martin',
-    artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/John_Martin_-_The_Great_Day_of_His_Wrath_-_Google_Art_Project.jpg/270px-John_Martin_-_The_Great_Day_of_His_Wrath_-_Google_Art_Project.jpg',
+    artImage: 'https://media.tate.org.uk/aztate-prd-ew-dg-wgtail-st1-ctr-data/images/.width-1440_dAaH0JO.jpg',
     type: 'Painting',
     description: 'The End of the World, commonly known as The Great Day of His Wrath, is an 1851–1853 oil painting on canvas by the English painter John Martin. Leopold Martin, John Martin\'s son, said that his father found the inspiration for this painting on a night journey through the Black Country.',
     movement: 'Romanticism',
