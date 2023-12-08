@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
 export default function Nav({ userData, setUserData }){
-  console.log(userData)
+  // console.log(userData)
   const navigate = useNavigate()
 
   function logOut(){
