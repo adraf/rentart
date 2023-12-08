@@ -3,6 +3,7 @@ import { Outlet, useNavigation } from 'react-router-dom'
 
 // components
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 
 import { Spinner } from 'react-bootstrap'
 
@@ -24,6 +25,7 @@ export default function App() {
       </div>
       }
       </main>
+      <Footer />
     </>
   )
 }
