@@ -267,8 +267,6 @@ export default function ArtIndex() {
                   return pattern.test(art.artName)
                 }
 
-
-
                 // else if (art.media.includes(mediaChoice)) {
                 //   return pattern.test(art.artName)
                 // }
