@@ -22,7 +22,7 @@ export const login = async (req,res) => {
       throw new Error(!user ? 'Username not found' : 'Incorrect Password')
     }
     const token = jwt.sign({ sub: user._id }, process.env.SECRET, { expiresIn: '7d' })
-    return res.json({ username: user.username, usertype: user.usertype, token: token })
+    return res.json({ username: user.username, usertype: user.usertype, token: token, email: user.email, name: user.name, address: user.address, rented: user.rented, favourites: user.favourites })
   } catch (error) {
     console.log(error)
     return res.status(401).json({ message: 'Unauthorized' })

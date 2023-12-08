@@ -22,7 +22,7 @@ export default function Login(){
       localStorage.setItem('username', res.data.username)
       localStorage.setItem('usertype', res.data.usertype)
 
-      setUserData([res.data.token, res.data.username])
+      setUserData(res.data)
       // Go to homepage
       navigate("/profile")
     } catch (error) {

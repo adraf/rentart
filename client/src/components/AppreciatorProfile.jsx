@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom"
 
+export default function AppreciatorProfile({ userData, setUserData }){
 
-export default function AppreciatorProfile(){
   return (
     <section className="profile">
       <div className="profile-header">
@@ -9,6 +10,16 @@ export default function AppreciatorProfile(){
       <div className="profile-body appr-body">
         <div className="body-instance current-items">
           <h2>Currently in posession</h2>
+          {console.log(userData.rented)}
+          {userData.rented > 0
+          ? 
+          userData.rented.map((art, i) => {
+            <div className="art-item" key={i}></div>
+          })
+          
+          : 
+          <h2>You have no artwork yet!</h2>
+          }
         </div>
         <div className="body-instance details">
           <div><p>Name</p><button>edit</button></div>
