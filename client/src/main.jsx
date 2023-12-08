@@ -12,7 +12,7 @@ import Profile from './components/Profile.jsx'
 
 // Loader
 import { getIndArt } from './utils/loaders/artLoader.js'
-import { getUser } from './utils/loaders/userLoader.js'
+
 
 //! Styles
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Slider from '@mui/material/Slider'
 import Box from '@mui/material/Box'
-import { Modal, Button } from '@mui/material'
+import { Modal } from '@mui/material'
 
 export default function ArtIndex() {
   const [search, setSearch] = useState('')
