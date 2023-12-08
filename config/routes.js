@@ -7,7 +7,7 @@ import {
   deleteArt,
   getSomeArt
 } from '../controllers/artController.js'
-import { register, login, getProfile } from '../controllers/userController.js'
+import { register, login, getProfile, getAllProfile } from '../controllers/userController.js'
 import secureRoute from './secureRoute.js'
 
 const router = express.Router()
@@ -36,4 +36,6 @@ router.route('/login')
 router.route('/profile')
   .get(secureRoute, getProfile)
 
+router.route('/profile/all')
+  .get(secureRoute, getProfile)
 export default router
