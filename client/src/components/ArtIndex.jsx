@@ -19,7 +19,7 @@ export default function ArtIndex() {
   const data = useOutletContext()
   const [ userData, setUserData ] = data
   const [favouriteChoice, setFavouriteChoice ] = useState([])
-  const { favourites } = userData
+  
 
 
   const handleOpen = () => setOpen(true);
@@ -308,12 +308,16 @@ export default function ArtIndex() {
                         <p className='favorite'
                           onClick={(e) => {
                             e.preventDefault()
+                            const { favourites } = userData
                             if (e.target.innerText === '🤍') {
                               e.target.innerText = '♥️'
                               favourites.push(indArtId)
                               console.log(favourites)
+                              setUserData(userData)
+                              console.log(userData)
                             } else {
                               e.target.innerText = '🤍'
+                              // favourites.filter((value, index) => favourites.indexOf(value) === index)
                               favourites.filter((value) => value.includes(indArtId))
                               console.log(favourites)
                             }
