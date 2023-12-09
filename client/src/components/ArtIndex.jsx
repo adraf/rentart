@@ -34,31 +34,6 @@ export default function ArtIndex() {
   }, [])
 
 
-  const updatedFavourites = userData.favourites
-  console.log("FAVES", updatedFavourites)
-  console.log(userData)
-  // console.log(u)
-
-
-  async function updateUserFavourites(newFavourites) {
-    try {
-      const res = await axios.put('/api/profile', { favourites: newFavourites }, {
-        headers: {
-          Authorization: `Bearer ${userData.token}`,
-        },
-      })
-      
-      localStorage.setItem('favourites', JSON.stringify(res.data.favourites))
-      setUserData((prevUserData) => ({
-        ...prevUserData,
-        favourites: res.data.favourites,
-      }))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-
   //* LIST OF ARTISTS
   const [artistChoice, setArtistChoice] = useState('Artists')
   const artistAll = [... new Set(arts.map(art => art.artist))]
@@ -149,8 +124,32 @@ export default function ArtIndex() {
     }
   }
 
-  //! Functions
+  //* FAVOURITES 
+  const updatedFavourites = userData.favourites
+  console.log("FAVES", updatedFavourites)
+  console.log(userData)
+  // console.log(u)
 
+  async function updateUserFavourites(newFavourites) {
+    try {
+      const res = await axios.put('/api/profile', { favourites: newFavourites }, {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+
+      localStorage.setItem('favourites', JSON.stringify(res.data.favourites))
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        favourites: res.data.favourites,
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  //! Functions
+  //* VALUES FOR SLIDES
   function valuetext(value) {
     return `${value} cm`
   }
@@ -168,9 +167,24 @@ export default function ArtIndex() {
           aria-describedby="modal-modal-description"
         >
           <Box className='filter-container'>
-            <h3>Filters</h3>
+            <div className='filters-header'>
+              <h3
+                          onClick={(e) => {
+                            e.preventDefault()
+                            if (e.target.innerText === '♡') {
+                              e.target.innerText = '♥️'
+                            } else {
+                              e.target.innerText = '♡'
+                            }
+                          }}
+                        >
+                          {'♡'}
+
+              </h3>
+              <h3>Filters</h3>
+            </div>
             <input
-              placeholder="Search..."
+              placeholder="Search Title ..."
               className="search"
               onChange={(e) => setSearch(e.target.value)}
               value={search}

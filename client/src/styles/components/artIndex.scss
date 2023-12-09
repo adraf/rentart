@@ -22,7 +22,8 @@
   background-color: white;
 }
 
-.filter-container h3 {
+.filters-header {
+  @include flex(row, flex-start, space-between);
   text-align: end;
   width: 100%;
   border-bottom: 1px solid $primary-color;
