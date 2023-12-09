@@ -1,6 +1,5 @@
-///ERROR 
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 
@@ -10,10 +9,16 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Slider from '@mui/material/Slider'
 import Box from '@mui/material/Box'
+import { Modal } from '@mui/material'
 
 export default function ArtIndex() {
+  //! States
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
+  const [open, setOpen] = React.useState(false);
+  const [userData, setUserData] = useOutletContext()
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   //! Effects
   useEffect(() => {
@@ -80,7 +85,7 @@ export default function ArtIndex() {
   //* HEIGHT SLIDER
   const [artHeight, setArtHeight] = React.useState([0, 1000])
 
-  const handleChange2 = (newValue, activeThumb) => {
+  const handleChange2 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -101,7 +106,7 @@ export default function ArtIndex() {
   //* PRICE SLIDER
   const [artPrice, setArtPrice] = React.useState([0, 100000])
 
-  const handleChange3 = (newValue, activeThumb) => {
+  const handleChange3 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -119,114 +124,147 @@ export default function ArtIndex() {
     }
   }
 
-  //* FAVOURITES
-  // let isToggled = false
-  // let favoriteStatus = '🤍'
-  // const [favorite, setFavorite] = useState(isToggled)
+  //* FAVOURITES 
+  const updatedFavourites = userData.favourites
+  console.log("FAVES", updatedFavourites)
+  console.log(userData)
+  // console.log(u)
+
+  async function updateUserFavourites(newFavourites) {
+    try {
+      const res = await axios.put('/api/profile', { favourites: newFavourites }, {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+
+      localStorage.setItem('favourites', JSON.stringify(res.data.favourites))
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        favourites: res.data.favourites,
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   //! Functions
-  // function handleSubmit(e) {
-  //   e.preventDefault()
-  // }
-
+  //* VALUES FOR SLIDES
   function valuetext(value) {
     return `${value} cm`
   }
 
 
-  // function favoriteSelection() {
-  //   const favoriteN = '🤍'
-  //   const favoriteY = '♥️♡'
-  // if () return 
-  // }
-
   //! JSX
   return (
     <>
       <main className='index-page'>
-        <div className='filter-container'>
-          <h3>Filters</h3>
-          <input
-            placeholder="Search..."
-            className="search"
-            onChange={(e) => setSearch(e.target.value)}
-            value={search}
-          />
-          <section className='filter-selection'>
-            <select
-              className="artist-list"
-              onChange={(e) => setArtistChoice(e.target.value)}
-              value={artistChoice}
-            >
-              {artistAll
-                .map((artistChoice, i) => {
-                  return <option key={i} value={artistChoice}>{artistChoice}</option>
-                })
-              }
-            </select>
-          </section>
-          <section className='filter-selection'>
-            <select
-              className="movement-list"
-              onChange={(e) => setMovementChoice(e.target.value)}
-              value={movementChoice}
-            >
-              {movementList
-                .map((movementChoice, i) => {
-                  return <option key={i} value={movementChoice}>{movementChoice}</option>
-                })
-              }
-            </select>
-          </section>
-          <section className='filter-selection'>
-            <select
-              className="media-list"
-              onChange={(e) => setMediaChoice(e.target.value)}
-              value={mediaChoice}
-            >
-              {mediaList
-                .map((mediaChoice, i) => {
-                  return <option key={i} value={mediaChoice}>{mediaChoice}</option>
-                })
-              }
-            </select>
-          </section>
-          <Box className='filter-sliders-container'>
-            <label>Width Range (cm)</label>
-            <Slider
-              min={0}
-              max={1000}
-              getAriaLabel={() => 'Minimum distance'}
-              value={artWidth}
-              onChange={handleChange1}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-              disableSwap
+        <button className='side-buttons' onClick={handleOpen}>Filters˯ </button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className='filter-container'>
+            <div className='filters-header'>
+              <h3
+                          onClick={(e) => {
+                            e.preventDefault()
+                            if (e.target.innerText === '♡') {
+                              e.target.innerText = '♥️'
+                            } else {
+                              e.target.innerText = '♡'
+                            }
+                          }}
+                        >
+                          {'♡'}
+
+              </h3>
+              <h3>Filters</h3>
+            </div>
+            <input
+              placeholder="Search Title ..."
+              className="search"
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
             />
-            <label>Height Range (cm)</label>
-            <Slider
-              min={0}
-              max={1000}
-              getAriaLabel={() => 'Minimum distance shift'}
-              value={artHeight}
-              onChange={handleChange2}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-              disableSwap
-            />
-            <label>Price Range (£)</label>
-            <Slider
-              min={0}
-              max={100000}
-              getAriaLabel={() => 'Minimum distance shift'}
-              value={artPrice}
-              onChange={handleChange3}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-              disableSwap
-            />
+            <section className='filter-selection'>
+              <select
+                className="artist-list"
+                onChange={(e) => setArtistChoice(e.target.value)}
+                value={artistChoice}
+              >
+                {artistAll
+                  .map((artistChoice, i) => {
+                    return <option key={i} value={artistChoice}>{artistChoice}</option>
+                  })
+                }
+              </select>
+            </section>
+            <section className='filter-selection'>
+              <select
+                className="movement-list"
+                onChange={(e) => setMovementChoice(e.target.value)}
+                value={movementChoice}
+              >
+                {movementList
+                  .map((movementChoice, i) => {
+                    return <option key={i} value={movementChoice}>{movementChoice}</option>
+                  })
+                }
+              </select>
+            </section>
+            <section className='filter-selection'>
+              <select
+                className="media-list"
+                onChange={(e) => setMediaChoice(e.target.value)}
+                value={mediaChoice}
+              >
+                {mediaList
+                  .map((mediaChoice, i) => {
+                    return <option key={i} value={mediaChoice}>{mediaChoice}</option>
+                  })
+                }
+              </select>
+            </section>
+            <Box className='filter-sliders-container'>
+              <label>Width Range (cm)</label>
+              <Slider
+                min={0}
+                max={1000}
+                getAriaLabel={() => 'Minimum distance'}
+                value={artWidth}
+                onChange={handleChange1}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                disableSwap
+              />
+              <label>Height Range (cm)</label>
+              <Slider
+                min={0}
+                max={1000}
+                getAriaLabel={() => 'Minimum distance shift'}
+                value={artHeight}
+                onChange={handleChange2}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                disableSwap
+              />
+              <label>Price Range (£)</label>
+              <Slider
+                min={0}
+                max={100000}
+                getAriaLabel={() => 'Minimum distance shift'}
+                value={artPrice}
+                onChange={handleChange3}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                disableSwap
+              />
+            </Box>
           </Box>
-        </div>
+        </Modal>
 
 
         {/* <h1 className="bold display-3 mb-4">Shows List</h1> */}
@@ -288,28 +326,34 @@ export default function ArtIndex() {
                     // Link helps the individual art page function
                     as={Link}
                     key={i}
-                    xs={5}
-                    s={4}
-                    md={4}
-                    lg={3}
+                    xs={12}
+                    s={8}
+                    md={6}
+                    lg={4}
                     xl={3}
                     // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
                     to={`/art/${indArtId}`}
                   >
                     {/* {artName} */}
                     <div className="rails" style={{ height: '300px' }}>
-                      {/* <img className="thumbnail" src={artImage} to={`/art/${id}`} /> */}
                       <div className="thumbnail" to={`/art/${indArtId}`}
                         style={{ backgroundImage: `url(${artImage})` }}>
 
                         <p className='favorite'
                           onClick={(e) => {
                             e.preventDefault()
-                            console.log(e.target.innerText)
+                            const { favourites } = userData
                             if (e.target.innerText === '🤍') {
                               e.target.innerText = '♥️'
+                              const newFavourites = [...favourites, indArtId]
+                              setUserData({ ...userData, newFavourites })
+                              updateUserFavourites(newFavourites)
+
                             } else {
                               e.target.innerText = '🤍'
+                              const newFavourites = favourites.filter((value) => !value.includes(indArtId))
+                              setUserData({ ...userData, favourites: newFavourites })
+                              updateUserFavourites(newFavourites)
                             }
                           }}
                         >
@@ -322,7 +366,7 @@ export default function ArtIndex() {
                         <p>{artist}</p>
                       </div>
                     </div>
-                  </Col> 
+                  </Col>
                 )
               })}
           </Row>

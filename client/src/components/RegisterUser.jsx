@@ -16,11 +16,7 @@ export default function RegisterUser(){
       // Get logged in
       const res = await axios.post('/api/login', parsedData)
       // Save data
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('username', res.data.username)
-      localStorage.setItem('usertype', res.data.usertype)
-
-      setUserData([res.data.token, res.data.username])
+      setUserData(res.data)
       // Go to homepage
       navigate("/profile")
     } catch (error) {

@@ -1,7 +1,8 @@
 import ImageUploadField from './ImageUploadField'
+import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 
-export default function AppreciatorProfile(){
+export default function AppreciatorProfile({ userData, setUserData }){
 
   const placeholderImg = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
   // Start of image upload, will complete when profile's are complete
@@ -26,6 +27,16 @@ export default function AppreciatorProfile(){
       <div className="profile-body appr-body">
         <div className="body-instance current-items">
           <h2>Currently in posession</h2>
+          {console.log(userData.rented)}
+          {userData.rented > 0
+          ? 
+          userData.rented.map((art, i) => {
+            <div className="art-item" key={i}></div>
+          })
+          
+          : 
+          <h2>You have no artwork yet!</h2>
+          }
         </div>
         <div className="body-instance details">
           <div><p>Name</p><button>edit</button></div>
