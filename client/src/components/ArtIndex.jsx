@@ -125,6 +125,8 @@ export default function ArtIndex() {
   }
 
   //* FAVOURITES 
+  const [filterByFavourites, setFilterByFavourites] = useState(false)
+  console.log(filterByFavourites)
   const updatedFavourites = userData.favourites
   console.log("FAVES", updatedFavourites)
   console.log(userData)
@@ -142,11 +144,14 @@ export default function ArtIndex() {
       setUserData((prevUserData) => ({
         ...prevUserData,
         favourites: res.data.favourites,
-      }))
+      }
+      )
+      )
     } catch (error) {
       console.log(error)
     }
   }
+
 
   //! Functions
   //* VALUES FOR SLIDES
@@ -169,16 +174,22 @@ export default function ArtIndex() {
           <Box className='filter-container'>
             <div className='filters-header'>
               <h3
-                          onClick={(e) => {
-                            e.preventDefault()
-                            if (e.target.innerText === '♡') {
-                              e.target.innerText = '♥️'
-                            } else {
-                              e.target.innerText = '♡'
-                            }
-                          }}
-                        >
-                          {'♡'}
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (e.target.innerText === '♡') {
+                    const newFavStatus = true
+                    setFilterByFavourites(newFavStatus)
+                    e.target.innerText = '♥️'
+
+                  } else {
+                    const newFavStatus = false
+                    setFilterByFavourites(newFavStatus)
+                    e.target.innerText = '♡'
+                  }
+
+                }}
+              >
+                {'♡'}
 
               </h3>
               <h3>Filters</h3>
@@ -279,34 +290,24 @@ export default function ArtIndex() {
                 // console.log(minWidth, maxWidth)
                 // console.log(art.width)
                 const pattern = new RegExp(search, 'i')
-                if (minWidth < art.width
-                  && art.width < maxWidth
-                  && minHeight < art.height
-                  && art.height < maxHeight
-                  && artistChoice === 'Artists'
-                  && movementChoice === 'Movements'
-                  && mediaChoice === 'Media') {
-                  return pattern.test(art.artName)
-                }
-                else if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && movementChoice === 'Movements' && mediaChoice === 'Media') {
-                  return pattern.test(art.artName)
-                }
-                else if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && mediaChoice === 'Media') {
-                  return pattern.test(art.artName)
-                }
-                else if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
-                  return pattern.test(art.artName)
-                }
-                else if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && movementChoice === 'Movements' && art.media.includes(mediaChoice)) {
-                  return pattern.test(art.artName)
-                }
-                else if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media') {
-                  return pattern.test(art.artName)
-                }
-                else if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
-                  return pattern.test(art.artName)
-                }
+                if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && movementChoice === 'Movements' && mediaChoice === 'Media'
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && movementChoice === 'Movements' && mediaChoice === 'Media'
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && mediaChoice === 'Media'
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && movementChoice === 'Movements' && art.media.includes(mediaChoice)
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media'
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media'
+                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
 
+
+                  if (filterByFavourites) {
+                    const favoritesArray = userData.favourites
+                    console.log(favoritesArray)
+                    return
+                  } else {
+                    return pattern.test(art.artName)
+                  }
+                }
 
 
                 // else if (art.media.includes(mediaChoice)) {
@@ -320,6 +321,8 @@ export default function ArtIndex() {
               .map((art, i) => {
                 // 'indArtId' is to link to Individual Art Page
                 const { _id: indArtId, artName, artImage, artist } = art
+                const isUserLoggedIn = userData && userData.token
+                const isFavourite = isUserLoggedIn && userData.favourites && userData.favourites.includes(indArtId)
                 return (
                   <Col
                     className='single-art-container'
@@ -342,22 +345,26 @@ export default function ArtIndex() {
                         <p className='favorite'
                           onClick={(e) => {
                             e.preventDefault()
-                            const { favourites } = userData
-                            if (e.target.innerText === '🤍') {
+                            if (isUserLoggedIn) {
+                              const { favourites } = userData
+                              if (isFavourite) {
+                                e.target.innerText = '🤍'
+                                const newFavourites = favourites.filter(value => value !== indArtId)
+                                // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
+                                setUserData({ ...userData, favourites: newFavourites })
+                                updateUserFavourites(newFavourites)
+                              }
+                            else {
                               e.target.innerText = '♥️'
                               const newFavourites = [...favourites, indArtId]
-                              setUserData({ ...userData, newFavourites })
-                              updateUserFavourites(newFavourites)
-
-                            } else {
-                              e.target.innerText = '🤍'
-                              const newFavourites = favourites.filter((value) => !value.includes(indArtId))
+                              // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
                               setUserData({ ...userData, favourites: newFavourites })
                               updateUserFavourites(newFavourites)
                             }
+                            }
                           }}
                         >
-                          {'🤍'}
+                          {isUserLoggedIn && (isFavourite ? '♥️' : '🤍')}
                         </p>
 
                       </div>
