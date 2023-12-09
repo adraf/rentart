@@ -18,8 +18,8 @@ export default function ImageUploadField({ formData, setFormData }) {
 
   return (
     <>
-      {formData.profileImage ?
-        <img src={formData.profileImage} alt="Profile-Pic" />
+      {formData.profileImage === 'placeholder' ?
+        <img src={formData.profileImage} className='profile-pic-preview' alt='Profile-Pic'/>
         :
         <input type='file' name='profileImage' onChange={handleImageUpload} />
       }

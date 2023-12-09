@@ -8,6 +8,8 @@ html {
 
 body{
   font-family: 'Nunito','Termina Test', sans-serif;
+  // to allow for footer
+  margin-bottom: 60px;
 }
 
 nav {
@@ -34,11 +36,19 @@ h3 {
 }
 
 footer{
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
   width: 100%;
   background-color: #494848;
-  height: 70px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: whitesmoke;
+}
+
+footer p {
+  margin: 0;
 }
