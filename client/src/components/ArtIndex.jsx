@@ -16,12 +16,7 @@ export default function ArtIndex() {
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
   const [open, setOpen] = React.useState(false);
-  const data = useOutletContext()
-  const [ userData, setUserData ] = data
-  const [favouriteChoice, setFavouriteChoice ] = useState([])
-  
-
-
+  const [userData, setUserData] = useOutletContext()
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -38,6 +33,30 @@ export default function ArtIndex() {
     getArtData()
   }, [])
 
+
+  const updatedFavourites = userData.favourites
+  console.log("FAVES", updatedFavourites)
+  console.log(userData)
+  // console.log(u)
+
+
+  async function updateUserFavourites(newFavourites) {
+    try {
+      const res = await axios.put('/api/profile', { favourites: newFavourites }, {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+      
+      localStorage.setItem('favourites', JSON.stringify(res.data.favourites))
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        favourites: res.data.favourites,
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   //* LIST OF ARTISTS
@@ -135,6 +154,7 @@ export default function ArtIndex() {
   function valuetext(value) {
     return `${value} cm`
   }
+
 
   //! JSX
   return (
@@ -311,15 +331,15 @@ export default function ArtIndex() {
                             const { favourites } = userData
                             if (e.target.innerText === '🤍') {
                               e.target.innerText = '♥️'
-                              favourites.push(indArtId)
-                              console.log(favourites)
-                              setUserData(userData)
-                              console.log(userData)
+                              const newFavourites = [...favourites, indArtId]
+                              setUserData({ ...userData, newFavourites })
+                              updateUserFavourites(newFavourites)
+
                             } else {
                               e.target.innerText = '🤍'
-                              // favourites.filter((value, index) => favourites.indexOf(value) === index)
-                              favourites.filter((value) => value.includes(indArtId))
-                              console.log(favourites)
+                              const newFavourites = favourites.filter((value) => !value.includes(indArtId))
+                              setUserData({ ...userData, favourites: newFavourites })
+                              updateUserFavourites(newFavourites)
                             }
                           }}
                         >

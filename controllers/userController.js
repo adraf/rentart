@@ -58,3 +58,18 @@ export const getAllProfile = async (req, res) => {
     return res.status(401).json({ message: 'Unauthorized' })
   }
 }
+
+// *update
+// method: PUT
+// path: /profile/
+export const updateUser = async (req, res) => {
+  try {
+    const profile = await User.findById(req.currentUser._id).populate('rented').populate('favourites')
+    Object.assign(profile, req.body)
+    await profile.save()
+    return res.json(profile)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
+  }
+}
