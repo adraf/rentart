@@ -16,3 +16,23 @@
 .negative-results{
   margin-top: 10vh;
 }
+
+.admin-result {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+}
+
+.user-results, .art-results{
+  width: 50%;
+  box-shadow: 0 0 5px 0 #9E9E9E;
+}
+
+.single-user-result, .single-art-result{
+  display: flex;
+}
+
+.search-image{
+  max-width: 160px;
+  aspect-ratio: 1 /1;
+}
