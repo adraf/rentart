@@ -25,15 +25,16 @@ nav button{
   background-color: whitesmoke;
 }
 
+main {
+  min-height: calc(100vh - 196px);
+}
+
 h3 {
   font-size: 1.75em;
 }
 
 footer{
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
+  width: 100%;
   background-color: #494848;
   height: 70px;
   display: flex;

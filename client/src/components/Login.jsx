@@ -18,9 +18,7 @@ export default function Login(){
       // Get logged in
       const res = await axios.post('/api/login', parsedData)
       // Save data
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('username', res.data.username)
-      localStorage.setItem('usertype', res.data.usertype)
+      localStorage.setItem('data', res.data)
 
       setUserData(res.data)
       // Go to homepage

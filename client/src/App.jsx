@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Outlet, useNavigation } from 'react-router-dom'
 
 // components
@@ -11,6 +11,12 @@ export default function App() {
 
   const [ userData, setUserData ] = useState([])
   const navigation = useNavigation()
+
+  useState(() => {
+    function retrieve(){
+      if(localStorage.getItem('data')) setUserData(localStorage.getItem('data'))
+    }
+  }, [userData])
 
   return (
     <>
