@@ -1,6 +1,5 @@
-///ERROR 
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 
@@ -17,6 +16,10 @@ export default function ArtIndex() {
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
   const [open, setOpen] = React.useState(false);
+  const data = useOutletContext()
+  const [ userData, setUserData ] = data
+  const [favouriteChoice, setFavouriteChoice ] = useState([])
+  const { favourites } = userData
 
 
   const handleOpen = () => setOpen(true);
@@ -307,9 +310,12 @@ export default function ArtIndex() {
                             e.preventDefault()
                             if (e.target.innerText === '🤍') {
                               e.target.innerText = '♥️'
-                              console.log(indArtId)
+                              favourites.push(indArtId)
+                              console.log(favourites)
                             } else {
                               e.target.innerText = '🤍'
+                              favourites.filter((value) => value.includes(indArtId))
+                              console.log(favourites)
                             }
                           }}
                         >
