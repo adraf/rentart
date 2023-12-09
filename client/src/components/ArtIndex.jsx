@@ -125,8 +125,7 @@ export default function ArtIndex() {
   }
 
   //* FAVOURITES 
-  const [filterByFavourites, setFilterByFavourites] = useState(false)
-  console.log(filterByFavourites)
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const updatedFavourites = userData.favourites
   console.log("FAVES", updatedFavourites)
   console.log(userData)
@@ -177,20 +176,15 @@ export default function ArtIndex() {
                 onClick={(e) => {
                   e.preventDefault()
                   if (e.target.innerText === '♡') {
-                    const newFavStatus = true
-                    setFilterByFavourites(newFavStatus)
                     e.target.innerText = '♥️'
-
+                    setShowFavoritesOnly(true)
                   } else {
-                    const newFavStatus = false
-                    setFilterByFavourites(newFavStatus)
                     e.target.innerText = '♡'
+                    setShowFavoritesOnly(false)
                   }
-
                 }}
               >
                 {'♡'}
-
               </h3>
               <h3>Filters</h3>
             </div>
@@ -287,33 +281,31 @@ export default function ArtIndex() {
                 const maxWidth = artWidth[1]
                 const minHeight = artHeight[0]
                 const maxHeight = artHeight[1]
-                // console.log(minWidth, maxWidth)
-                // console.log(art.width)
                 const pattern = new RegExp(search, 'i')
-                if (minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && movementChoice === 'Movements' && mediaChoice === 'Media'
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && movementChoice === 'Movements' && mediaChoice === 'Media'
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && mediaChoice === 'Media'
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && art.artist.includes(artistChoice) && movementChoice === 'Movements' && art.media.includes(mediaChoice)
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media'
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media'
-                  || minWidth < art.width && art.width < maxWidth && minHeight < art.height && art.height < maxHeight && artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)) {
 
+                const isUserLoggedIn = userData && userData.token
+                const userFavourites = isUserLoggedIn ? userData.favourites || [] : []
+                const isFavorite = userFavourites.includes(art._id)
 
-                  if (filterByFavourites) {
-                    const favoritesArray = userData.favourites
-                    console.log(favoritesArray)
-                    return
-                  } else {
-                    return pattern.test(art.artName)
-                  }
-                }
+                const matchesFilter =
+                  (minWidth < art.width &&
+                    art.width < maxWidth &&
+                    minHeight < art.height &&
+                    art.height < maxHeight &&
+                    ((artistChoice === 'Artists' && movementChoice === 'Movements' && mediaChoice === 'Media')
+                      || (art.artist.includes(artistChoice) && movementChoice === 'Movements' && mediaChoice === 'Media')
+                      || (art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && mediaChoice === 'Media')
+                      || (art.artist.includes(artistChoice) && art.movement.includes(movementChoice) && art.media.includes(mediaChoice))
+                      || (art.artist.includes(artistChoice) && movementChoice === 'Movements' && art.media.includes(mediaChoice))
+                      || (artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media')
+                      || (artistChoice === 'Artists' && art.movement.includes(movementChoice) && mediaChoice === 'Media')
+                      || (artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)))
+                    && pattern.test(art.artName)
+                    && (showFavoritesOnly ? isFavorite : true))
 
-
-                // else if (art.media.includes(mediaChoice)) {
-                //   return pattern.test(art.artName)
-                // }
+                return matchesFilter
               })
+
               .sort((a, b) => {
                 return a.artName.localeCompare(b.artName)
               }
@@ -354,13 +346,13 @@ export default function ArtIndex() {
                                 setUserData({ ...userData, favourites: newFavourites })
                                 updateUserFavourites(newFavourites)
                               }
-                            else {
-                              e.target.innerText = '♥️'
-                              const newFavourites = [...favourites, indArtId]
-                              // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
-                              setUserData({ ...userData, favourites: newFavourites })
-                              updateUserFavourites(newFavourites)
-                            }
+                              else {
+                                e.target.innerText = '♥️'
+                                const newFavourites = [...favourites, indArtId]
+                                // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
+                                setUserData({ ...userData, favourites: newFavourites })
+                                updateUserFavourites(newFavourites)
+                              }
                             }
                           }}
                         >
