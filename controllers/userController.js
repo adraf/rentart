@@ -49,7 +49,7 @@ export const getAllProfile = async (req, res) => {
     const payload = jwt.verify(token, process.env.SECRET)
     const userToVerify = await User.findById(payload.sub)
     const admin = await User.findOne({ username: 'admin' })
-    if (userToVerify._id !== admin._id) throw new Error()
+    if (!userToVerify._id.equals(admin._id)) throw new Error()
     // We can't populate req.currentUser as its not a query. So we'll get a query by using the req.currentUser._id and populate that
     const profile = await User.find().populate('rented').populate('favourites')
     return res.json(profile)
