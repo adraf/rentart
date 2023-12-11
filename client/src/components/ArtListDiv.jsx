@@ -1,29 +1,52 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react"
 import { getIndArt } from "../utils/loaders/artLoader"
+import { Link } from 'react-router-dom'
 
-export default function ArtListDiv({ id }){
-  const [ painting, setPainting ] = useState('')
+
+import Col from 'react-bootstrap/Col'
+
+
+export default function ArtListDiv({ id }) {
+  const [painting, setPainting] = useState('')
 
   useEffect(() => {
-    async function artworkRetrieve(){
+    async function artworkRetrieve() {
       const artwork = await getIndArt(id)
       setPainting(artwork)
     }
     artworkRetrieve()
-  }, [ id ]) 
+  }, [id])
 
   return (
-    <div className="art-item">
-      <img src={painting.artImage} className="search-image" alt="" />
-      <div>
-        <p>Name: {painting.artName}</p>
-        <p>Artist: {painting.artist}</p>
-        <p>Movement: {painting.movement}</p>
-        <p>Media: {painting.media}</p>
-        <p>Year: {painting.year}</p>
-        <p>Dimensions: {painting.width}cm x {painting.year}cm</p>
+    <Col
+      className='single-art-container'
+      // Link helps the individual art page function
+      as={Link}
+      // key={i}
+      xs={12}
+      s={8}
+      md={6}
+      lg={4}
+      xl={3}
+      // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
+      to={`/art/${painting._id}`}
+    >
+
+      <div className="rails" style={{ height: '300px' }}>
+        <div className="thumbnail" to={`/art/${painting._id}`}
+          style={{ backgroundImage: `url(${painting.artImage})` }}>
+        </div>
+        {/* <img src={painting.artImage} className="thumbnail" alt="" /> */}
+        <div className="art-title">
+          <h5>Name: {painting.artName}</h5>
+          <p>Artist: {painting.artist}</p>
+          <p>Movement: {painting.movement}</p>
+          <p>Media: {painting.media}</p>
+          <p>Year: {painting.year}</p>
+          <p>Dimensions: {painting.width}cm x {painting.year}cm</p>
+        </div>
       </div>
-    </div>
+    </Col>
   )
 }
