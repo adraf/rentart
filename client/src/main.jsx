@@ -11,6 +11,7 @@ import ArtCollection from './components/ArtCollection.jsx'
 import IndArtPage from './components/IndArtPage.jsx'
 import Profile from './components/Profile.jsx'
 import About from './components/About.jsx'
+import LoginModal from './components/LoginModal.jsx'
 
 // Loader
 import { getIndArt } from './utils/loaders/artLoader.js'
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />
+      },
+      {
+        path: '/loginmodal',
+        element: <LoginModal />
       }
     ]
   }

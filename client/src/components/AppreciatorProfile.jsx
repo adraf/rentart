@@ -10,7 +10,7 @@ export default function AppreciatorProfile({ userData }){
     async function getFaves(){
       try {
         const rawData = userData.favourites.map(art => {
-          console.log('id' + art)
+          
           getIndArt(art)
         })
         const resolved = await Promise.all(rawData)
