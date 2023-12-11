@@ -50,7 +50,7 @@ export default function AdminProfile({ userData }){
           <section className="admin-result">
             <section className="user-results">
               {searchData && searchData.userData.map(user => (
-                <section className="single-user-result" key={user._id}>
+                <Link className="single-user-result" key={user._id} to={`/profile/${user._id}`} >
                   {
                   !user.profileImage
                   ?
@@ -64,7 +64,7 @@ export default function AdminProfile({ userData }){
                     <p>Address: {user.address}</p>
                     <p>Payment Details: {user.paymentDetails}</p>
                   </div>
-                </section>
+                </Link>
               ))}
             </section>
             <section className="art-results">
