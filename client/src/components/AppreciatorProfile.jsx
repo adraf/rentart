@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import ArtListDiv from "./ArtListDiv"
 
-export default function AppreciatorProfile({ userData }){
-
+export default function AppreciatorProfile({ userData }) {
+console.log(userData)
   return (
     <section className="profile">
       <div className="profile-header">
@@ -12,28 +13,24 @@ export default function AppreciatorProfile({ userData }){
           <h2>Favourites</h2>
           {userData.favourites.length > 0
             ?
-            userData.favourites.map(art => {
+            userData.favourites.map(artId => {
               return (
-                <>
-                  <ArtListDiv key={art} id={art} />
-                </>
+                <ArtListDiv key={artId} id={artId} />
               )
             })
-            : 
-          <h2>You have no artwork yet!</h2>
+            :
+            <h2>You have no artwork yet!</h2>
           }
           <h2>Currently in posession</h2>
           {userData.rented.length > 0
-          ? 
-          userData.rented.map((art, i) => {
-            return (
-              <>
-                <ArtListDiv key={art} id={art} />
-              </>
-            )
-          })
-          : 
-          <h2>You have no artwork yet!</h2>
+            ?
+            userData.rented.map((artId) => {
+              return (
+                <ArtListDiv key={artId} id={artId} />
+              )
+            })
+            :
+            <h2>You have no artwork yet!</h2>
           }
         </div>
         <div className="body-instance details">

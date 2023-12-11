@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react"
 import { getIndArt } from "../utils/loaders/artLoader"
 
@@ -10,7 +11,7 @@ export default function ArtListDiv({ id }){
       setPainting(artwork)
     }
     artworkRetrieve()
-  }, []) 
+  }, [ id ]) 
 
   return (
     <div className="art-item">
