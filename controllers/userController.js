@@ -59,6 +59,24 @@ export const getAllProfile = async (req, res) => {
   }
 }
 
+// *show
+// Method: GET
+// Path: /profile/:userId
+export const getSingleUser = async (req, res) => {
+  try {
+    const { userId } = req.params
+    const user = await User.findById(userId)
+    if (!user) {
+      return res.status(404).json({ message: 'No art to be found' })
+    }
+    return res.json(user)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
+  }
+}
+
+
 // *update
 // method: PUT
 // path: /profile/

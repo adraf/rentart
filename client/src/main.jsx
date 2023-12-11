@@ -12,9 +12,11 @@ import IndArtPage from './components/IndArtPage.jsx'
 import Profile from './components/Profile.jsx'
 import About from './components/About.jsx'
 import LoginModal from './components/LoginModal.jsx'
+import IndUserPage from './components/PublicProfile.jsx'
 
 // Loader
 import { getIndArt } from './utils/loaders/artLoader.js'
+import { getIndUser } from './utils/loaders/userLoader.js'
 
 
 //! Styles
@@ -56,6 +58,11 @@ const router = createBrowserRouter([
         path: '/art/:artId',
         element: <IndArtPage />,
         loader: async ({ params }) => getIndArt(params.artId)
+      },
+      {
+        path: '/profile/:userId',
+        element: <IndUserPage />,
+        loader: async ({ params }) => getIndUser(params.userId)
       },
       {
         path: '/profile',

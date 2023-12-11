@@ -11,7 +11,8 @@ import {
   register, 
   login, 
   getProfile, 
-  getAllProfile, 
+  getAllProfile,
+  getSingleUser, 
   updateUser, 
   updateUserImg 
 } from '../controllers/userController.js'
@@ -47,4 +48,9 @@ router.route('/profile')
 
 router.route('/profile/all')
   .get(secureRoute, getAllProfile)
+
+router.route('/profile/:userId')
+  .get(getSingleUser)
+
+
 export default router
