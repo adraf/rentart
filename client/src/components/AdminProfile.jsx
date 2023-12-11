@@ -2,8 +2,9 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 
-export default function AdminProfile({ userData, setUserData }){
+export default function AdminProfile({ userData }){
 
+  console.log(userData)
   const [searchData, setSearchData] = useState('')
 
   async function search(e){

@@ -1,12 +1,21 @@
 import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 // eslint-disable-next-line react/prop-types
-export default function Nav({ userData, setUserData }){
+export default function Nav({ userData }){
+
+  // Session data
+
+
+  useEffect(() => {
+    //console.log('userData:', userData);
+  }, [userData]);
+
   const navigate = useNavigate()
 
   function logOut(){
     localStorage.clear()
-    setUserData('')
+    sessionStorage.clear()
     navigate('/')
   }
 
@@ -23,7 +32,8 @@ export default function Nav({ userData, setUserData }){
           </>
         ) : (
           <>
-            <Link to={'/collection/'}><button>Collection</button></Link>
+
+            {userData.usertype === 1 && <Link to={'/collection/'}><button>Collection</button></Link>}
             <Link to={`/profile/`}><button>Profile</button></Link>
             <button onClick={logOut}>Log Out</button>
           </>

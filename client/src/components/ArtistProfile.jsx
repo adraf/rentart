@@ -1,7 +1,7 @@
 
 
 
-export default function ArtistProfile({ userData, setUserData }){
+export default function ArtistProfile({ userData }){
   return (
     <section className="profile">
       <div className="profile-header">
