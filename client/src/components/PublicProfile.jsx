@@ -1,26 +1,15 @@
 import { Link, useLoaderData } from 'react-router-dom'
+
 // import axios from 'axios'
 // import { useEffect } from 'react'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import ArtListDiv from './ArtListDiv'
 
 
 export default function IndUserPage() {
-
-  // // //! Effects
-  // useEffect(() => {
-  //   async function getArtData() {
-  //     try {
-  //       const res = await axios.get('/api/art')
-  //       setArts(res.data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   getArtData()
-  // }, [])
 
   const user = useLoaderData()
 
@@ -36,9 +25,9 @@ export default function IndUserPage() {
 
   return (
     <main>
-      <Container className='' fluid={true}>
-        <Row className=''>
-          <Col className='' sm={2}>
+      <Container className='indArtContainer' fluid={true}>
+        <Row className='indArtSection'>
+          <Col className='indArtImageColumn' sm={2}>
             {
               !user.profileImage
                 ?
@@ -46,7 +35,7 @@ export default function IndUserPage() {
                 :
                 <img className="search-image" src={profileImage} alt={username} />
             }</Col>
-          <Col className=''>
+          <Col className='indArtTextColumn'>
             <Row>
               <h2>Name: {name}</h2>
               <h4>Username: {username}, {usertype}</h4>
@@ -62,39 +51,10 @@ export default function IndUserPage() {
             <Row>
               <Col>Favourites:</Col>
               <Col>
-              <Container>
-                <Row>
                   {favourites
-                    .map((art, i) => {
-                      const { _id: indArtId, artName, artImage, artist } = art
-                      return (
-                        <Col
-                          className=''
-                          // Link helps the individual art page function
-                          as={Link}
-                          key={i}
-                          xs={12}
-                          s={12}
-                          md={6}
-                          lg={6}
-                          xl={4}
-                          style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
-                          to={`/art/${indArtId}`}
-                        >
-                          <div className="rails" style={{ height: '300px' }}>
-                            <div className="thumbnail" to={`/art/${indArtId}`}
-                              style={{ backgroundImage: `url(${artImage})` }}>
-                            </div>
-                            <div className="art-title">
-                              <h5>art{artName}</h5>
-                              <p>artist {artist}</p>
-                            </div>
-                          </div>
-                        </Col>
-                      )
+                    .map((artId) => {
+                      <ArtListDiv id={artId} key={artId}/> 
                     })}
-                </Row>
-              </Container>
               </Col>
             </Row>
             <Row>
