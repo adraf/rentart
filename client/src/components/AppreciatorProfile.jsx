@@ -1,39 +1,69 @@
-import ImageUploadField from './ImageUploadField'
-import { useNavigate } from "react-router-dom"
-import { useState } from 'react'
+import { getIndArt } from "../utils/loaders/artLoader"
+import { useState, useEffect } from "react"
 
-export default function AppreciatorProfile({ userData, setUserData }){
-
-  const placeholderImg = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-  // Start of image upload, will complete when profile's are complete
-  const [ formData, setFormData ] = useState({ profileImage: placeholderImg })
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value }) 
-  }
+export default function AppreciatorProfile({ userData }){
+  const [ favourites, setFavourites ] = useState([])
+  const [ rented, setRented ] = useState([])
+  console.log(typeof(userData.favourites[0]))
+  useEffect(() => {
+    //Building arrays to render
+    async function getFaves(){
+      try {
+        const rawData = userData.favourites.map(art => {
+          
+          getIndArt(art)
+        })
+        const resolved = await Promise.all(rawData)
+        console.log(resolved)
+        setFavourites(resolved)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    async function getRents(){
+      try {
+        const rawData = userData.rented.map(art => getIndArt(art))
+        const resolved = await Promise.all(rawData)
+        setRented(resolved)
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getFaves()
+    getRents()
+  }, [])
 
   return (
     <section className="profile">
       <div className="profile-header">
-        {/* Start of image upload, will complete when profile's are complete */}
-        <div>
-          <form onSubmit={e => e.preventDefault()}>
-            <ImageUploadField formData={formData} setFormData={setFormData}/>
-            <input type="submit" value="Add Profile Picture" onSubmit={handleChange} />
-          </form>
-        </div>
-        <img src={formData.profileImage} alt="" className="profilepic" />
-
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" className="profilepic" />
       </div>
       <div className="profile-body appr-body">
         <div className="body-instance current-items">
+          <h2>Favourites</h2>
+          {favourites && userData.favourites.length > 0
+            ?
+            favourites.map((art, i) => {
+              return (
+              <div className="art-item" key={userData.favourites[i]}>
+                {/* name: {art.name} */}
+              </div>
+              )
+            })
+            : 
+          <h2>You have no artwork yet!</h2>
+          }
           <h2>Currently in posession</h2>
-          {console.log(userData.rented)}
-          {userData.rented > 0
+          {favourites && userData.rented.length > 0
           ? 
           userData.rented.map((art, i) => {
-            <div className="art-item" key={i}></div>
+            return (
+            <div className="art-item" key={userData.rented[i]}>
+              name: {art.name}
+            </div>
+            )
           })
-          
           : 
           <h2>You have no artwork yet!</h2>
           }

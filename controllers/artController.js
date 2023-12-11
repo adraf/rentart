@@ -69,7 +69,7 @@ export const deleteArt = async (req, res) => {
     const { artId } = req.params
     const artToDelete = await Art.findByIdAndDelete({ _id: artId, uploadedBy: req.currentUser._id })
     if (!artToDelete) {
-      return res.status(404).json({ message: 'No book found, or unauthorized' })
+      return res.status(404).json({ message: 'No art found, or unauthorized' })
     }
     return res.sendStatus(204)
   } catch (error) {
