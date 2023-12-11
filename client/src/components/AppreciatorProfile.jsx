@@ -1,7 +1,17 @@
 import { getIndArt } from "../utils/loaders/artLoader"
 import { useState, useEffect } from "react"
+ // Image Uploader Import
+import ImageUploadField from './ImageUploadField'
 
 export default function AppreciatorProfile({ userData }){
+
+  // Image Uploader
+  const placeholderImg = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+  const [ formData, setFormData ] = useState({ profileImage: placeholderImg })
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
   const [ favourites, setFavourites ] = useState([])
   const [ rented, setRented ] = useState([])
   console.log(typeof(userData.favourites[0]))
@@ -36,9 +46,17 @@ export default function AppreciatorProfile({ userData }){
 
   return (
     <section className="profile">
-      <div className="profile-header">
+      {/* <div className="profile-header">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" className="profilepic" />
+      </div> */}
+      {/* Image Upload Div */}
+      <div>
+        <form onSubmit={e => e.preventDefault()}>
+          <ImageUploadField formData={formData} setFormData={setFormData}/>
+          <input type="submit" value="Add Profile Picture" onSubmit={handleChange} />
+        </form>
       </div>
+      <img src={formData.profileImage} alt="" className="profilepic" />
       <div className="profile-body appr-body">
         <div className="body-instance current-items">
           <h2>Favourites</h2>

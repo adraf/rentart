@@ -73,3 +73,19 @@ export const updateUser = async (req, res) => {
     return res.status(400).json(error)
   }
 }
+
+// *update Add Profile Image
+// method: PUT
+// path: /profile
+export const updateUserImg = async (req, res) => {
+  try {
+    const profile = await User.findById(req.currentUser._id)
+    Object.assign(profile, req.currentUser.profileImage)
+    await profile.save()
+    console.log('profile >', profile)
+    return res.json(profile)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
+  }
+}
