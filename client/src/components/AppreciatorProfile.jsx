@@ -1,38 +1,6 @@
-import { getIndArt } from "../utils/loaders/artLoader"
-import { useState, useEffect } from "react"
+import ArtListDiv from "./ArtListDiv"
 
 export default function AppreciatorProfile({ userData }){
-  const [ favourites, setFavourites ] = useState([])
-  const [ rented, setRented ] = useState([])
-  console.log(typeof(userData.favourites[0]))
-  useEffect(() => {
-    //Building arrays to render
-    async function getFaves(){
-      try {
-        const rawData = userData.favourites.map(art => {
-          
-          getIndArt(art)
-        })
-        const resolved = await Promise.all(rawData)
-        console.log(resolved)
-        setFavourites(resolved)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    async function getRents(){
-      try {
-        const rawData = userData.rented.map(art => getIndArt(art))
-        const resolved = await Promise.all(rawData)
-        setRented(resolved)
-        
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getFaves()
-    getRents()
-  }, [])
 
   return (
     <section className="profile">
@@ -42,26 +10,26 @@ export default function AppreciatorProfile({ userData }){
       <div className="profile-body appr-body">
         <div className="body-instance current-items">
           <h2>Favourites</h2>
-          {favourites && userData.favourites.length > 0
+          {userData.favourites.length > 0
             ?
-            favourites.map((art, i) => {
+            userData.favourites.map(art => {
               return (
-              <div className="art-item" key={userData.favourites[i]}>
-                {/* name: {art.name} */}
-              </div>
+                <>
+                  <ArtListDiv key={art} id={art} />
+                </>
               )
             })
             : 
           <h2>You have no artwork yet!</h2>
           }
           <h2>Currently in posession</h2>
-          {favourites && userData.rented.length > 0
+          {userData.rented.length > 0
           ? 
           userData.rented.map((art, i) => {
             return (
-            <div className="art-item" key={userData.rented[i]}>
-              name: {art.name}
-            </div>
+              <>
+                <ArtListDiv key={art} id={art} />
+              </>
             )
           })
           : 
