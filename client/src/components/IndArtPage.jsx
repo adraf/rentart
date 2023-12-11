@@ -1,29 +1,52 @@
 // import { Link } from 'react-router-dom'
 
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom'
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import axios from 'axios'
+import { useState } from 'react'
 
 export default function IndArtPage() {
-  
+
+  const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
+  const [availableToRent, setavailableToRent] = useState(true)
   const indArt = useLoaderData()
 
-  const { 
-    artImage, 
-    artName, 
-    artist, 
-    type, 
-    description, 
-    movement, 
-    media, 
-    year, 
-    width, 
-    height, 
+  const {
+    _id,
+    artImage,
+    artName,
+    artist,
+    type,
+    description,
+    movement,
+    media,
+    year,
+    width,
+    height,
+    availability,
     price } = indArt
 
+  async function updateUserRented(newRentedList) {
+    try {
+      const res = await axios.put('/api/profile', { rented: newRentedList, availability: availableToRent }, {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+      console.log(res.data)
+      const newData = { ...res.data, token: userData.token }
+      sessionStorage.setItem('data', JSON.stringify(newData))
+      setUserData(newData)
+
+      console.log(availableToRent)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <main>
       <Container className='indArtContainer' fluid={true}>
@@ -51,7 +74,35 @@ export default function IndArtPage() {
               <Col>Measurements</Col>
               <Col>{width} x {height}cm</Col>
             </Row>
-            <Row>£{price}</Row>
+            <Row>
+              <Col>Price</Col>
+              <Col>£{price}</Col>
+            </Row>
+            <Row>
+              <Col></Col>
+              <Col>
+                <p
+                  className='rent-button'
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const isUserLoggedIn = userData && userData.token
+                    if (isUserLoggedIn) {
+                      const { rented } = userData
+                      if (availableToRent) {
+                        const newRentedList = [...rented, _id]
+                        setavailableToRent(false)
+                        updateUserRented(newRentedList, setUserData)
+                      } else {
+                        const newRentedList= rented.filter(value => value !== _id)
+                        setavailableToRent(true)
+                        updateUserRented(newRentedList, setUserData)
+                      }
+                    }
+                  }}>
+                  {availableToRent? 'Click to Rent' : 'Not Available'}
+                </p>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

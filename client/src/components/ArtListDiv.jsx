@@ -25,15 +25,15 @@ export default function ArtListDiv({ id }) {
       as={Link}
       // key={i}
       xs={12}
-      s={8}
-      md={6}
-      lg={4}
-      xl={3}
+      s={6}
+      md={4}
+      lg={3}
+      xl={2}
       // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
       to={`/art/${painting._id}`}
     >
 
-      <div className="rails" style={{ height: '300px' }}>
+      <div className="rails" style={{ height: '200px', paddingBottom: '3em' }}>
         <div className="thumbnail" to={`/art/${painting._id}`}
           style={{ backgroundImage: `url(${painting.artImage})` }}>
         </div>

@@ -22,6 +22,7 @@ export default function IndUserPage() {
     rented,
     personal_collection } = user
 
+    const userTypeText = usertype === 1 ? 'Artist' : usertype === 2 ? 'Art Appreciator' : '';
 
   return (
     <main>
@@ -37,8 +38,8 @@ export default function IndUserPage() {
             }</Col>
           <Col className=''>
             <Row>
-              <h2>Name: {name}</h2>
-              <h4>Username: {username}, {usertype}</h4>
+              <h2>Profile: {name}, {userTypeText}</h2>
+              <h4>Username: {username}</h4>
             </Row>
             <Row>
               <Col></Col>
@@ -46,7 +47,16 @@ export default function IndUserPage() {
             </Row>
             <Row style={{ marginBottom: '2em' }}>
               <Col>Currently on rent:</Col>
-              <Col>{rented}</Col>
+              <Container fluid className='art-grid'>
+                <Row className="artAll-list">
+                  {rented
+                    .map((artId) => {
+                      return (
+                        <ArtListDiv id={artId} key={artId} />
+                      )
+                    })}
+                </Row>
+              </Container>
             </Row>
             <Row style={{ marginBottom: '2em' }}>
               <Col>Favourites:</Col>
@@ -61,10 +71,12 @@ export default function IndUserPage() {
                 </Row>
               </Container>
             </Row>
-            <Row style={{ marginBottom: '2em' }}>
-              <Col>Artist Collection:</Col>
-              <Col>{personal_collection}</Col>
-            </Row>
+            {usertype === 1 && (
+              <Row style={{ marginBottom: '2em' }}>
+                <Col>Artist Collection:</Col>
+                <Col>{personal_collection}</Col>
+              </Row>
+              )}
           </Col>
         </Row>
       </Container>
