@@ -21,7 +21,7 @@ export const getSingleArt = async (req, res) => {
     return res.json(art)
   } catch (error) {
     console.log(error)
-    return res.json(400).json(error)
+    return res.status(400).json(error)
   }
 }
 

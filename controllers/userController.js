@@ -34,7 +34,7 @@ export const login = async (req,res) => {
 export const getProfile = async (req, res) => {
   try {
     // We can't populate req.currentUser as its not a query. So we'll get a query by using the req.currentUser._id and populate that
-    const profile = await User.findById(req.currentUser._id).populate('rented').populate('favourites')
+    const profile = await User.findById(req.currentUser._id).populate('rented').populate('favourites').populate('personal_collection')
     return res.json(profile)
   } catch (error) {
     console.log(error)
@@ -51,7 +51,7 @@ export const getAllProfile = async (req, res) => {
     const admin = await User.findOne({ username: 'admin' })
     if (!userToVerify._id.equals(admin._id)) throw new Error()
     // We can't populate req.currentUser as its not a query. So we'll get a query by using the req.currentUser._id and populate that
-    const profile = await User.find().populate('rented').populate('favourites')
+    const profile = await User.find().populate('rented').populate('favourites').populate('personal_collection')
     return res.json(profile)
   } catch (error) {
     console.log(error)

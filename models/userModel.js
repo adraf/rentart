@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
   profileImage: String,
   favourites: [{ type: mongoose.ObjectId, ref: 'Art' }],
   rented: [{ type: mongoose.ObjectId, ref: 'Art' }],
+  personal_collection: [{ type: mongoose.ObjectId, ref: 'Art' }],
 })
 
 // Whenever the user collection is queried and a user document is converted to JSON, we will remove the password from the response

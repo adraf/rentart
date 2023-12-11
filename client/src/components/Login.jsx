@@ -5,11 +5,9 @@ import axios from "axios"
 export default function Login(){
   //State
   const [ noBueno, setNoBueno ] = useState('')
+  
   // navigation
   const navigate = useNavigate()
-  // State from App
-  const data = useOutletContext()
-  const setUserData = data[1]
   //! console log turns udefined! Why?
 
 
@@ -18,9 +16,8 @@ export default function Login(){
       // Get logged in
       const res = await axios.post('/api/login', parsedData)
       // Save data
-      localStorage.setItem('data', res.data)
-
-      setUserData(res.data)
+      const stagedData = res.data
+      sessionStorage.setItem('data', JSON.stringify(stagedData))
       // Go to homepage
       navigate("/profile")
     } catch (error) {

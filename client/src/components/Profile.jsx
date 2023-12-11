@@ -8,10 +8,11 @@ import AdminProfile from "./AdminProfile"
 export default function Profile(){
   // State
   const data = useOutletContext()
-  const [ userData, setUserData ] = data
+  const [ userData ] = data
 
   // User type variable to render appropriate component
-  const type = localStorage.getItem('usertype')
+  const type = userData.usertype
+  console.log(type)
   // navigation
   const navigate = useNavigate()
 
@@ -22,15 +23,15 @@ export default function Profile(){
       }
     }
     getOut()
-  }, [ userData ])
+  }, [])
 
   return (
     <>
-      {!type 
+      {type === (null || undefined)
       ? navigate('/')
-      : type === '1' ? <ArtistProfile userData={userData} setUserData={setUserData} />
-      : type === '2' ? <AppreciatorProfile userData={userData} setUserData={setUserData} />
-      : type === '0' && <AdminProfile userData={userData} setUserData={setUserData} />
+      : type === 1 ? <ArtistProfile userData={userData} />
+      : type === 2 ? <AppreciatorProfile userData={userData} />
+      : type === 0 && <AdminProfile userData={userData} />
       }
     </>
   )

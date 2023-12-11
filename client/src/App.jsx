@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { Outlet, useNavigation } from 'react-router-dom'
 
 // components
@@ -9,22 +8,17 @@ import { Spinner } from 'react-bootstrap'
 
 export default function App() {
 
-  const [ userData, setUserData ] = useState([])
+  const stage = JSON.parse(sessionStorage.getItem('data'))
+  const userData = stage || '';
   const navigation = useNavigation()
-
-  useState(() => {
-    function retrieve(){
-      if(localStorage.getItem('data')) setUserData(localStorage.getItem('data'))
-    }
-  }, [userData])
 
   return (
     <>
-      <Nav userData={userData} setUserData={setUserData} />
+      <Nav userData={userData}/>
       <main>
       {
       navigation.state === 'idle' ?
-      <Outlet context={[userData, setUserData]} />
+      <Outlet context={[userData]} />
       :
       <div className='centered'>
         <Spinner animation='border' />
