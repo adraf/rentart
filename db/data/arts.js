@@ -47,8 +47,8 @@ export default [
     movement: 'Surrealism',
     media: 'Oil on canvas',
     year: 1931,
-    width: 24,
-    height: 33,
+    width: 33,
+    height: 24,
     price: 0,
   },
   {

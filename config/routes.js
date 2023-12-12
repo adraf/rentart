@@ -13,7 +13,7 @@ import {
   getProfile, 
   getAllProfile,
   getSingleUser, 
-  updateUser, 
+  updateUser,
   updateUserImg 
 } from '../controllers/userController.js'
 import secureRoute from './secureRoute.js'

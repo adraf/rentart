@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import Logo from '../images/rentartLogo.png';
 
 // eslint-disable-next-line react/prop-types
-export default function Nav({ userData }){
+export default function Nav({ userData, setUserData }){
 
   // Session data
 
@@ -18,6 +18,7 @@ export default function Nav({ userData }){
   function logOut(){
     localStorage.clear()
     sessionStorage.clear()
+    setUserData('')
     navigate('/')
   }
 
