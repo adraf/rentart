@@ -1,5 +1,5 @@
 // import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 
@@ -16,7 +16,8 @@ export default function ArtIndex() {
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
   const [open, setOpen] = useState(false)
-  const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
+  // const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
+  const [userData, setUserData] = useOutletContext()
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
@@ -144,7 +145,7 @@ export default function ArtIndex() {
         },
       })
       const newData = {...res.data, token: userData.token}
-      sessionStorage.setItem('data', JSON.stringify(newData))
+      // sessionStorage.setItem('data', JSON.stringify(newData))
       setUserData(newData)
 
     } catch (error) {
