@@ -5,10 +5,6 @@ import { useLoaderData, useOutletContext } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-<<<<<<< HEAD
-=======
-// import axios from 'axios'
->>>>>>> 4d602cb5ec0ab780894ef8d2631deeb07f3c55c7
 import { useState } from 'react'
 
 export default function IndArtPage() {
