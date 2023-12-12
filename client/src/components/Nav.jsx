@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import Logo from '../images/rentartLogo.png';
 
 // eslint-disable-next-line react/prop-types
 export default function Nav({ userData }){
@@ -22,9 +24,11 @@ export default function Nav({ userData }){
   return (
     <header>
       <nav>
-        <Link to='/'><button>Home</button></Link>
+        <div className="home-link">
+        <Link to='/'><img src={Logo} style={{height:'75px'}}/></Link>
+        </div>
+        <div className="nav-Link">
         <Link to='/gallery'><button>Gallery</button></Link>
-        <Link to='/about'><button>About us</button></Link>
         {!userData.username ? (
           <>
             <Link to='/login/'><button>Login</button></Link>
@@ -38,9 +42,12 @@ export default function Nav({ userData }){
             <button onClick={logOut}>Log Out</button>
           </>
         )}
+        </div>
       </nav>
       <section className="welcome">
+        <Link to={`/profile/${userData._id}`}>
         <p>Welcome {!userData.username ? 'visitor' : userData.username}</p>
+        </Link>
       </section>
     </header>
   )

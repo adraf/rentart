@@ -1,13 +1,13 @@
 // import { Link } from 'react-router-dom'
 import axios from "axios"
-import { useLoaderData, useOutletContext } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-import { useLoaderData } from 'react-router-dom'
+// import { useLoaderData } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import axios from 'axios'
+// import axios from 'axios'
 import { useState } from 'react'
 
 export default function IndArtPage() {
@@ -112,18 +112,6 @@ export default function IndArtPage() {
           </Col>
         </Row>
       </Container>
-      <div className='centered'>
-        {!userData
-        ?
-        <p>Log in to Rent Art!</p>
-        :
-        availability
-        ?
-        <button onClick={() => getRented()}>Rent</button>
-        :
-        <p>Not available at the moment!</p>
-        }
-      </div>
     </main>
   )
 }
