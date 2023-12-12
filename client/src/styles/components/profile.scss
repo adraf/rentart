@@ -42,16 +42,24 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  @media (max-width: 576px) {
+    flex-direction: column-reverse;
+  }
 }
-
-// .profileImageUploaderControls {
-//   width: 150px;
-// }
 
 .imgUploadButton {
   width: 150px;
 }
 
-.imgUploadButton ::button {
-  ;
+input::file-selector-button {
+  padding: 6px;
+  border: 2px solid forestgreen;
+  background-color: darkseagreen;
+  color: whitesmoke;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+input::file-selector-button:hover {
+  background-color: forestgreen;
 }
