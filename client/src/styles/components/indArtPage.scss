@@ -12,6 +12,7 @@
   align-items: center;
   width: 100%;
   margin: 0 auto;
+
   @media (max-width: 576px) {
     // margin-top: 100px;
   }
@@ -19,8 +20,8 @@
 
 .indArtImageColumn {
   text-align: center;
-  @media (max-width: 576px) {
-  }
+
+  @media (max-width: 576px) {}
 }
 
 .indArtImageColumn img {
@@ -28,18 +29,22 @@
     margin-bottom: 10px;
   }
 }
+
 // assigned class to wide pictures in IndArtPage
 .wideIndArt {
   width: 100%;
   max-width: 540px;
+
   @media (max-width: 576px) {
     max-width: 70%;
   }
 }
+
 // assigned class to tall pictures in IndArtPage
 .tallIndArt {
   max-height: 70vh;
   width: auto;
+
   @media (max-width: 576px) {
     max-height: 25vh;
   }
@@ -55,6 +60,7 @@
   padding: 12px;
   height: 60vh;
   margin: 0 auto;
+
   @media (max-width: 768px) {
     height: auto;
     font-size: 0.8em;
@@ -68,9 +74,11 @@
 // aligning bottom 4 rows, left columns to right and right columns to left
 .indArtTextColumn .row:nth-child(n+3) {
   margin-top: 5px;
+
   .col:first-of-type {
     text-align: right;
   }
+
   .col:last-of-type {
     text-align: left;
   }
@@ -80,10 +88,20 @@
   justify-content: center;
 }
 
-.rent-button{
-  border: 1px solid black;
+.rent-button {
+  border: 1px solid white;
   border-radius: 10px;
-  margin-right: 10em;
-  // margit
-  
+  /* margin-right: 10em; */
+  font-size: 1.5em;
+  background-color: $tertiary-color;
+  color: white;
+  padding: 10px 40px;
+  max-width: 250px;
+}
+
+.rent-button:hover {
+
+  border: 1px solid $tertiary-color;
+  background-color: white;
+  color: $tertiary-color;
 }

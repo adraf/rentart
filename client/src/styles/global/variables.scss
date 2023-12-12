@@ -3,6 +3,7 @@
 
 $primary-color: #b3b3b3;
 $secondary-color: #af5d5d;
+$tertiary-color: teal;
 
 @mixin flex($direction, $align, $justify){
   display: flex;

@@ -6,13 +6,12 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useState } from 'react'
+import { buttonBaseClasses } from "@mui/material";
 
 export default function IndArtPage() {
-//! STATES
-const [userData, setUserData] = useOutletContext()
-  const [availableToRent, setavailableToRent] = useState(true)
+  //! STATES
   const indArt = useLoaderData()
-  
+
   const {
     _id: artId,
     artImage,
@@ -27,21 +26,27 @@ const [userData, setUserData] = useOutletContext()
     height,
     availability,
     price } = indArt
-    
-    const isUserLoggedIn = userData && userData.token
-    const isRentedByMe = isUserLoggedIn && Array.isArray(userData.rented) && userData.rented.includes(artId)
-    console.log(userData)
 
-  async function updateUserRented(newRentedList) {
+  const [userData, setUserData] = useOutletContext()
+  const [availableToRent, setavailableToRent] = useState(availability)
+  const isUserLoggedIn = userData && userData.token
+
+  console.log(userData)
+
+  async function updateUserRented() {
+    console.log('NEW LOG', artId, availableToRent, userData.token)
+
     try {
-      const userResponse = await axios.put('/api/profile', { rented: newRentedList }, {
+      const res = await axios.put(`/api/art/rent/${artId}`, { availability: !availableToRent }, {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
       })
-      const newData = { ...userResponse.data, token: userData.token }
-      sessionStorage.setItem('data', JSON.stringify(newData))
-      setUserData(newData)
+
+
+      setavailableToRent(!availableToRent)
+
+      setUserData({ ...res.data[1], token: userData.token })
 
     } catch (error) {
       console.error(error)
@@ -55,8 +60,8 @@ const [userData, setUserData] = useOutletContext()
       <Container className='indArtContainer' fluid={true}>
         <Row className='indArtSection'>
           <Col className='indArtImageColumn' sm={5}>
-            <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'}/>
-            </Col>
+            <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'} />
+          </Col>
           <Col className='indArtTextColumn'>
             <Row>
               <h2>{artName}</h2>
@@ -84,29 +89,34 @@ const [userData, setUserData] = useOutletContext()
               <Col>£{price}</Col>
             </Row>
             <Row>
-              <Col></Col>
-              <Col>
-                <p
-                  className='rent-button'
-                  onClick={(e) => {
-                    e.preventDefault()
-                    if (isUserLoggedIn) {
-                      const { rented } = userData
-                      if (!isRentedByMe) {
-                        const newRentedList = [...rented, artId]
-                        console.log(newRentedList)
-                        setavailableToRent(false)
-                        updateUserRented(newRentedList, setUserData)
-                      } else {
-                        const newRentedList= rented.filter(value => value !== artId)
-                        setavailableToRent(true)
-                        updateUserRented(newRentedList, setUserData)
-                      }
-                    }
-                  }}>
-                  {(isUserLoggedIn && !isRentedByMe)? 'Click to Rent' : 'Not Available'}
-                </p>
-              </Col>
+              
+              
+                {(isUserLoggedIn) ?
+                  availableToRent ? <button
+                    className='rent-button'
+                    onClick={() => {
+                      updateUserRented()
+                    }}>
+                    Click to Rent
+                  </button> :
+                    userData.rented.includes(artId) ? (
+                      <button
+                        className='rent-button'
+                        onClick={() => {
+                          updateUserRented()
+                        }}>
+                        Return Art
+                      </button>
+                    ) : (<p>Not Available</p>)
+                    :
+                  (
+                    <>
+                      <p>Log in to rent art</p>
+                    </>
+                  )
+
+                }
+                
             </Row>
           </Col>
         </Row>
