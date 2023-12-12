@@ -12,21 +12,6 @@ body{
   margin-bottom: 60px;
 }
 
-nav {
-  display: flex;
-  justify-content: space-evenly;
-  margin: 15px;
-  padding: 15px;
-  box-shadow: 0 0 5px 0 #9E9E9E;
-  border-radius: 15px;
-  background-color: whitesmoke;
-}
-
-nav button{
-  border: none;
-  background-color: whitesmoke;
-}
-
 main {
   min-height: calc(100vh - 196px);
 }
@@ -35,6 +20,7 @@ h3 {
   font-size: 1.75em;
 }
 
+<<<<<<< HEAD
 footer{
   bottom: 0;
   left: 0;
@@ -49,6 +35,8 @@ footer{
   color: whitesmoke;
 }
 
+=======
+>>>>>>> development
 footer p {
   margin: 0;
 }

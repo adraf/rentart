@@ -6,15 +6,14 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useState } from 'react'
+import { buttonBaseClasses } from "@mui/material";
 
 export default function IndArtPage() {
-
-  const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
-  const [availableToRent, setavailableToRent] = useState(true)
+  //! STATES
   const indArt = useLoaderData()
 
   const {
-    _id,
+    _id: artId,
     artImage,
     artName,
     artist,
@@ -28,31 +27,41 @@ export default function IndArtPage() {
     availability,
     price } = indArt
 
-  async function updateUserRented(newRentedList) {
+  const [userData, setUserData] = useOutletContext()
+  const [availableToRent, setavailableToRent] = useState(availability)
+  const isUserLoggedIn = userData && userData.token
+
+  console.log(userData)
+
+  async function updateUserRented() {
+    console.log('NEW LOG', artId, availableToRent, userData.token)
+
     try {
-      const res = await axios.put('/api/profile', { rented: newRentedList, availability: availableToRent }, {
+      const res = await axios.put(`/api/art/rent/${artId}`, { availability: !availableToRent }, {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
       })
-      console.log(res.data)
-      const newData = { ...res.data, token: userData.token }
-      sessionStorage.setItem('data', JSON.stringify(newData))
-      setUserData(newData)
 
-      console.log(availableToRent)
+
+      setavailableToRent(!availableToRent)
+
+      setUserData({ ...res.data[1], token: userData.token })
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
+
+
+  //! JSX
   return (
     <main>
       <Container className='indArtContainer' fluid={true}>
         <Row className='indArtSection'>
           <Col className='indArtImageColumn' sm={5}>
-            <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'}/>
-            </Col>
+            <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'} />
+          </Col>
           <Col className='indArtTextColumn'>
             <Row>
               <h2>{artName}</h2>
@@ -80,45 +89,38 @@ export default function IndArtPage() {
               <Col>£{price}</Col>
             </Row>
             <Row>
-              <Col></Col>
-              <Col>
-                <p
-                  className='rent-button'
-                  onClick={(e) => {
-                    e.preventDefault()
-                    const isUserLoggedIn = userData && userData.token
-                    if (isUserLoggedIn) {
-                      const { rented } = userData
-                      if (availableToRent) {
-                        const newRentedList = [...rented, _id]
-                        setavailableToRent(false)
-                        updateUserRented(newRentedList, setUserData)
-                      } else {
-                        const newRentedList= rented.filter(value => value !== _id)
-                        setavailableToRent(true)
-                        updateUserRented(newRentedList, setUserData)
-                      }
-                    }
-                  }}>
-                  {availableToRent? 'Click to Rent' : 'Not Available'}
-                </p>
-              </Col>
+              
+              
+                {(isUserLoggedIn) ?
+                  availableToRent ? <button
+                    className='rent-button'
+                    onClick={() => {
+                      updateUserRented()
+                    }}>
+                    Click to Rent
+                  </button> :
+                    userData.rented.includes(artId) ? (
+                      <button
+                        className='rent-button'
+                        onClick={() => {
+                          updateUserRented()
+                        }}>
+                        Return Art
+                      </button>
+                    ) : (<p>Not Available</p>)
+                    :
+                  (
+                    <>
+                      <p>Log in to rent art</p>
+                    </>
+                  )
+
+                }
+                
             </Row>
           </Col>
         </Row>
       </Container>
-      <div className='centered'>
-        {!userData
-        ?
-        <p>Log in to Rent Art!</p>
-        :
-        availability
-        ?
-        <button onClick={() => getRented()}>Rent</button>
-        :
-        <p>Not available at the moment!</p>
-        }
-      </div>
     </main>
   )
 }

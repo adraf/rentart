@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800&family=Roboto:wght@100&display=swap');
 
 $primary-color: #b3b3b3;
-$secondary-color: #99af5d;
+$secondary-color: #af5d5d;
+$tertiary-color: teal;
 
 @mixin flex($direction, $align, $justify){
   display: flex;

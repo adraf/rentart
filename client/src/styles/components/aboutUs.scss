@@ -1,0 +1,7 @@
+.about-us{
+  padding-right: calc(100vw/5);
+  padding-left: calc(100vw/5);
+  @include flex(column, center, center);
+  text-align: center;
+  // max-width:100em;
+}
