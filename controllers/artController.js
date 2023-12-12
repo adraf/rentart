@@ -77,11 +77,7 @@ export const rentArt = async (req, res) => {
       if (req.body.availability === true) {
         // If art becomes available again
         const user = await User.findOne({ rented: { $in: [artId] } })
-<<<<<<< HEAD
-        console.log(user.rented)
-=======
         // console.log(user.rented)
->>>>>>> development
         if (user) {
           user.rented = user.rented.filter(id => id.toString() !== artId)
           Object.assign(art, req.body)
