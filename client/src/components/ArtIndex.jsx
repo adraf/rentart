@@ -343,17 +343,15 @@ export default function ArtIndex() {
                                 e.target.innerText = '🤍'
                                 const newFavourites = favourites.filter(value => value !== indArtId)
                                 // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
+                                setUserData({ ...userData, favourites: newFavourites })
                                 updateUserFavourites(newFavourites)
-                                sessionStorage.setItem('data', JSON.stringify({ ...userData, favourites: newFavourites }))
-                                setUserData()
-                              }        
+                              }
                               else {
                                 e.target.innerText = '♥️'
                                 const newFavourites = [...favourites, indArtId]
                                 // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
+                                setUserData({ ...userData, favourites: newFavourites })
                                 updateUserFavourites(newFavourites)
-                                sessionStorage.setItem('data', JSON.stringify({ ...userData, favourites: newFavourites }))
-                                setUserData()
                               }
                             }
                           }}

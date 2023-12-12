@@ -1,5 +1,5 @@
 .indArtContainer {
-  height: 80vh;
+  height: 70vh;
   width: 100vw;
   max-width: 1220px;
   display: flex;
@@ -64,4 +64,18 @@
 
 .indArtTextColumn .row:last-of-type {
   justify-content: center;
+}
+
+.centered{
+  display: flex;
+  justify-content: center;
+}
+
+.centered button{
+  padding: 10px 50px;
+  color: white;
+  border: none;
+  background-color: teal;
+  border-radius: 5px;
+  font-size: 2em;
 }

@@ -9,13 +9,13 @@ console.log(userData)
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" className="profilepic" />
       </div> */}
       {/* Image Upload Div */}
-      <div>
+      {/* <div>
         <form onSubmit={e => e.preventDefault()}>
           <ImageUploadField formData={formData} setFormData={setFormData}/>
           <input type="submit" value="Add Profile Picture" onSubmit={handleChange} />
         </form>
-      </div>
-      <img src={formData.profileImage} alt="" className="profilepic" />
+      </div> */}
+      {/* <img src={formData.profileImage} alt="" className="profilepic" /> */}
       <div className="profile-body appr-body">
         <div className="body-instance current-items">
           <h2>Favourites</h2>
