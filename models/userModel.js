@@ -39,7 +39,7 @@ userSchema.pre('validate', function (next) {
 })
 
 userSchema.pre('validate', function (next) {
-  if (this.isModified('rented') && this.rented.length >= 2) {
+  if (this.isModified('rented') && this.rented.length > 2) {
     this.invalidate('rented', 'Maximum 2 rented pieces')
   }
   next()
