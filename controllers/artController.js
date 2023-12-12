@@ -1,4 +1,6 @@
 import Art from '../models/artModel.js'
+import User from '../models/userModel.js'
+import mongoose from 'mongoose'
 
 // *index
 // Method: GET
@@ -58,6 +60,55 @@ export const updateArt = async (req, res) => {
   } catch (error) {
     console.log(error)
     return res.status(400).json(error)
+  }
+}
+//* Renting art
+export const rentArt = async (req, res) => {
+  // mongoose session
+  const session = await mongoose.startSession()
+  session.startTransaction()
+  try {
+    const { artId } = req.params
+    const art = await Art.findById(artId)
+    if (!art) throw new Error('Art not found')
+    if (Object.keys(req.body).length === 1 && Object.keys(req.body)[0] === 'availability'){
+      // set end of rental date
+      if (req.body.availability === true) {
+        // If art becomes available again
+        const user = await User.findOne({ rented: { $in: [artId] } })
+        console.log(user.rented)//!
+        if (user) {
+          user.rented = user.rented.filter(id => id.toString() !== artId)
+          Object.assign(art, req.body)
+          await user.save()
+        }
+        await art.save()
+        await session.commitTransaction()
+        session.endSession()
+        return res.json(art)
+      } else {
+        // if art is being rented
+        const user = await User.findById(req.currentUser._id)
+        if (user.rented.length > 2) throw new Error('Max 2 rentals at a time')
+        user.rented.push(artId)
+        const inAWeek = new Date()
+        inAWeek.setDate(inAWeek.getDate() + 7)
+        Object.assign(art, req.body, { rentalStartDate: new Date(), rentalEndDate: inAWeek })
+        await user.save()
+        await art.save()
+        await session.commitTransaction()
+        session.endSession()
+        return res.json(art)
+      }
+    } else {
+      await session.abortTransaction()
+      session.endSession()
+      return res.status(404).json({ message: 'Unable to process rent' })
+    }
+  } catch (error) {
+    await session.abortTransaction()
+    session.endSession()
+    return res.status(400).json({ message: error.message })
   }
 }
 

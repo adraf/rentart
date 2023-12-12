@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   paymentDetails: Number,
   profileImage: String,
   favourites: [{ type: mongoose.ObjectId, ref: 'Art' }],
-  rented: [{ type: mongoose.ObjectId, ref: 'Art', maxlength: 2 }],
+  rented: [{ type: mongoose.ObjectId, ref: 'Art' }],
   personal_collection: [{ type: mongoose.ObjectId, ref: 'Art' }],
 })
 
@@ -39,7 +39,7 @@ userSchema.pre('validate', function (next) {
 })
 
 userSchema.pre('validate', function (next) {
-  if (this.isModified('rented') && this.rented.length >= 2) {
+  if (this.isModified('rented') && this.rented.length > 2) {
     this.invalidate('rented', 'Maximum 2 rented pieces')
   }
   next()
