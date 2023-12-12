@@ -14,7 +14,7 @@ const artSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   rentalStartDate: { type: Date, default: Date.now },
   rentalEndDate: { type: Date, default: Date.now },
-  availability: Boolean,
+  availability: { type: Boolean, default: true },
   uploadedBy: { type: mongoose.ObjectId, ref: 'User', required: true },
 })
 

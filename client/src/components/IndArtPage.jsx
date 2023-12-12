@@ -1,4 +1,6 @@
 // import { Link } from 'react-router-dom'
+import axios from "axios"
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 
 import { useLoaderData } from 'react-router-dom'
 
@@ -110,6 +112,18 @@ export default function IndArtPage() {
           </Col>
         </Row>
       </Container>
+      <div className='centered'>
+        {!userData
+        ?
+        <p>Log in to Rent Art!</p>
+        :
+        availability
+        ?
+        <button onClick={() => getRented()}>Rent</button>
+        :
+        <p>Not available at the moment!</p>
+        }
+      </div>
     </main>
   )
 }

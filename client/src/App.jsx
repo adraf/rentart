@@ -5,7 +5,6 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 
 import { Spinner } from 'react-bootstrap'
-// import { useEffect } from 'react'
 
 export default function App() {
   let stage = JSON.parse(sessionStorage.getItem('data'))
