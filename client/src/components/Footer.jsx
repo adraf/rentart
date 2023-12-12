@@ -3,7 +3,7 @@
 export default function Footer(){
   return (
     <footer>
-      <p>This is a placeholder for the actual footer</p>
+      <p>Site created by Adam Rafferty, Anne-Laure Guillot and Antonio Climent at:<br />SEI, General Assembly© {new Date().getFullYear()}</p>
     </footer>
   )
 }
