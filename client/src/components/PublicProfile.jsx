@@ -1,10 +1,12 @@
-// import { Link } from 'react-router-dom'
-
 import { useLoaderData } from 'react-router-dom'
+
+// import axios from 'axios'
+// import { useEffect } from 'react'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import ArtListDiv from './ArtListDiv'
 
 
 export default function IndUserPage() {
@@ -20,34 +22,61 @@ export default function IndUserPage() {
     rented,
     personal_collection } = user
 
-    console.log(user.username)
+    const userTypeText = usertype === 1 ? 'Artist' : usertype === 2 ? 'Art Appreciator' : '';
 
   return (
     <main>
-      <Container className='indArtContainer' fluid={true}>
-        <Row className='indArtSection'>
-          <Col className='indArtImageColumn' sm={5}><img src={profileImage} alt={username} /></Col>
-          <Col className='indArtTextColumn'>
+      <Container className='' fluid={true}>
+        <Row className=''>
+          <Col className='indArtImageColumn' sm={2}>
+            {
+              !user.profileImage
+                ?
+                <img className="search-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                :
+                <img className="search-image" src={profileImage} alt={username} />
+            }</Col>
+          <Col className=''>
             <Row>
-              <h2>Name: {name}</h2>
-              <h4>Username: {username}, {usertype}</h4>
+              <h2>Profile: {name}, {userTypeText}</h2>
+              <h4>Username: {username}</h4>
             </Row>
             <Row>
               <Col></Col>
               <Col></Col>
             </Row>
-            <Row>
-              <Col>Favourites:</Col>
-              <Col>{favourites}</Col>
-            </Row>
-            <Row>
+            <Row style={{ marginBottom: '2em' }}>
               <Col>Currently on rent:</Col>
-              <Col>{rented}</Col>
+              <Container fluid className='art-grid'>
+                <Row className="artAll-list">
+                  {rented
+                    .map((artId) => {
+                      return (
+                        <ArtListDiv id={artId} key={artId} />
+                      )
+                    })}
+                </Row>
+              </Container>
             </Row>
-            <Row>
-              <Col>Artist Collection:</Col>
-              <Col>{personal_collection}</Col>
+            <Row style={{ marginBottom: '2em' }}>
+              <Col>Favourites:</Col>
+              <Container fluid className='art-grid'>
+                <Row className="artAll-list">
+                  {favourites
+                    .map((artId) => {
+                      return (
+                        <ArtListDiv id={artId} key={artId} />
+                      )
+                    })}
+                </Row>
+              </Container>
             </Row>
+            {usertype === 1 && (
+              <Row style={{ marginBottom: '2em' }}>
+                <Col>Artist Collection:</Col>
+                <Col>{personal_collection}</Col>
+              </Row>
+              )}
           </Col>
         </Row>
       </Container>

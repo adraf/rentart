@@ -1,5 +1,5 @@
 .indArtContainer {
-  height: 80vh;
+  height: 70vh;
   width: 100vw;
   max-width: 1220px;
   display: flex;
@@ -78,4 +78,12 @@
 
 .indArtTextColumn .row:last-of-type {
   justify-content: center;
+}
+
+.rent-button{
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-right: 10em;
+  // margit
+  
 }
