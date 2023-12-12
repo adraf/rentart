@@ -29,18 +29,18 @@ export default function Nav({ userData, setUserData }) {
           <Link to='/'><img src={Logo} style={{ height: '75px' }} /></Link>
         </div>
         <div className="nav-Link">
-          <Link to='/gallery'><button>Gallery</button></Link>
+          <Link to='/gallery'><button className='nav-button'>Gallery</button></Link>
           {!userData.username ? (
             <>
-              <Link to='/login/'><button>Login</button></Link>
-              <Link to='/register'><button>Register</button></Link>
+              <Link to='/login/'><button className='nav-button'>Login</button></Link>
+              <Link to='/register'><button className='nav-button'>Register</button></Link>
             </>
           ) : (
             <>
 
-              {userData.usertype === 1 && <Link to={'/collection/'}><button>Collection</button></Link>}
-              <Link to={`/profile/`}><button>Profile</button></Link>
-              <button onClick={logOut}>Log Out</button>
+              {userData.usertype === 1 && <Link to={'/collection/'}><button className='nav-button'>Collection</button></Link>}
+              <Link to={`/profile/`}><button className='nav-button'>Profile</button></Link>
+              <button className='nav-button' onClick={logOut}>Log Out</button>
             </>
           )}
         </div>

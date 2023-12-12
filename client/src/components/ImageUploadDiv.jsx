@@ -10,10 +10,10 @@ export default function ImageUploadSection() {
 
   return (
     <div className='profileImageUploadSection'>
-      <form className='profileImageUploaderControls' onSubmit={e => e.preventDefault()}>
-        <ImageUploadField userData={userData} setUserData={setUserData} placeholderImg={placeholderImg} />
-      </form>
       <img src={userData.profileImage || placeholderImg} alt="profile picture" className="profilePic" /> 
+      <form className='profileImageUploaderControls' onSubmit={e => e.preventDefault()}>
+        <ImageUploadField userData={userData} setUserData={setUserData} /*placeholderImg={placeholderImg}*/ />
+      </form>
     </div>
   )
 }

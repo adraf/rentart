@@ -11,3 +11,11 @@ $tertiary-color: teal;
   align-items: $align;
   justify-content: $justify;
 }
+
+@mixin button($border-color, $background-color){
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  background-color: $background-color;
+  color: $border-color;
+  max-width: min-content;
+}

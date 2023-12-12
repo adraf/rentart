@@ -16,7 +16,7 @@ nav {
   @include flex(row, center, space-evenly);
 }
 
-nav button{
+.nav-button{
   border: none;
   background-color: transparent;
   padding-left: calc(100vw/20);
