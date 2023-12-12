@@ -22,7 +22,7 @@ export const login = async (req,res) => {
       throw new Error(!user ? 'Username not found' : 'Incorrect Password')
     }
     const token = jwt.sign({ sub: user._id }, process.env.SECRET, { expiresIn: '7d' })
-    return res.json({ username: user.username, usertype: user.usertype, token: token, email: user.email, name: user.name, address: user.address, rented: user.rented, favourites: user.favourites })
+    return res.json({ token: token, ...user.toObject() })
   } catch (error) {
     console.log(error)
     return res.status(401).json({ message: 'Unauthorized' })
@@ -82,7 +82,7 @@ export const getSingleUser = async (req, res) => {
 // path: /profile/
 export const updateUser = async (req, res) => {
   try {
-    const profile = await User.findById(req.currentUser._id).populate('rented').populate('favourites')
+    const profile = await User.findById(req.currentUser._id)
     Object.assign(profile, req.body)
     await profile.save()
     return res.json(profile)
@@ -98,9 +98,8 @@ export const updateUser = async (req, res) => {
 export const updateUserImg = async (req, res) => {
   try {
     const profile = await User.findById(req.currentUser._id)
-    Object.assign(profile, req.currentUser.profileImage)
+    Object.assign(profile, req.body.profileImage)
     await profile.save()
-    console.log('profile >', profile)
     return res.json(profile)
   } catch (error) {
     console.log(error)

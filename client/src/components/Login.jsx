@@ -3,6 +3,8 @@ import { useNavigate, useOutletContext } from "react-router-dom"
 import axios from "axios"
 
 export default function Login(){
+
+  const [userData, setUserData] = useOutletContext()
   //State
   const [ noBueno, setNoBueno ] = useState('')
   
@@ -17,7 +19,8 @@ export default function Login(){
       const res = await axios.post('/api/login', parsedData)
       // Save data
       const stagedData = res.data
-      sessionStorage.setItem('data', JSON.stringify(stagedData))
+      // sessionStorage.setItem('data', JSON.stringify(stagedData))
+      setUserData(stagedData)
       // Go to homepage
       navigate("/profile")
     } catch (error) {
