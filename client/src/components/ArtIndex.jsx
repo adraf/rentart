@@ -15,11 +15,11 @@ export default function ArtIndex() {
   //! States
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  // let newFavourite = userData.favourites
+
 
   //! Effects
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function ArtIndex() {
 
   //* WIDTH SLIDER
   const minDistance = 10
-  const [artWidth, setArtWidth] = React.useState([0, 1000])
+  const [artWidth, setArtWidth] = useState([0, 1000])
 
   const handleChangeWidth = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -88,7 +88,7 @@ export default function ArtIndex() {
   }
 
   //* HEIGHT SLIDER
-  const [artHeight, setArtHeight] = React.useState([0, 1000])
+  const [artHeight, setArtHeight] = useState([0, 1000])
 
   const handleChangeHeight = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -109,7 +109,7 @@ export default function ArtIndex() {
   }
 
   //* PRICE SLIDER
-  const [artPrice, setArtPrice] = React.useState([0, 100000])
+  const [artPrice, setArtPrice] = useState([0, 100000])
 
   const handleChangePrice = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -143,7 +143,6 @@ export default function ArtIndex() {
           Authorization: `Bearer ${userData.token}`,
         },
       })
-      console.log(res.data)
       const newData = {...res.data, token: userData.token}
       sessionStorage.setItem('data', JSON.stringify(newData))
       setUserData(newData)
@@ -339,19 +338,14 @@ export default function ArtIndex() {
                             e.preventDefault()
                             if (isUserLoggedIn) {
                               const { favourites } = userData
-                              // const newFavourite = userData.favourites
                               if (isFavourite) {
                                 e.target.innerText = '🤍'
                                 const newFavourite = favourites.filter(value => value !== indArtId)
-                                console.log('When removing a favourite', newFavourite)
-                                // setUserData({ ...userData, favourites: newFavourites })
                                 updateUserFavourites(newFavourite, setUserData)
                               }        
                               else {
                                 e.target.innerText = '♥️'
                                 const newFavourite = [...favourites, indArtId]
-                                console.log('When adding a favourite', newFavourite)
-                                // setUserData({ ...userData, favourites: newFavourites })
                                 updateUserFavourites(newFavourite, setUserData)
                               }
                             }

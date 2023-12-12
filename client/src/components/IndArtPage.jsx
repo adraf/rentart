@@ -9,13 +9,13 @@ import axios from 'axios'
 import { useState } from 'react'
 
 export default function IndArtPage() {
-
+//! STATES
   const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
   const [availableToRent, setavailableToRent] = useState(true)
   const indArt = useLoaderData()
-
+  
   const {
-    _id,
+    _id: artId,
     artImage,
     artName,
     artist,
@@ -28,25 +28,29 @@ export default function IndArtPage() {
     height,
     availability,
     price } = indArt
+    
+    const isUserLoggedIn = userData && userData.token
+    const isRentedByMe = isUserLoggedIn && Array.isArray(userData.rented) && userData.rented.includes(artId)
+    console.log(userData)
 
   async function updateUserRented(newRentedList) {
     try {
-      const res = await axios.put('/api/profile', { rented: newRentedList, availability: availableToRent }, {
+      const userResponse = await axios.put('/api/profile', { rented: newRentedList }, {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
       })
-      console.log(res.data)
-      const newData = { ...res.data, token: userData.token }
+      const newData = { ...userResponse.data, token: userData.token }
       sessionStorage.setItem('data', JSON.stringify(newData))
       setUserData(newData)
 
-      console.log(availableToRent)
-
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
+
+
+  //! JSX
   return (
     <main>
       <Container className='indArtContainer' fluid={true}>
@@ -85,21 +89,21 @@ export default function IndArtPage() {
                   className='rent-button'
                   onClick={(e) => {
                     e.preventDefault()
-                    const isUserLoggedIn = userData && userData.token
                     if (isUserLoggedIn) {
                       const { rented } = userData
-                      if (availableToRent) {
-                        const newRentedList = [...rented, _id]
+                      if (!isRentedByMe) {
+                        const newRentedList = [...rented, artId]
+                        console.log(newRentedList)
                         setavailableToRent(false)
                         updateUserRented(newRentedList, setUserData)
                       } else {
-                        const newRentedList= rented.filter(value => value !== _id)
+                        const newRentedList= rented.filter(value => value !== artId)
                         setavailableToRent(true)
                         updateUserRented(newRentedList, setUserData)
                       }
                     }
                   }}>
-                  {availableToRent? 'Click to Rent' : 'Not Available'}
+                  {(isUserLoggedIn && !isRentedByMe)? 'Click to Rent' : 'Not Available'}
                 </p>
               </Col>
             </Row>
