@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   paymentDetails: Number,
   profileImage: String,
   favourites: [{ type: mongoose.ObjectId, ref: 'Art' }],
-  rented: [{ type: mongoose.ObjectId, ref: 'Art', maxlength: 2 }],
+  rented: [{ type: mongoose.ObjectId, ref: 'Art' }],
   personal_collection: [{ type: mongoose.ObjectId, ref: 'Art' }],
 })
 

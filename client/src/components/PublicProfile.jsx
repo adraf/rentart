@@ -1,8 +1,4 @@
 import { useLoaderData } from 'react-router-dom'
-
-// import axios from 'axios'
-// import { useEffect } from 'react'
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -22,7 +18,7 @@ export default function IndUserPage() {
     rented,
     personal_collection } = user
 
-    const userTypeText = usertype === 1 ? 'Artist' : usertype === 2 ? 'Art Appreciator' : '';
+  const userTypeText = usertype === 1 ? 'Artist' : usertype === 2 ? 'Art Appreciator' : '';
 
   return (
     <main>
@@ -36,9 +32,9 @@ export default function IndUserPage() {
                 :
                 <img className="search-image" src={profileImage} alt={username} />
             }</Col>
-          <Col className=''>
+          <Col className='user-information'>
             <Row>
-              <h2>Profile: {name}, {userTypeText}</h2>
+              <h2>PROFILE: {name}, {userTypeText}</h2>
               <h4>Username: {username}</h4>
             </Row>
             <Row>
@@ -46,7 +42,7 @@ export default function IndUserPage() {
               <Col></Col>
             </Row>
             <Row style={{ marginBottom: '2em' }}>
-              <Col>Currently on rent:</Col>
+              <Col style={{ backgroundColor:'grey', color:'white'}}>CURRENTLY ON RENT</Col>
               <Container fluid className='art-grid'>
                 <Row className="artAll-list">
                   {rented
@@ -59,7 +55,7 @@ export default function IndUserPage() {
               </Container>
             </Row>
             <Row style={{ marginBottom: '2em' }}>
-              <Col>Favourites:</Col>
+              <Col style={{ backgroundColor:'grey', color:'white'}}>FAVOURITES</Col>
               <Container fluid className='art-grid'>
                 <Row className="artAll-list">
                   {favourites
@@ -76,7 +72,7 @@ export default function IndUserPage() {
                 <Col>Artist Collection:</Col>
                 <Col>{personal_collection}</Col>
               </Row>
-              )}
+            )}
           </Col>
         </Row>
       </Container>
