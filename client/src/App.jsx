@@ -13,6 +13,7 @@ export default function App() {
 
   
   function setUserData(){
+    console.log()
     userData = JSON.parse(sessionStorage.getItem('data'))
   }
 

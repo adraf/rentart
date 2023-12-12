@@ -82,9 +82,11 @@ export const getSingleUser = async (req, res) => {
 // path: /profile/
 export const updateUser = async (req, res) => {
   try {
-    const profile = await User.findById(req.currentUser._id).populate('rented').populate('favourites')
+    const profile = await User.findById(req.currentUser._id)//.populate('rented').populate('favourites')
+    console.log(profile)
     Object.assign(profile, req.body)
     await profile.save()
+    console.log(profile)
     return res.json(profile)
   } catch (error) {
     console.log(error)

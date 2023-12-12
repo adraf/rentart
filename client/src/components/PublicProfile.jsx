@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 
 // import axios from 'axios'
 // import { useEffect } from 'react'
@@ -22,11 +22,12 @@ export default function IndUserPage() {
     rented,
     personal_collection } = user
 
+    const userTypeText = usertype === 1 ? 'Artist' : usertype === 2 ? 'Art Appreciator' : '';
 
   return (
     <main>
-      <Container className='indArtContainer' fluid={true}>
-        <Row className='indArtSection'>
+      <Container className='' fluid={true}>
+        <Row className=''>
           <Col className='indArtImageColumn' sm={2}>
             {
               !user.profileImage
@@ -35,32 +36,47 @@ export default function IndUserPage() {
                 :
                 <img className="search-image" src={profileImage} alt={username} />
             }</Col>
-          <Col className='indArtTextColumn'>
+          <Col className=''>
             <Row>
-              <h2>Name: {name}</h2>
-              <h4>Username: {username}, {usertype}</h4>
+              <h2>Profile: {name}, {userTypeText}</h2>
+              <h4>Username: {username}</h4>
             </Row>
             <Row>
               <Col></Col>
               <Col></Col>
             </Row>
-            <Row>
+            <Row style={{ marginBottom: '2em' }}>
               <Col>Currently on rent:</Col>
-              <Col>{rented}</Col>
+              <Container fluid className='art-grid'>
+                <Row className="artAll-list">
+                  {rented
+                    .map((artId) => {
+                      return (
+                        <ArtListDiv id={artId} key={artId} />
+                      )
+                    })}
+                </Row>
+              </Container>
             </Row>
-            <Row>
+            <Row style={{ marginBottom: '2em' }}>
               <Col>Favourites:</Col>
-              <Col>
+              <Container fluid className='art-grid'>
+                <Row className="artAll-list">
                   {favourites
                     .map((artId) => {
-                      <ArtListDiv id={artId} key={artId}/> 
+                      return (
+                        <ArtListDiv id={artId} key={artId} />
+                      )
                     })}
-              </Col>
+                </Row>
+              </Container>
             </Row>
-            <Row>
-              <Col>Artist Collection:</Col>
-              <Col>{personal_collection}</Col>
-            </Row>
+            {usertype === 1 && (
+              <Row style={{ marginBottom: '2em' }}>
+                <Col>Artist Collection:</Col>
+                <Col>{personal_collection}</Col>
+              </Row>
+              )}
           </Col>
         </Row>
       </Container>

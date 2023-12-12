@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 
@@ -15,10 +15,11 @@ export default function ArtIndex() {
   //! States
   const [search, setSearch] = useState('')
   const [arts, setArts] = useState([])
-  const [open, setOpen] = React.useState(false);
-  const [userData, setUserData] = useOutletContext()
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState(false)
+  const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  // let newFavourite = userData.favourites
 
   //! Effects
   useEffect(() => {
@@ -32,6 +33,10 @@ export default function ArtIndex() {
     }
     getArtData()
   }, [])
+
+  useEffect(()=>{
+    console.log(userData)
+  }, [userData])
 
 
   //* LIST OF ARTISTS
@@ -70,7 +75,7 @@ export default function ArtIndex() {
   const minDistance = 10
   const [artWidth, setArtWidth] = React.useState([0, 1000])
 
-  const handleChange1 = (event, newValue, activeThumb) => {
+  const handleChangeWidth = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -85,7 +90,7 @@ export default function ArtIndex() {
   //* HEIGHT SLIDER
   const [artHeight, setArtHeight] = React.useState([0, 1000])
 
-  const handleChange2 = (event, newValue, activeThumb) => {
+  const handleChangeHeight = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -106,7 +111,7 @@ export default function ArtIndex() {
   //* PRICE SLIDER
   const [artPrice, setArtPrice] = React.useState([0, 100000])
 
-  const handleChange3 = (event, newValue, activeThumb) => {
+  const handleChangePrice = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return
     }
@@ -131,33 +136,28 @@ export default function ArtIndex() {
   console.log(userData)
   // console.log(u)
 
-  async function updateUserFavourites(newFavourites) {
+  async function updateUserFavourites(newFavourite) {
     try {
-      const res = await axios.put('/api/profile', { favourites: newFavourites }, {
+      const res = await axios.put('/api/profile', { favourites: newFavourite }, {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
       })
+      console.log(res.data)
+      const newData = {...res.data, token: userData.token}
+      sessionStorage.setItem('data', JSON.stringify(newData))
+      setUserData(newData)
 
-      localStorage.setItem('favourites', JSON.stringify(res.data.favourites))
-      setUserData((prevUserData) => ({
-        ...prevUserData,
-        favourites: res.data.favourites,
-      }
-      )
-      )
     } catch (error) {
       console.log(error)
     }
   }
-
 
   //! Functions
   //* VALUES FOR SLIDES
   function valuetext(value) {
     return `${value} cm`
   }
-
 
   //! JSX
   return (
@@ -240,7 +240,7 @@ export default function ArtIndex() {
                 max={1000}
                 getAriaLabel={() => 'Minimum distance'}
                 value={artWidth}
-                onChange={handleChange1}
+                onChange={handleChangeWidth}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 disableSwap
@@ -251,7 +251,7 @@ export default function ArtIndex() {
                 max={1000}
                 getAriaLabel={() => 'Minimum distance shift'}
                 value={artHeight}
-                onChange={handleChange2}
+                onChange={handleChangeHeight}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 disableSwap
@@ -262,7 +262,7 @@ export default function ArtIndex() {
                 max={100000}
                 getAriaLabel={() => 'Minimum distance shift'}
                 value={artPrice}
-                onChange={handleChange3}
+                onChange={handleChangePrice}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
                 disableSwap
@@ -339,19 +339,20 @@ export default function ArtIndex() {
                             e.preventDefault()
                             if (isUserLoggedIn) {
                               const { favourites } = userData
+                              // const newFavourite = userData.favourites
                               if (isFavourite) {
                                 e.target.innerText = '🤍'
-                                const newFavourites = favourites.filter(value => value !== indArtId)
-                                // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
-                                setUserData({ ...userData, favourites: newFavourites })
-                                updateUserFavourites(newFavourites)
-                              }
+                                const newFavourite = favourites.filter(value => value !== indArtId)
+                                console.log('When removing a favourite', newFavourite)
+                                // setUserData({ ...userData, favourites: newFavourites })
+                                updateUserFavourites(newFavourite, setUserData)
+                              }        
                               else {
                                 e.target.innerText = '♥️'
-                                const newFavourites = [...favourites, indArtId]
-                                // newFavourites.filter((value, index) => newFavourites.indexOf(value) === index)
-                                setUserData({ ...userData, favourites: newFavourites })
-                                updateUserFavourites(newFavourites)
+                                const newFavourite = [...favourites, indArtId]
+                                console.log('When adding a favourite', newFavourite)
+                                // setUserData({ ...userData, favourites: newFavourites })
+                                updateUserFavourites(newFavourite, setUserData)
                               }
                             }
                           }}
