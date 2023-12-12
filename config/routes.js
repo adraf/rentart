@@ -4,6 +4,7 @@ import {
   createArt, 
   getSingleArt,
   updateArt,
+  rentArt,
   deleteArt,
   getSomeArt
 } from '../controllers/artController.js'
@@ -29,6 +30,10 @@ router.route('/art/:artId')
   .get(getSingleArt)
   .put(secureRoute, updateArt)
   .delete(secureRoute, deleteArt)
+
+router.route('/art/rent/:artId')
+  // Art Rental Status Modification Specific Endpoint
+  .put(secureRoute, rentArt)
 
 router.route('/art/count/:artCount')
   .get(getSomeArt)

@@ -1,18 +1,15 @@
 // import { Link } from 'react-router-dom'
 import axios from "axios"
-import { useLoaderData } from 'react-router-dom';
-
-// import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-// import axios from 'axios'
 import { useState } from 'react'
 
 export default function IndArtPage() {
 //! STATES
-  const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('data')))
+const [userData, setUserData] = useOutletContext()
   const [availableToRent, setavailableToRent] = useState(true)
   const indArt = useLoaderData()
   
