@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
 // eslint-disable-next-line react/prop-types
-export default function Nav({ userData }){
+export default function Nav({ userData, setUserData }){
 
   // Session data
 
@@ -16,6 +16,7 @@ export default function Nav({ userData }){
   function logOut(){
     localStorage.clear()
     sessionStorage.clear()
+    setUserData('')
     navigate('/')
   }
 

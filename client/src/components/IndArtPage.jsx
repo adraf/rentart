@@ -50,7 +50,9 @@ export default function IndArtPage() {
     <main>
       <Container className='indArtContainer' fluid={true}>
         <Row className='indArtSection'>
-          <Col className='indArtImageColumn' sm={5}><img src={artImage} alt={artName} /></Col>
+          <Col className='indArtImageColumn' sm={5}>
+            <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'}/>
+            </Col>
           <Col className='indArtTextColumn'>
             <Row>
               <h2>{artName}</h2>

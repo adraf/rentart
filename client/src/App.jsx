@@ -5,21 +5,26 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 
 import { Spinner } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
 
 export default function App() {
-  let stage = JSON.parse(sessionStorage.getItem('data'))
-  let userData = stage || ''
+  let stage = sessionStorage.getItem('data')
+  // let userData = stage || ''
+  const [userData, setUserData] = useState(stage ? JSON.parse(stage) : '')
   const navigation = useNavigation()
 
   
-  function setUserData(){
-    console.log()
-    userData = JSON.parse(sessionStorage.getItem('data'))
-  }
+  // function setUserData(){
+  //   userData = JSON.parse(sessionStorage.getItem('data'))
+  // }
+
+  useEffect(() => {
+    sessionStorage.setItem('data', JSON.stringify(userData))
+  }, [userData])
 
   return (
     <>
-      <Nav userData={userData}/>
+      <Nav userData={userData} setUserData={setUserData}/>
       <main>
       {
       navigation.state === 'idle' ?

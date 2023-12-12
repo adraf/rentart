@@ -9,13 +9,13 @@
   justify-content: flex-end;
 }
 
-.profile-body, .artistcollection, .profilepic{
+.profile-body, .artistcollection, .profilePic{
   border-radius: 15px;
   margin: 10px;
   box-shadow: 0 0 5px 0 #9E9E9E;
 }
 
-.artistcollection, .profilepic{
+.artistcollection, .profilePic{
   width: 150px;
   aspect-ratio: 1 / 1;
   border-radius: 15px;
@@ -35,4 +35,19 @@
 
 .profile-pic-preview {
   height: 50px;
+}
+
+// Image Uploader Section
+.profileImageUploadSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// .profileImageUploaderControls {
+//   width: 150px;
+// }
+
+.imgUploadButton {
+  width: 150px;
 }
