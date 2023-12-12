@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import Logo from '../images/rentartLogo.png';
 
 // eslint-disable-next-line react/prop-types
-export default function Nav({ userData, setUserData }){
+export default function Nav({ userData, setUserData }) {
 
   // Session data
 
@@ -15,7 +15,7 @@ export default function Nav({ userData, setUserData }){
 
   const navigate = useNavigate()
 
-  function logOut(){
+  function logOut() {
     localStorage.clear()
     sessionStorage.clear()
     setUserData('')
@@ -26,30 +26,37 @@ export default function Nav({ userData, setUserData }){
     <header>
       <nav>
         <div className="home-link">
-        <Link to='/'><img src={Logo} style={{height:'75px'}}/></Link>
+          <Link to='/'><img src={Logo} style={{ height: '75px' }} /></Link>
         </div>
         <div className="nav-Link">
-        <Link to='/gallery'><button>Gallery</button></Link>
-        {!userData.username ? (
-          <>
-            <Link to='/login/'><button>Login</button></Link>
-            <Link to='/register'><button>Register</button></Link>
-          </>
-        ) : (
-          <>
+          <Link to='/gallery'><button>Gallery</button></Link>
+          {!userData.username ? (
+            <>
+              <Link to='/login/'><button>Login</button></Link>
+              <Link to='/register'><button>Register</button></Link>
+            </>
+          ) : (
+            <>
 
-            {userData.usertype === 1 && <Link to={'/collection/'}><button>Collection</button></Link>}
-            <Link to={`/profile/`}><button>Profile</button></Link>
-            <button onClick={logOut}>Log Out</button>
-          </>
-        )}
+              {userData.usertype === 1 && <Link to={'/collection/'}><button>Collection</button></Link>}
+              <Link to={`/profile/`}><button>Profile</button></Link>
+              <button onClick={logOut}>Log Out</button>
+            </>
+          )}
         </div>
       </nav>
-      <section className="welcome">
-        <Link to={`/profile/${userData._id}`}>
-        <p>Welcome {!userData.username ? 'visitor' : userData.username}</p>
-        </Link>
-      </section>
-    </header>
+      {!userData.username ? (
+        <></>
+      )
+        : (
+          <>
+            <section className="welcome">
+              <Link to={`/profile/${userData._id}`}>
+                <p>Welcome {userData.username}</p>
+              </Link>
+            </section >
+          </>)
+      }
+    </header >
   )
 }
