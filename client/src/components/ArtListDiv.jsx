@@ -39,12 +39,12 @@ export default function ArtListDiv({ id }) {
         </div>
         {/* <img src={painting.artImage} className="thumbnail" alt="" /> */}
         <div className="art-title">
-          <h5>Name: {painting.artName}</h5>
-          <p>Artist: {painting.artist}</p>
-          <p>Movement: {painting.movement}</p>
+          <h5>{painting.artName}</h5>
+          <p>{painting.artist}</p>
+          {/* <p>Movement: {painting.movement}</p>
           <p>Media: {painting.media}</p>
           <p>Year: {painting.year}</p>
-          <p>Dimensions: {painting.width}cm x {painting.year}cm</p>
+          <p>Dimensions: {painting.width}cm x {painting.year}cm</p> */}
         </div>
       </div>
     </Col>

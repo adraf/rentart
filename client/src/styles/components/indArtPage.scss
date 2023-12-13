@@ -89,19 +89,17 @@
 }
 
 .rent-button {
-  border: 1px solid white;
-  border-radius: 10px;
-  /* margin-right: 10em; */
+  @include button(white, $secondary-color); 
+  margin-right: 10em;
   font-size: 1.5em;
-  background-color: $tertiary-color;
-  color: white;
   padding: 10px 40px;
   max-width: 250px;
 }
 
 .rent-button:hover {
-
-  border: 1px solid $tertiary-color;
-  background-color: white;
-  color: $tertiary-color;
+  @include button($secondary-color,white);
+  margin-right: 10em;
+  font-size: 1.5em;
+  padding: 10px 40px;
+  max-width: 250px;
 }
