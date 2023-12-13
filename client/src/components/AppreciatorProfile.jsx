@@ -49,7 +49,6 @@ export default function AppreciatorProfile({ userData, setUserData }) {
               <div style={{ display: "flex" }}>
                 <h2>PROFILE: {userData.name}, Art Appreciator</h2>
               </div>
-
               <div style={{ display: "flex" }}>
                 <h4>Username: {userData.username}</h4>
               </div>
