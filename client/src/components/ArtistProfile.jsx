@@ -1,5 +1,6 @@
 import ArtListDiv from "./ArtListDiv"
 import ImageUploadSection from "./ImageUploadDiv"
+// import ArtworkUploadSection from "./ArtistWorkUploadDiv"
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'

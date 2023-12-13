@@ -15,7 +15,7 @@ import {
   getAllProfile,
   getSingleUser, 
   updateUser,
-  updateUserImg 
+  updateUserImg
 } from '../controllers/userController.js'
 import secureRoute from './secureRoute.js'
 

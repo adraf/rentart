@@ -12,7 +12,7 @@ export default function Profile(){
 
   // User type variable to render appropriate component
   const type = userData.usertype
-  console.log(type)
+  // console.log(type)
   // navigation
   const navigate = useNavigate()
 

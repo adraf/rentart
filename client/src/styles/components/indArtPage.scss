@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 
   @media (max-width: 576px) {
@@ -24,31 +25,33 @@
   @media (max-width: 576px) {}
 }
 
-.indArtImageColumn img {
+.poster-container {
+  // width: 100vw;
+  height: calc(100vh - 76px - 50px);
   @media (max-width: 576px) {
     margin-bottom: 10px;
   }
 }
 
 // assigned class to wide pictures in IndArtPage
-.wideIndArt {
-  width: 100%;
-  max-width: 540px;
+// .wideIndArt {
+//   width: 100%;
+//   max-width: 540px;
 
-  @media (max-width: 576px) {
-    max-width: 70%;
-  }
-}
+//   @media (max-width: 576px) {
+//     max-width: 70%;
+//   }
+// }
 
 // assigned class to tall pictures in IndArtPage
-.tallIndArt {
-  max-height: 70vh;
-  width: auto;
+// .tallIndArt {
+//   max-height: 70vh;
+//   width: auto;
 
-  @media (max-width: 576px) {
-    max-height: 25vh;
-  }
-}
+//   @media (max-width: 576px) {
+//     max-height: 25vh;
+//   }
+// }
 
 .indArtTextColumn {
   text-align: center;
@@ -90,7 +93,6 @@
 
 .rent-button {
   @include button(white, $secondary-color); 
-  margin-right: 10em;
   font-size: 1.5em;
   padding: 10px 40px;
   max-width: 250px;
@@ -98,8 +100,24 @@
 
 .rent-button:hover {
   @include button($secondary-color,white);
-  margin-right: 10em;
   font-size: 1.5em;
   padding: 10px 40px;
   max-width: 250px;
+}
+
+.poster {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-items: center;
+  border: none;
+  margin-bottom: 0.5em;
+
+}
+
+.centering{
+  display: flex;
+  justify-content: center;
 }

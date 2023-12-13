@@ -7,12 +7,11 @@ import ArtCarousel from './components/Carousel.jsx'
 import RegisterUser from './components/RegisterUser.jsx'
 import Login from './components/Login.jsx'
 import ArtIndex from './components/ArtIndex.jsx'
-import ArtCollection from './components/ArtCollection.jsx'
 import IndArtPage from './components/IndArtPage.jsx'
 import Profile from './components/Profile.jsx'
 import About from './components/About.jsx'
-import LoginModal from './components/LoginModal.jsx'
 import IndUserPage from './components/PublicProfile.jsx'
+import ArtworkUploadSection from './components/ArtistWorkUploadDiv.jsx'
 
 // Loader
 import { getIndArt } from './utils/loaders/artLoader.js'
@@ -51,8 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/collection',
-        element: <ArtCollection />,
-        // loader: getUser
+        element: <ArtworkUploadSection />,
       },
       {
         path: '/art/:artId',
@@ -67,10 +65,6 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
-      },
-      {
-        path: '/loginmodal',
-        element: <LoginModal />
       }
     ]
   }

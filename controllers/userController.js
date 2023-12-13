@@ -86,7 +86,7 @@ export const updateUser = async (req, res) => {
     const profile = await User.findById(req.currentUser._id)
     Object.assign(profile, req.body)
     await profile.save()
-    console.log(profile)
+    // console.log(profile)
     return res.json(profile)
   } catch (error) {
     console.log(error)

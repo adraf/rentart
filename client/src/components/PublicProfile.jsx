@@ -41,6 +41,21 @@ export default function IndUserPage() {
               <Col></Col>
               <Col></Col>
             </Row>
+            {usertype === 1 && (
+              <Row >
+                <Col style={{ backgroundColor: 'grey', color: 'white' }}>{`${name.toUpperCase()}'S ARTWORK COLLECTION`}</Col>
+                <Container fluid className='art-grid'>
+                  <Row className="artAll-list">
+                    {personal_collection
+                      .map((artId) => {
+                        return (
+                          <ArtListDiv id={artId} key={artId} />
+                        )
+                      })}
+                  </Row>
+                </Container>
+              </Row>
+            )}
             <Row >
               <Col style={{ backgroundColor: 'grey', color: 'white' }}>CURRENTLY ON RENT</Col>
               <Container fluid className='art-grid'>
@@ -67,21 +82,6 @@ export default function IndUserPage() {
                 </Row>
               </Container>
             </Row>
-            {usertype === 1 && (
-              <Row >
-                <Col style={{ backgroundColor: 'grey', color: 'white' }}>MY OWN ART COLLECTION</Col>
-                <Container fluid className='art-grid'>
-                  <Row className="artAll-list">
-                    {personal_collection
-                      .map((artId) => {
-                        return (
-                          <ArtListDiv id={artId} key={artId} />
-                        )
-                      })}
-                  </Row>
-                </Container>
-              </Row>
-            )}
           </Col>
         </Row>
       </Container>
