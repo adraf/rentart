@@ -82,7 +82,6 @@ export const getSingleUser = async (req, res) => {
 // path: /profile/
 export const updateUser = async (req, res) => {
   try {
-    console.log('Hit inner')
     const profile = await User.findById(req.currentUser._id)
     Object.assign(profile, req.body)
     await profile.save()
