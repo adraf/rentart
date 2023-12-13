@@ -9,6 +9,7 @@ export default function ArtworkUploadSection() {
   const [ uploadArtImg, setUploadArtImg ] = useState('')
   const navigate = useNavigate()
   const [inputs, setInputs] = useState({})
+  const { personal_collection } = userData
 
   const handleChange = (event) => {
     const name = event.target.name
@@ -16,11 +17,14 @@ export default function ArtworkUploadSection() {
     setInputs(values => ({...values, [name]: value}))
   }
 
-
-  const keysArray = Object.keys(inputs); 
-  const count = keysArray.length; 
-  console.log(count)
-
+  // Disable button unless completed forms
+  const keysArray = Object.keys(inputs)
+  const count = keysArray
+  const artUploadField = document.querySelector('.artUploadField')
+  const submitBtn = document.querySelector('.submitBtn')
+  if ((count.length === 11) && !artUploadField.value !== true) {
+    submitBtn.disabled = false
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -38,7 +42,25 @@ export default function ArtworkUploadSection() {
       },
     })
       const artID = res.data._id
+      // push to artist collection
+      const artistCollection = [...personal_collection, artID]
+      updateArtistCollection(artistCollection)
       navigate(`/art/${artID}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // push to artist collection
+  async function updateArtistCollection(artistCollection) {
+    try {
+      const res = await axios.put('/api/profile', { personal_collection: artistCollection }, {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      })
+      const newData = {...res.data, token: userData.token}
+      setUserData(newData)
     } catch (error) {
       console.log(error)
     }
@@ -60,7 +82,6 @@ export default function ArtworkUploadSection() {
   useEffect(() => {
     inputs.artImage = uploadArtImg
   }, [uploadArtImg])
-
 
 
   return (
@@ -86,8 +107,8 @@ export default function ArtworkUploadSection() {
         <input type="number" name="height" placeholder='Height in cm' value={inputs.height || ''} onChange={handleChange}  required />
         <label hidden htmlFor="price">Price</label>
         <input type="number" name="price" placeholder='Price in £s' value={inputs.price || ''} onChange={handleChange}  required /> 
-        <input type='file' className='artUploadField' name='artImage' value={inputs.artImage || ''} onChange={handleImageUpload} required/>
-        <input type="submit" value="Upload Artwork" />
+        <input type='file' className='artUploadField' name='artImage' onChange={handleImageUpload} />
+        <input type="submit" className="submitBtn" value="Upload Artwork" disabled={true} />
       </form>
     </div>
   )

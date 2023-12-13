@@ -134,7 +134,7 @@ export default function ArtIndex() {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const updatedFavourites = userData.favourites
   console.log("FAVES", updatedFavourites)
-  console.log(userData)
+  // console.log(userData)
   // console.log(u)
 
   async function updateUserFavourites(newFavourite) {
