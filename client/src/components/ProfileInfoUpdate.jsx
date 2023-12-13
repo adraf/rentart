@@ -7,13 +7,11 @@ export default function ProfileInfoUpdate({ show, setShow, toChange, userData, s
 
   async function submitData(change) {
     try {
-      console.log(userData.token)
-      const res = await axios.put('/api/profile', change, {
+      await axios.put('/api/profile', change, {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },
       })
-      console.log(res)
     } catch (error) {
       console.log(error)
     }
