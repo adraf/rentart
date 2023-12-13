@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useState } from 'react'
-import { buttonBaseClasses } from "@mui/material";
+// import { buttonBaseClasses } from "@mui/material";
 
 export default function IndArtPage() {
   //! STATES
@@ -59,8 +59,10 @@ export default function IndArtPage() {
     <main>
       <Container className='indArtContainer' fluid={true}>
         <Row className='indArtSection'>
-          <Col className='indArtImageColumn' sm={5}>
-            <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'} />
+          <Col className='indArtImageColumn' sm={6}>
+          <div className="poster-container">
+            <div className="poster" style={{ backgroundImage: `url(${artImage})` }}><></></div></div>
+            {/* <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'} /> */}
           </Col>
           <Col className='indArtTextColumn'>
             <Row>
@@ -89,34 +91,30 @@ export default function IndArtPage() {
               <Col>£{price}</Col>
             </Row>
             <Row>
-              
-              
-                {(isUserLoggedIn) ?
-                  availableToRent ? <button
-                    className='rent-button'
-                    onClick={() => {
-                      updateUserRented()
-                    }}>
-                    Click to Rent
-                  </button> :
-                    userData.rented.includes(artId) ? (
-                      <button
-                        className='rent-button'
-                        onClick={() => {
-                          updateUserRented()
-                        }}>
-                        Return Art
-                      </button>
-                    ) : (<p>Not Available</p>)
-                    :
-                  (
-                    <>
-                      <p>Log in to rent art</p>
-                    </>
-                  )
-
-                }
-                
+              {(isUserLoggedIn) ?
+                availableToRent ? <button
+                  className='rent-button'
+                  onClick={() => {
+                    updateUserRented()
+                  }}>
+                  Click to Rent
+                </button> :
+                  userData.rented.includes(artId) ? (
+                    <button
+                      className='rent-button'
+                      onClick={() => {
+                        updateUserRented()
+                      }}>
+                      Return Art
+                    </button>
+                  ) : (<p>Not Available</p>)
+                :
+                (
+                  <>
+                    <p>Log in to rent art</p>
+                  </>
+                )
+              }
             </Row>
           </Col>
         </Row>
