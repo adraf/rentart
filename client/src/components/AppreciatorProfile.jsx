@@ -1,12 +1,28 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react'
+
 import ArtListDiv from "./ArtListDiv"
 import ImageUploadSection from "./ImageUploadDiv"
+import ProfileInfoUpdate from "./ProfileInfoUpdate"
+
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export default function AppreciatorProfile({ userData }) {
+
+
+export default function AppreciatorProfile({ userData, setUserData }) {
+  const [show, setShow] = useState(false)
+  const [toChange, setToChange] = useState('')
+
+
+  function loadModal(definition) {
+    setToChange(definition)
+    setShow(true)
+  }
+
+
   return (
     <section>
       <Container className='' fluid={true}>
@@ -15,10 +31,11 @@ export default function AppreciatorProfile({ userData }) {
             <h3 className='filters-header' style={{justifyContent:"flex-end"}}>Settings</h3>
             <ImageUploadSection />
             <Container className="setting-fields">
-              <div><p>{userData.name}</p><button>edit</button></div>
-              <div><p>Delivery Address</p><button>edit</button></div>
-              <div><p>Payment Details</p><button>edit</button></div>
+              <div><p>{userData.name}</p><button className="edit-button" onClick={() => loadModal('Name')} >Edit</button></div>
+              <div><p>Delivery Address</p><button className="edit-button" onClick={() => loadModal('Address')} >Edit</button></div>
+              <div><p>Payment Details</p><button className="edit-button" onClick={() => loadModal('Details')} >Edit</button></div>
             </Container>
+            <ProfileInfoUpdate show={show} setShow={setShow} toChange={toChange} userData={userData} setUserData={setUserData} />
             {/* {
             !userData.profileImage
               ?
@@ -32,7 +49,6 @@ export default function AppreciatorProfile({ userData }) {
               <div style={{ display: "flex" }}>
                 <h2>PROFILE: {userData.name}, Art Appreciator</h2>
               </div>
-
               <div style={{ display: "flex" }}>
                 <h4>Username: {userData.username}</h4>
               </div>
