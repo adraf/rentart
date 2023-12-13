@@ -26,7 +26,7 @@ export default function Nav({ userData, setUserData }) {
     <header>
       <nav>
         <div className="home-link">
-          <Link to='/'><img src={Logo} style={{ height: '75px' }} /></Link>
+          <Link to='/'><img src={Logo} style={{ height: '75px' }} alt='Home'/></Link>
         </div>
         <div className="nav-Link">
           <Link to='/gallery'><button className='nav-button'>Gallery</button></Link>

@@ -89,7 +89,7 @@
 }
 
 .rent-button {
-  @include button(white, $tertiary-color); 
+  @include button(white, $secondary-color); 
   margin-right: 10em;
   font-size: 1.5em;
   padding: 10px 40px;
@@ -97,7 +97,7 @@
 }
 
 .rent-button:hover {
-  @include button($tertiary-color,white);
+  @include button($secondary-color,white);
   margin-right: 10em;
   font-size: 1.5em;
   padding: 10px 40px;

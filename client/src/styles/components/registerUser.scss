@@ -23,26 +23,26 @@ form{
   align-items: center;
 }
 
-form input, select{
-  width: 400px;
-  border: none;
-  background-color: lightblue;
-  color: white;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 10px;
-  border: 2px solid royalblue;
-}
+// form input, select{
+//   width: 400px;
+//   border: none;
+//   background-color: lightblue;
+//   color: white;
+//   padding: 10px;
+//   margin: 5px;
+//   border-radius: 10px;
+//   border: 2px solid royalblue;
+// }
 
 input::placeholder {
-  color: whitesmoke
+  color: $secondary-color
 }
 
-form button{
-  margin: 20px;
-  padding: 6px 40px;
-  border: 2px solid forestgreen;
-  background-color: darkseagreen;
-  color: whitesmoke;
-  border-radius: 10px;
-}
+// form button{
+//   margin: 20px;
+//   padding: 6px 40px;
+//   border: 2px solid forestgreen;
+//   background-color: darkseagreen;
+//   color: whitesmoke;
+//   border-radius: 10px;
+// }

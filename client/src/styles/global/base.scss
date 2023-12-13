@@ -23,3 +23,26 @@ h3 {
 footer p {
   margin: 0;
 }
+
+form input, select{
+  @include button($secondary-color, white);
+  width: 400px;
+  // border: none;
+  // background-color: lightblue;
+  // color: white;
+  padding: 10px;
+  margin: 5px;
+  // border-radius: 10px;
+  // border: 2px solid royalblue;
+}
+form button{
+  margin: 20px;
+  padding: 6px 40px;
+  @include button(white, $secondary-color);
+}
+
+form button:hover{
+  margin: 20px;
+  padding: 6px 40px;
+  @include button($secondary-color, white);
+}
