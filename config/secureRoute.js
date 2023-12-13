@@ -3,7 +3,6 @@ import User from '../models/userModel.js'
 
 export default async function secureRoute(req, res, next){
   try {
-    console.log('Hit secure')
     // 1. We want to ensure the Authorization header was passed with the request
     if (!req.headers.authorization) throw new Error('Missing headers')
     // 2. Extract the token from the header

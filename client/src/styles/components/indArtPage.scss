@@ -30,6 +30,7 @@
   height: calc(100vh - 76px - 50px);
   @media (max-width: 576px) {
     margin-bottom: 10px;
+    max-height: 300px;
   }
 }
 
@@ -96,6 +97,9 @@
   font-size: 1.5em;
   padding: 10px 40px;
   max-width: 250px;
+  @media (max-width: 576px) {
+    margin-bottom: 50px;
+  }
 }
 
 .rent-button:hover {
@@ -114,7 +118,6 @@
   justify-items: center;
   border: none;
   margin-bottom: 0.5em;
-
 }
 
 .centering{
