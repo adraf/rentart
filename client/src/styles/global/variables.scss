@@ -17,5 +17,5 @@ $tertiary-color: rgb(100, 186, 186);
   border-radius: 10px;
   background-color: $background-color;
   color: $border-color;
-  max-width: min-content;
+  max-width: -webkit-fill-available;
 }
