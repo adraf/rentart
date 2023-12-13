@@ -196,7 +196,7 @@ export default function ArtIndex() {
             />
             <section className='filter-selection'>
               <select
-                className="artist-list"
+                className="selection-list"
                 onChange={(e) => setArtistChoice(e.target.value)}
                 value={artistChoice}
               >
@@ -209,7 +209,7 @@ export default function ArtIndex() {
             </section>
             <section className='filter-selection'>
               <select
-                className="movement-list"
+                className="selection-list"
                 onChange={(e) => setMovementChoice(e.target.value)}
                 value={movementChoice}
               >
@@ -222,7 +222,7 @@ export default function ArtIndex() {
             </section>
             <section className='filter-selection'>
               <select
-                className="media-list"
+                className="selection-list"
                 onChange={(e) => setMediaChoice(e.target.value)}
                 value={mediaChoice}
               >

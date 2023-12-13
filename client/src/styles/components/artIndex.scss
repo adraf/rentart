@@ -2,12 +2,12 @@
   @include flex(row, flex-start, flex-start);
 }
 
-.side-buttons{
+.side-buttons {
   position: absolute;
   top: 6.5em;
   left: -0.75em;
-  transform:rotate(-90deg);
-  font-weight:500;
+  transform: rotate(-90deg);
+  font-weight: 500;
   font-size: 1.75em;
   background-color: transparent;
   border: none;
@@ -29,7 +29,7 @@
   border-bottom: 1px solid $primary-color;
 }
 
-.filter-selection select,
+.filter-selection .selection-list,
 .search {
   border: 1px solid $primary-color;
   width: 100%;
@@ -38,6 +38,7 @@
   border-radius: 10px;
   background-color: white;
   color: black;
+  max-width: 100%;
 }
 
 .search::placeholder {
@@ -68,6 +69,7 @@
     text-align: -webkit-center;
     padding-bottom: 5em;
     box-shadow: 10px;
+
     // border: 1px solid red;
     // .rails{
     // }
@@ -84,11 +86,11 @@
       box-shadow: 5px 5px 10px #d3d3d3,
         -5px -5px 10px #ededed;
       // transition: size 0.2s;
-      transition: all .2s ease-in-out; 
+      transition: all .2s ease-in-out;
 
       &:hover {
         // width: 100%;
-        transform: scale(1.04); 
+        transform: scale(1.04);
       }
 
       .favorite {
@@ -104,4 +106,15 @@
       margin: 0;
     }
   }
+}
+
+.MuiSlider-track,
+.MuiSlider-thumb
+{
+color: $secondary-color;
+}
+
+.MuiSlider-rail
+{
+color: $tertiary-color;
 }

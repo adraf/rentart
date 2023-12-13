@@ -21,16 +21,16 @@ export default function IndUserPage() {
   const userTypeText = usertype === 1 ? 'Artist' : usertype === 2 ? 'Art Appreciator' : '';
 
   return (
-    <main>
+    <section>
       <Container className='' fluid={true}>
         <Row className=''>
           <Col className='indArtImageColumn' sm={2}>
             {
               !user.profileImage
                 ?
-                <img className="search-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                <img className='profilePic' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
                 :
-                <img className="search-image" src={profileImage} alt={username} />
+                <img className='profilePic' src={profileImage} alt={username} />
             }</Col>
           <Col className='user-information'>
             <Row>
@@ -41,8 +41,8 @@ export default function IndUserPage() {
               <Col></Col>
               <Col></Col>
             </Row>
-            <Row style={{ marginBottom: '2em' }}>
-              <Col style={{ backgroundColor:'grey', color:'white'}}>CURRENTLY ON RENT</Col>
+            <Row >
+              <Col style={{ backgroundColor: 'grey', color: 'white' }}>CURRENTLY ON RENT</Col>
               <Container fluid className='art-grid'>
                 <Row className="artAll-list">
                   {rented
@@ -54,8 +54,8 @@ export default function IndUserPage() {
                 </Row>
               </Container>
             </Row>
-            <Row style={{ marginBottom: '2em' }}>
-              <Col style={{ backgroundColor:'grey', color:'white'}}>FAVOURITES</Col>
+            <Row >
+              <Col style={{ backgroundColor: 'grey', color: 'white' }}>FAVOURITES</Col>
               <Container fluid className='art-grid'>
                 <Row className="artAll-list">
                   {favourites
@@ -68,14 +68,23 @@ export default function IndUserPage() {
               </Container>
             </Row>
             {usertype === 1 && (
-              <Row style={{ marginBottom: '2em' }}>
-                <Col>Artist Collection:</Col>
-                <Col>{personal_collection}</Col>
+              <Row >
+                <Col style={{ backgroundColor: 'grey', color: 'white' }}>MY OWN ART COLLECTION</Col>
+                <Container fluid className='art-grid'>
+                  <Row className="artAll-list">
+                    {personal_collection
+                      .map((artId) => {
+                        return (
+                          <ArtListDiv id={artId} key={artId} />
+                        )
+                      })}
+                  </Row>
+                </Container>
               </Row>
             )}
           </Col>
         </Row>
       </Container>
-    </main>
+    </section>
   )
 }
