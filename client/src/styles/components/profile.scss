@@ -15,7 +15,7 @@
   box-shadow: 0 0 5px 0 #9E9E9E;
 }
 
-.artistcollection, .profilePic{
+.artistcollection, .profilePic, .artworkPic{
   width: 150px;
   aspect-ratio: 1 / 1;
   border-radius: 15px;
@@ -62,4 +62,8 @@ input::file-selector-button {
 
 input::file-selector-button:hover {
   background-color: forestgreen;
+}
+
+.artUploadField {
+  width: 400px;
 }

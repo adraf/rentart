@@ -30,7 +30,7 @@ const [userData, setUserData] = useOutletContext()
     
     const isUserLoggedIn = userData && userData.token
     const isRentedByMe = isUserLoggedIn && Array.isArray(userData.rented) && userData.rented.includes(artId)
-    console.log(userData)
+    // console.log(userData)
 
   async function updateUserRented(newRentedList) {
     try {

@@ -30,8 +30,8 @@ export default function ImageUploadField({ userData, setUserData, placeholderImg
 
   return (
     <>
-        <img src={userData.profileImage || placeholderImg} className='profile-pic-preview' alt='Profile-Pic'/>
-        <input type='file' className='imgUploadButton' name='profileImage' onChange={handleImageUpload} />
+      <img src={userData.profileImage || placeholderImg} className='profile-pic-preview' alt='Profile-Pic'/>
+      <input type='file' className='imgUploadButton' name='profileImage' onChange={handleImageUpload} />
     </>
   )
 }
