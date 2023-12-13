@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const artSchema = new mongoose.Schema({
-  artName: { type: String, required: true, unique: true },
+  artName: { type: String, required: true },
   artist: { type: String, required: true },
   artImage: { type: String, required: true },
   type: [{ type: String, required: true }],
