@@ -3,14 +3,18 @@
 }
 
 .side-buttons {
-  position: absolute;
-  top: 6.5em;
-  left: -0.75em;
+  // top: 6.5em;
+  // left: -0.75em;
+  transform-origin: 0 0;
   transform: rotate(-90deg);
   font-weight: 500;
   font-size: 1.75em;
   background-color: transparent;
   border: none;
+  position: absolute;
+  &:hover{
+    color: $secondary-color;
+  }
 }
 
 .filter-container {

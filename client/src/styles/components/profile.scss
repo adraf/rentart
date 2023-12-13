@@ -100,3 +100,10 @@ input::file-selector-button:hover {
 .setting-fields button:hover {
   @include button($secondary-color, white);
 }
+
+// disable styling for art upload button
+:disabled {
+  background-color: ($primary-color);
+  color: white;
+  border: white;
+}

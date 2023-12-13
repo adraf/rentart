@@ -20,7 +20,7 @@ export default function ArtIndex() {
   const [userData, setUserData] = useOutletContext()
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-
+  const isUserLoggedIn = userData && userData.token
 
   //! Effects
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function ArtIndex() {
     getArtData()
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(userData)
   }, [userData])
 
@@ -134,7 +134,7 @@ export default function ArtIndex() {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
   const updatedFavourites = userData.favourites
   console.log("FAVES", updatedFavourites)
-  console.log(userData)
+  // console.log(userData)
   // console.log(u)
 
   async function updateUserFavourites(newFavourite) {
@@ -144,7 +144,7 @@ export default function ArtIndex() {
           Authorization: `Bearer ${userData.token}`,
         },
       })
-      const newData = {...res.data, token: userData.token}
+      const newData = { ...res.data, token: userData.token }
       // sessionStorage.setItem('data', JSON.stringify(newData))
       setUserData(newData)
 
@@ -162,8 +162,8 @@ export default function ArtIndex() {
   //! JSX
   return (
     <>
-      <main className='index-page'>
-        <button className='side-buttons' onClick={handleOpen}>Filters˯ </button>
+      <section className='index-page'>
+        <button className='side-buttons' onClick={handleOpen} style={{top:'9em', left:'0.5em'}}>Filters˯ </button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -184,7 +184,7 @@ export default function ArtIndex() {
                   }
                 }}
               >
-                {'♡'}
+                {isUserLoggedIn ? '♡' : ''}
               </h3>
               <h3>Filters</h3>
             </div>
@@ -313,7 +313,7 @@ export default function ArtIndex() {
               .map((art, i) => {
                 // 'indArtId' is to link to Individual Art Page
                 const { _id: indArtId, artName, artImage, artist } = art
-                const isUserLoggedIn = userData && userData.token
+                // const isUserLoggedIn = userData && userData.token
                 const isFavourite = isUserLoggedIn && userData.favourites && userData.favourites.includes(indArtId)
                 return (
                   <Col
@@ -343,7 +343,7 @@ export default function ArtIndex() {
                                 e.target.innerText = '🤍'
                                 const newFavourite = favourites.filter(value => value !== indArtId)
                                 updateUserFavourites(newFavourite, setUserData)
-                              }        
+                              }
                               else {
                                 e.target.innerText = '♥️'
                                 const newFavourite = [...favourites, indArtId]
@@ -366,7 +366,7 @@ export default function ArtIndex() {
               })}
           </Row>
         </Container>
-      </main >
+      </section >
     </>
   )
 }
