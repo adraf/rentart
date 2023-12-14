@@ -47,14 +47,13 @@
   // align-items: center;
   // justify-content: flex-end;
   @include flex(column, center, center);
-
   @media (max-width: 576px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 
 .imgUploadButton {
-  width: 250px;
+  width: 100%;
 }
 
 input::file-selector-button {
@@ -77,9 +76,21 @@ input::file-selector-button:hover {
   margin-right: 2em;
 }
 
+.user-information .row {
+  @media (max-width: 576px) {
+    justify-content: center;
+  }
+}
+
 .settings {
   border-right: 1px solid $primary-color;
+  min-width: 180px;
   @include flex(column, center, start);
+  @media (max-width: 576px) {
+    width: 80%;
+    border: none;
+    margin: 0 auto 10px auto;
+  }
 }
 
 .setting-fields {
@@ -99,11 +110,4 @@ input::file-selector-button:hover {
 
 .setting-fields button:hover {
   @include button($secondary-color, white);
-}
-
-// disable styling for art upload button
-:disabled {
-  background-color: ($primary-color);
-  color: white;
-  border: white;
 }

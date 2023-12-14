@@ -7,10 +7,22 @@
   background-color: white;
 }
 
-.modal-buttonToUpload{
+.modal-buttonToUpload, .submitBtn{
   @include button(white, $secondary-color);
   margin:5px;
   &:hover{
     @include button($secondary-color, white);
+  }
+}
+
+// disable styling for art upload button
+:disabled {
+  background-color: ($primary-color);
+  color: white;
+  border: white;
+  &:hover{
+    background-color: ($primary-color);
+    color: white;
+    border: white;
   }
 }

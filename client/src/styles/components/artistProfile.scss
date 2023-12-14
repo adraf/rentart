@@ -6,3 +6,9 @@
   font-weight: 700;
   background-color: whitesmoke;
 }
+
+.art-grid .row {
+  @media (max-width: 576px) {
+    justify-content: center;
+  }
+}

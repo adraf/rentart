@@ -7,7 +7,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export default function ArtistProfile({ userData }) {
-
   return (
     <section>
       <Container className='' fluid={true}>
@@ -16,9 +15,9 @@ export default function ArtistProfile({ userData }) {
             <h3 className='filters-header' style={{justifyContent:"flex-end"}}>Settings</h3>
             <ImageUploadSection />
             <Container className="setting-fields">
-              <div><p>{userData.name}</p><button>edit</button></div>
-              <div><p>Delivery Address</p><button>edit</button></div>
-              <div><p>Payment Details</p><button>edit</button></div>
+              <div><p>{userData.name}</p><button>Edit</button></div>
+              <div><p>Delivery Address</p><button>Edit</button></div>
+              <div><p>Payment Details</p><button>Edit</button></div>
             </Container>
             {/* {
             !userData.profileImage

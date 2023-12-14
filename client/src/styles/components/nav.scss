@@ -9,17 +9,25 @@ nav {
   font-size: 20px;
   border-bottom: 1px solid $primary-color;
   margin-bottom: 1em;
-  // background-color: whitesmoke;
 }
 
 .nav-link{
   @include flex(row, center, space-evenly);
+  @media (max-width: 576px) {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
 }
 
 .nav-button{
   border: none;
   background-color: transparent;
   padding-left: calc(100vw/20);
+  @media (max-width: 576px) {
+    padding: 10px;
+    font-size: 16px;
+  }
 }
 
 nav button:hover{
