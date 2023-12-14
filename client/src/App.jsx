@@ -13,11 +13,6 @@ export default function App() {
   const [userData, setUserData] = useState(stage ? JSON.parse(stage) : '')
   const navigation = useNavigation()
 
-  
-  // function setUserData(){
-  //   userData = JSON.parse(sessionStorage.getItem('data'))
-  // }
-
   useEffect(() => {
     sessionStorage.setItem('data', JSON.stringify(userData))
   }, [userData])

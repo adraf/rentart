@@ -97,7 +97,6 @@ export default function ArtworkUploadSection() {
   return (
     <>
       <section className='index-page'>
-        {/* <button className='side-buttons' onClick={handleOpen} style={{top:'18em', left:'1em'}}>Upload Artwork˯</button> */}
         <Modal
           open={open}
           onClose={handleClose}
