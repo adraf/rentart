@@ -28,7 +28,7 @@ export default [
   {
     artName: 'The Starry Night',
     artist: 'Van Gogh',
-    artImage: 'https://www.vangoghgallery.com/img/starry_night_full.jpg',
+    artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/2560px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
     type: 'Painting',
     description: 'Van Gogh\'s night sky is a field of roiling energy. Below the exploding stars, the village is a place of quiet order. Connecting earth and sky is the flamelike cypress, a tree traditionally associated with graveyards and mourning. But death was not ominous for van Gogh. "Looking at the stars always makes me dream," he said, "Why, I ask myself, shouldn\'t the shining dots of the sky be as accessible as the black dots on the map of France? Just as we take the train to get to Tarascon or Rouen, we take death to reach a star.',
     movement: 'Post-Impressionism',
@@ -197,9 +197,9 @@ export default [
   {
     artName: 'Number 1 (Lavender Mist)',
     artist: 'Jackson Pollock',
-    artImage: 'https://www.jackson-pollock.org/images/paintings/lavender-mist.jpg',
+    artImage: 'https://www.nga.gov/content/dam/ngaweb/audio-video/audio/stills/number-1-1950-lavender-mist-pollock.jpg',
     type: 'Painting',
-    description: 'Jackson Pollock’s mural-size “drip” paintings met with mixed reactions when they debuted at the Betty Parsons Gallery in New York City in 1948. Sales were dismal, and critical reviews offered skepticism or mild appreciation.',
+    description: 'Jackson Pollock\'s mural-size “drip” paintings met with mixed reactions when they debuted at the Betty Parsons Gallery in New York City in 1948. Sales were dismal, and critical reviews offered skepticism or mild appreciation.',
     movement: 'Abstract Art',
     media: 'Oil on canvas',
     year: 1950,
@@ -405,6 +405,7 @@ export default [
   {
     artName: 'Coquelicots (La promenade)',
     artist: 'Claude Monet',
+    artImage: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Claude_Monet_037.jpg',
     type: 'Painting',
     description: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Claude_Monet_037.jpg',
     movement: 'Impresionism',
@@ -415,7 +416,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'Houses of Parliament (Monet series)',
+    artName: 'Houses of Parliament (Monet series)1',
     artist: 'Claude Monet',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Claude_Monet%2C_Houses_of_Parliament%2C_London%2C_1900-1903%2C_1933.1164%2C_Art_Institute_of_Chicago.jpg/1024px-Claude_Monet%2C_Houses_of_Parliament%2C_London%2C_1900-1903%2C_1933.1164%2C_Art_Institute_of_Chicago.jpg',
     type: 'Painting',
@@ -428,7 +429,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'Houses of Parliament (Monet series)',
+    artName: 'Houses of Parliament (Monet series)2',
     artist: 'Claude Monet',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Monet_Houses_of_Parliament%2C_Sunset.jpg/1024px-Monet_Houses_of_Parliament%2C_Sunset.jpg',
     type: 'Painting',
@@ -441,7 +442,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'Houses of Parliament (Monet series)',
+    artName: 'Houses of Parliament (Monet series)3',
     artist: 'Claude Monet',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/4/49/Brouillard%2C_London_Parliament%2C_Claude_Monet.jpg',
     type: 'Painting',
@@ -454,7 +455,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'Houses of Parliament (Monet series)',
+    artName: 'Houses of Parliament (Monet series)4',
     artist: 'Claude Monet',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Claude_Monet_-_Houses_of_Parliament_in_the_Fog_-_High_Museum_of_Art.jpg/1024px-Claude_Monet_-_Houses_of_Parliament_in_the_Fog_-_High_Museum_of_Art.jpg',
     type: 'Painting',
@@ -467,7 +468,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'Houses of Parliament (Monet series)',
+    artName: 'Houses of Parliament (Monet series)5',
     artist: 'Claude Monet',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Monet%2C_Claude%2C_Houses_of_Parliament%2C_Seagulls.jpg/1024px-Monet%2C_Claude%2C_Houses_of_Parliament%2C_Seagulls.jpg',
     type: 'Painting',
@@ -480,7 +481,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'Houses of Parliament (Monet series)',
+    artName: 'Houses of Parliament (Monet series)6',
     artist: 'Claude Monet',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Claude_Monet_-_The_Houses_of_Parliament%2C_Sunset.jpg/1024px-Claude_Monet_-_The_Houses_of_Parliament%2C_Sunset.jpg',
     type: 'Painting',
@@ -688,7 +689,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'self-portrait',
+    artName: 'Self Portrait',
     artist: 'Van Gogh',
     artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg/1280px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg',
     type: 'Painting',
@@ -714,7 +715,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'self-portrait',
+    artName: 'Self-portrait',
     artist: 'Egon Schiele',
     artImage: 'https://arthive.net/res/media/img/oy1200/work/993/107619@2x.jpg',
     type: 'Painting',
@@ -781,7 +782,7 @@ export default [
   {
     artName: 'La tour Eiffel',
     artist: 'Georges Seurat',
-    artImage: 'https://www.famsf.org/artworks/eiffel-tower',
+    artImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Georges_Seurat_043.jpg/800px-Georges_Seurat_043.jpg',
     type: 'Painting',
     description: 'Outdoors painting depicting Paris\' famous tower',
     movement: 'Neo-impressionist',
