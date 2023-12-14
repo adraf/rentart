@@ -1,4 +1,6 @@
-import Art from '../models/artModel'
+import Art from '../models/artModel.js'
+import User from '../models/userModel.js'
+import mongoose from 'mongoose'
 
 // *index
 // Method: GET
@@ -21,7 +23,7 @@ export const getSingleArt = async (req, res) => {
     return res.json(art)
   } catch (error) {
     console.log(error)
-    return res.json(400).json(error)
+    return res.status(400).json(error)
   }
 }
 
@@ -60,6 +62,55 @@ export const updateArt = async (req, res) => {
     return res.status(400).json(error)
   }
 }
+//* Renting art
+export const rentArt = async (req, res) => {
+  // mongoose session
+  const session = await mongoose.startSession()
+  session.startTransaction()
+  try {
+    const { artId } = req.params
+    const art = await Art.findById(artId)
+    if (!art) throw new Error('Art not found')
+    if (Object.keys(req.body).length === 1 && Object.keys(req.body)[0] === 'availability'){
+      // set end of rental date
+      if (req.body.availability === true) {
+        // If art becomes available again
+        const user = await User.findOne({ rented: { $in: [artId] } })
+        if (user) {
+          user.rented = user.rented.filter(id => id.toString() !== artId)
+          Object.assign(art, req.body)
+          await user.save()
+        }
+        await art.save()
+        await session.commitTransaction()
+        session.endSession()
+        return res.json([art, user])
+      } else {
+        // if art is being rented
+        const user = await User.findById(req.currentUser._id)
+        if (user.rented.length > 2) throw new Error('Max 2 rentals at a time')
+        user.rented.push(artId)
+        const inAWeek = new Date()
+        inAWeek.setDate(inAWeek.getDate() + 7)
+        Object.assign(art, req.body, { rentalStartDate: new Date(), rentalEndDate: inAWeek })
+        await user.save()
+        await art.save()
+        await session.commitTransaction()
+        session.endSession()
+        return res.json([art, user])
+      }
+    } else {
+      // If something not specified goes wrong
+      await session.abortTransaction()
+      session.endSession()
+      return res.status(404).json({ message: 'Unable to process rent' })
+    }
+  } catch (error) {
+    await session.abortTransaction()
+    session.endSession()
+    return res.status(400).json({ message: error.message })
+  }
+}
 
 // *delete
 // method: DELETE
@@ -69,9 +120,22 @@ export const deleteArt = async (req, res) => {
     const { artId } = req.params
     const artToDelete = await Art.findByIdAndDelete({ _id: artId, uploadedBy: req.currentUser._id })
     if (!artToDelete) {
-      return res.status(404).json({ message: 'No book found, or unauthorized' })
+      return res.status(404).json({ message: 'No art found, or unauthorized' })
     }
     return res.sendStatus(204)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error)
+  }
+}
+
+export const getSomeArt = async (req, res) => {
+  try {
+    const { artCount } = req.params
+    const randomArt = await Art.aggregate([
+      { $sample: { size: 6 } }
+    ])
+    return res.json(randomArt)
   } catch (error) {
     console.log(error)
     return res.status(400).json(error)

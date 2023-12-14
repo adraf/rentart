@@ -1,4 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
 
 body{
-  font-family: 'Termina Test', sans-serif;
+  font-family: 'Nunito','Termina Test', sans-serif;
+  // to allow for footer
+  margin-bottom: 60px;
+}
+
+main {
+  min-height: calc(100vh - 196px);
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+footer{
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #494848;
+  height: 50px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+
+footer p {
+  margin: 0;
+}
+
+form input, select{
+  @include button($secondary-color, white);
+  width: 400px;
+  // border: none;
+  // background-color: lightblue;
+  // color: white;
+  padding: 10px;
+  margin: 5px;
+  // border-radius: 10px;
+  // border: 2px solid royalblue;
+}
+form button{
+  margin: 20px;
+  padding: 6px 40px;
+  @include button(white, $secondary-color);
+}
+
+form button:hover{
+  margin: 20px;
+  padding: 6px 40px;
+  @include button($secondary-color, white);
 }

@@ -1,0 +1,113 @@
+@import './artistProfile.scss';
+@import './appreciatorProfile.scss';
+@import './adminProfile.scss';
+
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.profile-body,
+.artistcollection,
+.profilePic {
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 0 5px 0 #9E9E9E;
+}
+
+.artistcollection,
+.profilePic {
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 0 5px 0 #9E9E9E;
+}
+
+.profile-body {
+  min-height: 40vh;
+}
+
+.body-instance {
+  background-color: antiquewhite;
+  margin: 15px;
+  padding: 15px;
+}
+
+.profile-pic-preview {
+  // height: 50px;
+  display: none;
+}
+
+// Image Uploader Section
+.profileImageUploadSection {
+  // display: flex;
+  // align-items: center;
+  // justify-content: flex-end;
+  @include flex(column, center, center);
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.imgUploadButton {
+  width: 100%;
+}
+
+input::file-selector-button {
+  @include button(white, $secondary-color);
+  padding: 6px;
+  // border: 2px solid forestgreen;
+  // background-color: darkseagreen;
+  // color: whitesmoke;
+  // border-radius: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+input::file-selector-button:hover {
+  // background-color: forestgreen;
+  @include button($secondary-color, white);
+}
+
+.user-information {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.user-information .row {
+  @media (max-width: 576px) {
+    justify-content: center;
+  }
+}
+
+.settings {
+  border-right: 1px solid $primary-color;
+  min-width: 180px;
+  @include flex(column, center, start);
+  @media (max-width: 576px) {
+    width: 80%;
+    border: none;
+    margin: 0 auto 10px auto;
+  }
+}
+
+.setting-fields {
+  @include flex(column, start, space-between);
+  margin-top: 1em;
+}
+
+.setting-fields div {
+  @include flex(row, start, space-between);
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.setting-fields button {
+  @include button(white, $secondary-color);
+}
+
+.setting-fields button:hover {
+  @include button($secondary-color, white);
+}

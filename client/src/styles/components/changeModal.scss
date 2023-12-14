@@ -1,0 +1,35 @@
+.changeModal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.changeModal form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.changeSubmit{
+  background-color: teal;
+  color: white;
+}
+
+.changeSubmit:hover{
+  background-color: white;
+  color: teal;
+  border: 1px solid teal;
+}
+
+.exit{
+  padding: 0 12px 2px;
+  border-radius: 100px;
+  font-weight: 900;
+  aspect-ratio: 1/1;
+}
+.exit:hover{
+  padding: 0 12px 2px;
+  border-radius: 100px;
+  font-weight: 900;
+  aspect-ratio: 1/1;
+}

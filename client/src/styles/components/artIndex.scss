@@ -1,0 +1,128 @@
+.index-page {
+  @include flex(row, flex-start, flex-start);
+}
+
+.side-buttons {
+ 
+  transform-origin: top right;
+  transform: rotate(-90deg);
+  font-weight: 500;
+  font-size: 1.75em;
+  background-color: transparent;
+  border: none;
+  width: 0;
+  position: relative;
+  top: 4em;
+  align-self: flex-start;
+  padding: 0;
+
+  &:hover{
+    color: $secondary-color;
+  }
+}
+
+.modal-container {
+  border-right: 1px solid $primary-color;
+  padding: 2em;
+  width: calc(100vw/5);
+  min-width: 250px;
+  height: 100vh;
+  background-color: white;
+}
+
+.modal-header {
+  @include flex(row, flex-start, space-between);
+  text-align: end;
+  width: 100%;
+  border-bottom: 1px solid $primary-color;
+}
+
+.filter-selection .selection-list,
+.search {
+  border: 1px solid $primary-color;
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  max-width: 100%;
+}
+
+.search::placeholder {
+  color: black;
+}
+
+.filter-sliders-container {
+  width: 100%;
+  // border: 1px solid $primary-color;
+  padding-left: 10px;
+  padding-right: 10px;
+  // margin: 5px;
+  // border-radius: 10px;
+}
+
+.filter-sliders-container label {
+  padding-bottom: 10px;
+}
+
+.art-grid {
+  margin: 2em;
+}
+
+.artAll-list {
+  .single-art-container {
+    text-decoration: none;
+    color: black;
+    text-align: -webkit-center;
+    padding-bottom: 5em;
+    box-shadow: 10px;
+
+    // border: 1px solid red;
+    // .rails{
+    // }
+    .thumbnail {
+      height: 90%;
+      width: 90%;
+      border: 10px solid;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      justify-items: center;
+      border: none;
+      margin-bottom: 0.5em;
+      box-shadow: 5px 5px 10px #d3d3d3,
+        -5px -5px 10px #ededed;
+      // transition: size 0.2s;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        // width: 100%;
+        transform: scale(1.04);
+      }
+
+      .favorite {
+        padding: 1em;
+        text-align: right;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      }
+    }
+
+
+    h5,
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.MuiSlider-track,
+.MuiSlider-thumb
+{
+color: $secondary-color;
+}
+
+.MuiSlider-rail
+{
+color: $tertiary-color;
+}

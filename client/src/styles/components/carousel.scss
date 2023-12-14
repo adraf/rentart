@@ -1,0 +1,59 @@
+:root {
+  --lightest: white;
+}
+
+.carousel {
+  margin: 15px;
+  height: 60vh;
+  @media (max-width: 576px) {
+    width: 90%;
+    margin: 15px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.carousel-inner{
+  text-align: center;
+  height: 70vh;
+}
+
+.carouselSlideImage {
+  height: 60vh;
+  @media (max-width: 576px) {
+    height: 40vh;
+    width: 100%;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+}
+
+.carousel-item {
+  background-position: center;
+}
+
+// artist writing
+.carousel-caption {
+  position: absolute;
+  bottom: unset;
+}
+
+.carousel-indicators {
+  @media (max-width: 576px) {
+    top: 0;
+    bottom: none;
+    width: auto;
+    margin: -20px auto;
+    height: 20px;
+  }
+}
+
+// carousel lines at the bottom
+[data-bs-theme=dark] .carousel .carousel-indicators [data-bs-target], [data-bs-theme=dark].carousel .carousel-indicators [data-bs-target] {
+  background-color: var(--lightest);
+  @media (max-width: 576px) {
+    background-color: ($secondary-color);
+  }
+}

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const artSchema = new mongoose.Schema({
-  artName: { type: String, required: true, unique: true },
+  artName: { type: String, required: true },
   artist: { type: String, required: true },
   artImage: { type: String, required: true },
   type: [{ type: String, required: true }],
@@ -14,7 +14,7 @@ const artSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   rentalStartDate: { type: Date, default: Date.now },
   rentalEndDate: { type: Date, default: Date.now },
-  availability: Boolean,
+  availability: { type: Boolean, default: true },
   uploadedBy: { type: mongoose.ObjectId, ref: 'User', required: true },
 })
 
