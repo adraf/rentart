@@ -68,7 +68,7 @@ export default function IndArtPage() {
               <h2>{artName}</h2>
               <h4>{artist}, {year}</h4>
             </Row>
-            <Row>{description}</Row>
+            <Row className="description-row">{description}</Row>
             <Row>
               <Col>Type</Col>
               <Col>{type}</Col>
