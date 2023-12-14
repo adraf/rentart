@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import Col from "react-bootstrap/esm/Col"
@@ -7,7 +7,6 @@ import Row from "react-bootstrap/esm/Row"
 
 export default function AdminProfile({ userData }) {
 
-  console.log(userData)
   const [searchData, setSearchData] = useState('')
 
   async function search(e) {
@@ -26,21 +25,13 @@ export default function AdminProfile({ userData }) {
       const rawUserData = response.data
       const parsedUserData = rawUserData.filter(user => pattern.test(user.username))
       setSearchData({ userData: parsedUserData, artData: parsedArtData })
-      console.log(searchData)
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => {
-    console.log(searchData);
-  }, [searchData]);
-
   return (
     <section className="profile">
-      {/* <div className="profile-header">
-        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" className="profilepic" />
-      </div> */}
       <div className="profile-body admin-body">
         <form onSubmit={search} className="admin-search">
           <input type="text" name="searchField" placeholder="Search by username, name of artwork" className="admin-search" />
@@ -78,7 +69,6 @@ export default function AdminProfile({ userData }) {
                         <div style={{ width: '160px' }}>
                           <div className="search-image" style={{ backgroundImage: `url(${art.artImage})` }}></div>
                         </div>
-                        {/* <img className="search-image" src={art.artImage} alt="" /> */}
                         <div className="text-data">
                           <p>Artist: {art.artist}</p>
                           <p>Name: {art.artName}</p>

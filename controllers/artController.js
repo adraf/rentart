@@ -70,14 +70,12 @@ export const rentArt = async (req, res) => {
   try {
     const { artId } = req.params
     const art = await Art.findById(artId)
-    console.log(art)
     if (!art) throw new Error('Art not found')
     if (Object.keys(req.body).length === 1 && Object.keys(req.body)[0] === 'availability'){
       // set end of rental date
       if (req.body.availability === true) {
         // If art becomes available again
         const user = await User.findOne({ rented: { $in: [artId] } })
-        // console.log(user.rented)
         if (user) {
           user.rented = user.rented.filter(id => id.toString() !== artId)
           Object.assign(art, req.body)
@@ -102,6 +100,7 @@ export const rentArt = async (req, res) => {
         return res.json([art, user])
       }
     } else {
+      // If something not specified goes wrong
       await session.abortTransaction()
       session.endSession()
       return res.status(404).json({ message: 'Unable to process rent' })

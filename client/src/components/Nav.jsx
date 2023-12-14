@@ -1,17 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
 import Logo from '../images/rentartLogo.png';
 
 // eslint-disable-next-line react/prop-types
 export default function Nav({ userData, setUserData }) {
 
   // Session data
-
-
-  useEffect(() => {
-    //console.log('userData:', userData);
-  }, [userData]);
 
   const navigate = useNavigate()
 
@@ -37,7 +31,6 @@ export default function Nav({ userData, setUserData }) {
             </>
           ) : (
             <>
-
               {userData.usertype === 1 && <Link to={'/collection/'}><button className='nav-button'>Collection</button></Link>}
               <Link to={`/profile/`}><button className='nav-button'>Profile</button></Link>
               <button className='nav-button' onClick={logOut}>Log Out</button>

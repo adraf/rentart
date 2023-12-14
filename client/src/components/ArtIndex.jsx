@@ -35,10 +35,6 @@ export default function ArtIndex() {
     getArtData()
   }, [])
 
-  useEffect(() => {
-    console.log(userData)
-  }, [userData])
-
 
   //* LIST OF ARTISTS
   const [artistChoice, setArtistChoice] = useState('Artists')
@@ -132,10 +128,6 @@ export default function ArtIndex() {
 
   //* FAVOURITES 
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
-  const updatedFavourites = userData.favourites
-  console.log("FAVES", updatedFavourites)
-  // console.log(userData)
-  // console.log(u)
 
   async function updateUserFavourites(newFavourite) {
     try {
@@ -145,7 +137,6 @@ export default function ArtIndex() {
         },
       })
       const newData = { ...res.data, token: userData.token }
-      // sessionStorage.setItem('data', JSON.stringify(newData))
       setUserData(newData)
 
     } catch (error) {
@@ -163,15 +154,15 @@ export default function ArtIndex() {
   return (
     <>
       <section className='index-page'>
-        <button className='side-buttons' onClick={handleOpen} style={{top:'9em', left:'0.5em'}}>Filters˯ </button>
+        <button className='side-buttons' onClick={handleOpen} /*style={{top:'9em', left:'0.5em'}}*/>Filters˯ </button>
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box className='filter-container'>
-            <div className='filters-header'>
+          <Box className='modal-container'>
+            <div className='modal-header'>
               <h3
                 onClick={(e) => {
                   e.preventDefault()
@@ -271,8 +262,6 @@ export default function ArtIndex() {
           </Box>
         </Modal>
 
-
-        {/* <h1 className="bold display-3 mb-4">Shows List</h1> */}
         <Container fluid className='art-grid'>
           <Row className="artAll-list">
             {arts
@@ -282,11 +271,9 @@ export default function ArtIndex() {
                 const minHeight = artHeight[0]
                 const maxHeight = artHeight[1]
                 const pattern = new RegExp(search, 'i')
-
                 const isUserLoggedIn = userData && userData.token
                 const userFavourites = isUserLoggedIn ? userData.favourites || [] : []
                 const isFavorite = userFavourites.includes(art._id)
-
                 const matchesFilter =
                   (minWidth < art.width &&
                     art.width < maxWidth &&
@@ -302,10 +289,8 @@ export default function ArtIndex() {
                       || (artistChoice === 'Artists' && art.movement.includes(movementChoice) && art.media.includes(mediaChoice)))
                     && pattern.test(art.artName)
                     && (showFavoritesOnly ? isFavorite : true))
-
                 return matchesFilter
               })
-
               .sort((a, b) => {
                 return a.artName.localeCompare(b.artName)
               }
@@ -313,7 +298,6 @@ export default function ArtIndex() {
               .map((art, i) => {
                 // 'indArtId' is to link to Individual Art Page
                 const { _id: indArtId, artName, artImage, artist } = art
-                // const isUserLoggedIn = userData && userData.token
                 const isFavourite = isUserLoggedIn && userData.favourites && userData.favourites.includes(indArtId)
                 return (
                   <Col
@@ -326,10 +310,8 @@ export default function ArtIndex() {
                     md={6}
                     lg={4}
                     xl={3}
-                    // style={{ backgroundImage: `url(${artImage})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain' }}
                     to={`/art/${indArtId}`}
                   >
-                    {/* {artName} */}
                     <div className="rails" style={{ height: '300px' }}>
                       <div className="thumbnail" to={`/art/${indArtId}`}
                         style={{ backgroundImage: `url(${artImage})` }}>
@@ -354,7 +336,6 @@ export default function ArtIndex() {
                         >
                           {isUserLoggedIn && (isFavourite ? '♥️' : '🤍')}
                         </p>
-
                       </div>
                       <div className="art-title">
                         <h5>{artName}</h5>

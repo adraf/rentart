@@ -12,20 +12,13 @@ export default function ArtistProfile({ userData }) {
       <Container className='' fluid={true}>
         <Row className=''>
           <Col className='settings' sm={2}>
-            <h3 className='filters-header' style={{justifyContent:"flex-end"}}>Settings</h3>
+            <h3 className='modal-header' style={{justifyContent:"flex-end"}}>Settings</h3>
             <ImageUploadSection />
             <Container className="setting-fields">
               <div><p>{userData.name}</p><button>Edit</button></div>
               <div><p>Delivery Address</p><button>Edit</button></div>
               <div><p>Payment Details</p><button>Edit</button></div>
             </Container>
-            {/* {
-            !userData.profileImage
-              ?
-              <img className='profilePic' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
-              :
-              <img className='profilePic' src={userData.profileImage} alt={userData.username} />
-          } */}
           </Col>
           <Col className='user-information'>
             <Row>
@@ -84,27 +77,5 @@ export default function ArtistProfile({ userData }) {
         </Row>
       </Container>
     </section>
-
-    // <section className="profile">
-    //   {/* <div className="profile-header">
-    //     <div className="artistcollection">Your Art Collection</div> */}
-    //   <ImageUploadSection />
-    //   {/* </div> */}
-    //   <div className="profile-body art-body">
-    //     <h2>Your Personal Artworks</h2>
-    //     {userData.favourites.length > 0
-    //         ?
-    //         userData.favourites.map(art => {
-    //           return (
-    //             <>
-    //               <ArtListDiv key={art} id={art} />
-    //             </>
-    //           )
-    //         })
-    //         : 
-    //       <h2>You have no artwork yet!</h2>
-    //       }
-    //   </div>
-    // </section>
   )
 }

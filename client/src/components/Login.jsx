@@ -19,7 +19,6 @@ export default function Login(){
       const res = await axios.post('/api/login', parsedData)
       // Save data
       const stagedData = res.data
-      // sessionStorage.setItem('data', JSON.stringify(stagedData))
       setUserData(stagedData)
       // Go to homepage
       navigate("/profile")

@@ -46,7 +46,6 @@ const router = createBrowserRouter([
       {
         path: '/gallery',
         element: <ArtIndex />,
-        // loader: getUser
       },
       {
         path: '/collection',

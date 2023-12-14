@@ -28,7 +28,7 @@ export default function AppreciatorProfile({ userData, setUserData }) {
       <Container className='' fluid={true}>
         <Row className=''>
           <Col className='settings' sm={2}>
-            <h3 className='filters-header' style={{justifyContent:"flex-end"}}>Settings</h3>
+            <h3 className='modal-header' style={{justifyContent:"flex-end"}}>Settings</h3>
             <ImageUploadSection />
             <Container className="setting-fields">
               <div><p>{userData.name}</p><button className="edit-button" onClick={() => loadModal('Name')} >Edit</button></div>
@@ -36,13 +36,6 @@ export default function AppreciatorProfile({ userData, setUserData }) {
               <div><p>Payment Details</p><button className="edit-button" onClick={() => loadModal('Details')} >Edit</button></div>
             </Container>
             <ProfileInfoUpdate show={show} setShow={setShow} toChange={toChange} userData={userData} setUserData={setUserData} />
-            {/* {
-            !userData.profileImage
-              ?
-              <img className='profilePic' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
-              :
-              <img className='profilePic' src={userData.profileImage} alt={userData.username} />
-          } */}
           </Col>
           <Col className='user-information'>
             <Row>
@@ -87,41 +80,5 @@ export default function AppreciatorProfile({ userData, setUserData }) {
         </Row>
       </Container>
     </section>
-
-
-    // <section className="profile">
-    //   <ImageUploadSection />
-    //   <div className="profile-body appr-body">
-    //     <div className="body-instance current-items">
-    //       <h2>Favourites</h2>
-    //       {userData.favourites.length > 0
-    //         ?
-    //         userData.favourites.map(artId => {
-    //           return (
-    //             <ArtListDiv key={artId} id={artId} />
-    //           )
-    //         })
-    //         :
-    //         <h2>You have no artwork yet!</h2>
-    //       }
-    //       <h2>Currently in posession</h2>
-    //       {userData.rented.length > 0
-    //         ?
-    //         userData.rented.map((artId) => {
-    //           return (
-    //             <ArtListDiv key={artId} id={artId} />
-    //           )
-    //         })
-    //         :
-    //         <h2>You have no artwork yet!</h2>
-    //       }
-    //     </div>
-    // <div className="body-instance details">
-    //   <div><p>Name</p><button>edit</button></div>
-    //   <div><p>Delivery Address</p><button>edit</button></div>
-    //   <div><p>Payment Details</p><button>edit</button></div>
-    // </div>
-    //   </div>
-    // </section>
   )
 }

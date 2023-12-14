@@ -62,7 +62,6 @@ export default function IndArtPage() {
           <Col className='indArtImageColumn' sm={6}>
           <div className="poster-container">
             <div className="poster" style={{ backgroundImage: `url(${artImage})` }}><></></div></div>
-            {/* <img src={artImage} alt={artName} className={width > height ? 'wideIndArt' : 'tallIndArt'} /> */}
           </Col>
           <Col className='indArtTextColumn'>
             <Row>

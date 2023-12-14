@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
   try {
-    console.log('req.body->', req.body)
     const newUser = await User.create(req.body)
     const token = jwt.sign({ sub: newUser._id }, process.env.SECRET, { expiresIn: '7d' })
     return res.status(201).json({ username: newUser.username, token: token })
@@ -85,7 +84,6 @@ export const updateUser = async (req, res) => {
     const profile = await User.findById(req.currentUser._id)
     Object.assign(profile, req.body)
     await profile.save()
-    // console.log(profile)
     return res.json(profile)
   } catch (error) {
     console.log(error)
