@@ -5,3 +5,11 @@
   text-align: center;
   // max-width:100em;
 }
+
+.devLinks a{
+  color: ($secondary-color);
+}
+
+.devLinks a:hover {
+  color: ($tertiary-color)
+}
