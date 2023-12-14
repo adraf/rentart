@@ -598,7 +598,7 @@ export default [
     price: 0,
   },
   {
-    artName: 'King of the  Hill',
+    artName: 'Silver Warrior',
     artist: 'Frank Frazzeta',
     artImage: 'https://img2.rtve.es/im/6768142/?w=900',
     type: 'Painting',
