@@ -47,7 +47,7 @@ export default function FilterBox(
 <>
 
 
-    <div className='filter-container'>
+    <div className='modal-container'>
       <h3>Filters</h3>
       <input
         placeholder="Search..."

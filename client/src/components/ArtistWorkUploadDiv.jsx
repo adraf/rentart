@@ -97,55 +97,63 @@ export default function ArtworkUploadSection() {
   return (
     <>
       <section className='index-page'>
+<<<<<<< HEAD
+=======
+        <button className='side-buttons' onClick={handleOpen} style={{ top: '6.5em', }}>Upload˯</button>
+>>>>>>> development
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box className='filter-container'>
-            <div className='ArtworkImageUploadSection'>
-              <form className='ArtworkImageUploaderControls' onSubmit={handleSubmit} method="POST">
-                <label hidden htmlFor="artName">Name of art work</label>
-                <input type="text" name="artName" placeholder='Title of art work' value={inputs.artName || ''} onChange={handleChange} required />
-                <label hidden htmlFor="artist">Artist name</label>
-                <input type="text" name="artist" placeholder='Artist name' value={inputs.artist || ''} onChange={handleChange} required />
-                <label hidden htmlFor="type">Type</label>
-                <input type="text" name="type" placeholder='Type (painting, sculpture, etc)' value={inputs.type || ''} onChange={handleChange} required />
-                <label hidden htmlFor="description">Description</label>
-                <input type="text" name="description" placeholder='Description' value={inputs.description || ''} onChange={handleChange} required />
-                <label hidden htmlFor="movement">Movement</label>
-                <input type="text" name="movement" placeholder='Movement' value={inputs.movement || ''} onChange={handleChange} required />
-                <label hidden htmlFor="media">Media</label>
-                <input type="text" name="media" placeholder='Media' value={inputs.media || ''} onChange={handleChange} required />
-                <label hidden htmlFor="year">Year</label>
-                <input type="number" name="year" placeholder='Year' value={inputs.year || ''} onChange={handleChange} required />
-                <label hidden htmlFor="width">Width</label>
-                <input type="number" name="width" placeholder='Width in cm' value={inputs.width || ''} onChange={handleChange} required />
-                <label hidden htmlFor="height">Height</label>
-                <input type="number" name="height" placeholder='Height in cm' value={inputs.height || ''} onChange={handleChange} required />
-                <label hidden htmlFor="price">Price</label>
-                <input type="number" name="price" placeholder='Price in £s' value={inputs.price || ''} onChange={handleChange} required />
-                <input type='file' className='artUploadField' name='artImage' onChange={handleImageUpload} />
-                <input type="submit" className="submitBtn" value="Upload Artwork" disabled={true} />
-              </form>
+          <Box className='modal-container'>
+            <div className='modal-header'>
+              <h3></h3>
+              <h3>Upload</h3>
             </div>
+            <form className='ArtworkImageUploaderControls' onSubmit={handleSubmit} method="POST">
+              <label hidden htmlFor="artName">Name of art work</label>
+              <input type="text" name="artName" placeholder='Title of art work' value={inputs.artName || ''} onChange={handleChange} required />
+              <label hidden htmlFor="artist">Artist name</label>
+              <input type="text" name="artist" placeholder='Artist name' value={inputs.artist || ''} onChange={handleChange} required />
+              <label hidden htmlFor="type">Type</label>
+              <input type="text" name="type" placeholder='Type (painting, sculpture, etc)' value={inputs.type || ''} onChange={handleChange} required />
+              <label hidden htmlFor="description">Description</label>
+              <input type="text" name="description" placeholder='Description' value={inputs.description || ''} onChange={handleChange} required />
+              <label hidden htmlFor="movement">Movement</label>
+              <input type="text" name="movement" placeholder='Movement' value={inputs.movement || ''} onChange={handleChange} required />
+              <label hidden htmlFor="media">Media</label>
+              <input type="text" name="media" placeholder='Media' value={inputs.media || ''} onChange={handleChange} required />
+              <label hidden htmlFor="year">Year</label>
+              <input type="number" name="year" placeholder='Year' value={inputs.year || ''} onChange={handleChange} required />
+              <label hidden htmlFor="width">Width</label>
+              <input type="number" name="width" placeholder='Width in cm' value={inputs.width || ''} onChange={handleChange} required />
+              <label hidden htmlFor="height">Height</label>
+              <input type="number" name="height" placeholder='Height in cm' value={inputs.height || ''} onChange={handleChange} required />
+              <label hidden htmlFor="price">Price</label>
+              <input type="number" name="price" placeholder='Price in £s' value={inputs.price || ''} onChange={handleChange} required />
+              <input type='file' className='artUploadField' name='artImage' onChange={handleImageUpload} />
+              <input type="submit" className="submitBtn" value="Upload Artwork" disabled={true} />
+            </form>
           </Box>
         </Modal>
         <Container fluid className='art-grid'>
-        <Row >
-        <Col style={{ backgroundColor: 'grey', color: 'white', height:'2.5em'}}>MY OWN ART COLLECTION <button className='modal-buttonToUpload' onClick={handleOpen} > UPLOAD˯ </button></Col>
-        <Container fluid className='art-grid'>
-          <Row className="artAll-list">
-            {userData.personal_collection
-              .map((artId) => {
-                return (
-                  <ArtListDiv id={artId} key={artId} />
-                )
-              })}
+          <Row >
+            <Col style={{ backgroundColor: 'grey', color: 'white', height: '2.5em', marginLeft:'1em' }}>MY OWN ART COLLECTION
+              {/* <button className='modal-buttonToUpload' onClick={handleOpen} > UPLOAD˯ </button> */}
+            </Col>
+            <Container fluid className='art-grid'>
+              <Row className="artAll-list">
+                {userData.personal_collection
+                  .map((artId) => {
+                    return (
+                      <ArtListDiv id={artId} key={artId} />
+                    )
+                  })}
+              </Row>
+            </Container>
           </Row>
-        </Container>
-        </Row>
         </Container>
       </section>
     </>

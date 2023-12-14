@@ -3,21 +3,25 @@
 }
 
 .side-buttons {
-  // top: 6.5em;
-  // left: -0.75em;
-  transform-origin: 0 0;
+ 
+  transform-origin: top right;
   transform: rotate(-90deg);
   font-weight: 500;
   font-size: 1.75em;
   background-color: transparent;
   border: none;
-  position: absolute;
+  width: 0;
+  position: relative;
+  top: 4em;
+  align-self: flex-start;
+  padding: 0;
+
   &:hover{
     color: $secondary-color;
   }
 }
 
-.filter-container {
+.modal-container {
   border-right: 1px solid $primary-color;
   padding: 2em;
   width: calc(100vw/5);
@@ -26,7 +30,7 @@
   background-color: white;
 }
 
-.filters-header {
+.modal-header {
   @include flex(row, flex-start, space-between);
   text-align: end;
   width: 100%;
