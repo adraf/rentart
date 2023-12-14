@@ -75,6 +75,10 @@
   width: 100%;
 }
 
+.description-row {
+  justify-content: center;
+}
+
 // aligning bottom 4 rows, left columns to right and right columns to left
 .indArtTextColumn .row:nth-child(n+3) {
   margin-top: 5px;
