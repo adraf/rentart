@@ -111,7 +111,7 @@ export default function IndArtPage() {
                 :
                 (
                   <>
-                    <p>Log in to rent art</p>
+                    <p className="logInMessage">Log in to rent art</p>
                   </>
                 )
               }

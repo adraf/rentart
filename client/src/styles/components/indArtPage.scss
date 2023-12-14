@@ -124,3 +124,9 @@
   display: flex;
   justify-content: center;
 }
+
+.logInMessage {
+  color: ($secondary-color);
+  font-weight: bold;
+  margin-top: 5px;
+}

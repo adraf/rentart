@@ -7,7 +7,6 @@ import Row from "react-bootstrap/esm/Row"
 
 export default function AdminProfile({ userData }) {
 
-  console.log(userData)
   const [searchData, setSearchData] = useState('')
 
   async function search(e) {
@@ -26,7 +25,6 @@ export default function AdminProfile({ userData }) {
       const rawUserData = response.data
       const parsedUserData = rawUserData.filter(user => pattern.test(user.username))
       setSearchData({ userData: parsedUserData, artData: parsedArtData })
-      console.log(searchData)
     } catch (error) {
       console.log(error)
     }
