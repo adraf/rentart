@@ -13,7 +13,7 @@ export default function ArtistProfile({ userData }) {
       <Container className='' fluid={true}>
         <Row className=''>
           <Col className='settings' sm={2}>
-            <h3 className='filters-header' style={{justifyContent:"flex-end"}}>Settings</h3>
+            <h3 className='modal-header' style={{justifyContent:"flex-end"}}>Settings</h3>
             <ImageUploadSection />
             <Container className="setting-fields">
               <div><p>{userData.name}</p><button>edit</button></div>

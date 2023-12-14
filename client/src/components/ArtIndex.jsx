@@ -163,15 +163,15 @@ export default function ArtIndex() {
   return (
     <>
       <section className='index-page'>
-        <button className='side-buttons' onClick={handleOpen} style={{top:'9em', left:'0.5em'}}>Filters˯ </button>
+        <button className='side-buttons' onClick={handleOpen} /*style={{top:'9em', left:'0.5em'}}*/>Filters˯ </button>
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box className='filter-container'>
-            <div className='filters-header'>
+          <Box className='modal-container'>
+            <div className='modal-header'>
               <h3
                 onClick={(e) => {
                   e.preventDefault()
