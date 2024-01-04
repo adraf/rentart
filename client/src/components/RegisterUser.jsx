@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate, useOutletContext } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 export default function RegisterUser(){
@@ -8,17 +8,16 @@ export default function RegisterUser(){
   // navigation
   const navigate = useNavigate()
   // State from App
-  const data = useOutletContext()
-  const setUserData = data[1]
+  // const [userData, setUserData] = useOutletContext()
 
   async function submitData(parsedData){
     try {
       // Get logged in
-      const res = await axios.post('/api/login', parsedData)
+      const res = await axios.post('/api/register', parsedData)
       // Save data
-      setUserData(res.data)
+      // setUserData(res.data)
       // Go to homepage
-      navigate("/profile")
+      navigate("/login")
     } catch (error) {
       console.log(error)
     }
